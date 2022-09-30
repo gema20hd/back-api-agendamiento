@@ -2,6 +2,7 @@ package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,10 @@ public class Profesion implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_profesion")
 	private Long idProfesion;
+	
+	@Column(name="descripcion_profesion")
+	private String descripcionProfesion;
  
 }
