@@ -9,23 +9,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
-
+import lombok.*;
 
 
 @Entity
-@Table(name="profesion")
+@Table(name = "tipo_discapacidad")
 @Data
-public class Profesion implements Serializable{
+public class TipoDiscapacidad implements Serializable{
 	
-	
+
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_profesion")
-	private Long idProfesion;
+	@Column(name = "id_tipo_discapacidad")
+	private Long idTipoDiscapacidad;
 	
-	@Column(name="descripcion_profesion")
-	private String descripcionProfesion;
- 
+	@Column(name = "descripcion_tipo_discapacidad")
+	private String descripcionTipoDiscapacidad;
+
+
 }

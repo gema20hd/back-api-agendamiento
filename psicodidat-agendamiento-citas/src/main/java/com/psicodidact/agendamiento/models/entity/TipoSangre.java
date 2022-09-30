@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.models.entity;
 
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -11,21 +12,20 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-
-
 @Entity
-@Table(name="profesion")
+@Table(name = "tipo_sangre")
 @Data
-public class Profesion implements Serializable{
+public class TipoSangre implements Serializable{
 	
-	
+
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_profesion")
-	private Long idProfesion;
+	@Column(name = "id_tipo_sangre")
+	private Long idTipoSangre;
 	
-	@Column(name="descripcion_profesion")
-	private String descripcionProfesion;
- 
+	@Column(name = "descripcion_tipo_sangre")
+	private String descripcionTipoSangre;
+
 }

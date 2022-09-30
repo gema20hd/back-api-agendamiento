@@ -9,23 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
-
+import lombok.*;
 
 
 @Entity
-@Table(name="profesion")
+@Table(name = "estado_civil")
 @Data
-public class Profesion implements Serializable{
-	
-	
+public class EstadoCivil implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_profesion")
-	private Long idProfesion;
+	@Column(name = "id_estado_civil")
+	private Long idEstadoCivil;
 	
-	@Column(name="descripcion_profesion")
-	private String descripcionProfesion;
- 
+	@Column(name = " descripcion_estado_civil")
+	private String descripcionEstadoCivil;
+	
+
 }

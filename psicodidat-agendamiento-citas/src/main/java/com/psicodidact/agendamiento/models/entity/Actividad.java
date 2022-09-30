@@ -11,21 +11,20 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
-
-
 @Entity
-@Table(name="profesion")
+@Table(name = "actividad")
 @Data
-public class Profesion implements Serializable{
-	
-	
+public class Actividad implements Serializable{
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_profesion")
-	private Long idProfesion;
+	@Column(name = "id_actividad")
+	private Long idActividad;  
 	
-	@Column(name="descripcion_profesion")
-	private String descripcionProfesion;
- 
+	@Column(name = "descripcion_actividad")
+	private String descripcionActividad;
+	
+
+
 }
