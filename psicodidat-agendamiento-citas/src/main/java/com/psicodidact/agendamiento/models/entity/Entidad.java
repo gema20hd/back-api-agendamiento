@@ -13,20 +13,18 @@ import lombok.*;
 
 @Entity
 @Table(name = "entidad")
-@Data
-public class Entidad  implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class Entidad implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name = "id_entidad")
-	private Long idEntidad;  
-	
-	@Column(name = "descripcion_entidad")
-	private String descripcionEntidad;
-	
-	@Column(name = "direccion_entidad")
-	private String direccionEntidad;
+private static final long serialVersionUID = 1L;
 
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+@Column(name = "id_entidad")
+private Long idEntidad;
+
+@Column(name = "descripcion_entidad", nullable = false, length = 400)
+private String descripcionEntidad;
+
+@Column(name = "direccion_entidad", nullable = true, length = 500)
+private String direccionEntidad;
 }
