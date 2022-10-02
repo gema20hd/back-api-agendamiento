@@ -8,7 +8,7 @@ public class PsicodidatAgendamientoCitasApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PsicodidatAgendamientoCitasApplication.class, args);
-		System.out.println ("Hola Mundo");
+		//System.out.println ("Hola Mundo");
 	}
 
 }
