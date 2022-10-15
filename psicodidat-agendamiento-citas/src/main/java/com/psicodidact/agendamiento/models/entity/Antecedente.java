@@ -10,7 +10,11 @@ import javax.persistence.Table;
 
 import lombok.*;
 
-@Data
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name="antecedente")
 public class Antecedente implements Serializable{

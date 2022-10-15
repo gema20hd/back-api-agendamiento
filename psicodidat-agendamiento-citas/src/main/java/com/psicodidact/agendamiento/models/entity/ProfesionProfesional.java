@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 import lombok.*;
 //import javax.validation.constraints.NotNull;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name = "profesion_profesional")
-@Data
 public class ProfesionProfesional implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -24,7 +24,6 @@ import com.psicodidact.agendamiento.services.impl.UserDetailsServiceImpl;
 
 
 
-
 @RestController
 @CrossOrigin("*")
 public class AuthenticationController {

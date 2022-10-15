@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,10 @@ import javax.persistence.Table;
 import lombok.*;
 
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name = "actividad")
