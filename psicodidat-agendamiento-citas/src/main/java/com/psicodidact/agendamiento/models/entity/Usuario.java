@@ -13,16 +13,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.*;
 
-@Entity
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
+@Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -46,48 +48,7 @@ public class Usuario implements Serializable {
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"id_rol", "id_profesional"})})
 	private List<Rol> roles;
 	
-	public Boolean getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
-	}
-
-	public String getClaveUsuario() {
-		return claveUsuario;
-	}
-
-	public void setClaveUsuario(String claveUsuario) {
-		this.claveUsuario = claveUsuario;
-	}
-
-	public List<Rol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
-	}
-
-
-
+	
 	
 
 }

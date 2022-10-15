@@ -16,6 +16,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name="rol")
@@ -32,28 +35,8 @@ public class Rol implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private List<Usuario> usuarios;
 
-	public Long getIdRol() {
-		return idRol;
-	}
+	
+	
 
-	public void setIdRol(Long idRol) {
-		this.idRol = idRol;
-	}
-
-	public String getDescripcionRol() {
-		return descripcionRol;
-	}
-
-	public void setDescripcionRol(String descripcionRol) {
-		this.descripcionRol = descripcionRol;
-	}
-
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
 
 }
