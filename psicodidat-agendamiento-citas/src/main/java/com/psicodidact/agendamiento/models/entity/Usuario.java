@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 @Entity
-@Data
 @Table(name="usuario")
 public class Usuario implements Serializable{
 	private static final long serialVersionUID = 1L;
