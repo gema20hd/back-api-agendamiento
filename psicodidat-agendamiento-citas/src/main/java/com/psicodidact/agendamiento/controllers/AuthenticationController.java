@@ -20,7 +20,7 @@ import com.psicodidact.agendamiento.entidades.autoridades.JwtRequest;
 import com.psicodidact.agendamiento.entidades.autoridades.JwtResponse;
 import com.psicodidact.agendamiento.excepciones.UsuarioNotFoundException;
 import com.psicodidact.agendamiento.models.entity.Usuario;
-import com.psicodidact.agendamiento.services.impl.UserDetailsServiceImpl;
+import com.psicodidact.agendamiento.services.UserDetailsServiceImpl;
 
 
 

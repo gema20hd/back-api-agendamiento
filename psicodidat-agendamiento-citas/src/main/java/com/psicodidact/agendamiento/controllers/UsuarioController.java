@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.psicodidact.agendamiento.models.entity.Usuario;
-import com.psicodidact.agendamiento.services.UsuarioService;
+import com.psicodidact.agendamiento.services.IUsuarioService;
 
 
 
@@ -17,7 +17,7 @@ import com.psicodidact.agendamiento.services.UsuarioService;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private IUsuarioService usuarioService;
     
    // @Autowired
   //  private BCryptPasswordEncoder bCryptPasswordEncoder;
