@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.psicodidact.agendamiento.models.dao.IUsuarioDao;
 import com.psicodidact.agendamiento.models.entity.Usuario;
+import com.psicodidact.agendamiento.models.repository.IUsuarioDao;
 
 @Service
 public class UsuarioService  implements UserDetailsService{
