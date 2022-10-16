@@ -14,13 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.psicodidact.agendamiento.entidades.autoridades.Authority;
 
 import lombok.*;
@@ -31,15 +32,15 @@ import java.util.Set;
 
 
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
+//@Data
 @Entity
 @Table(name = "usuario")
 public class Usuario implements UserDetails {
 
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
@@ -54,22 +55,36 @@ public class Usuario implements UserDetails {
 	
     private boolean enabled = true;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="rol", joinColumns= @JoinColumn(name="id_rol"),
-	inverseJoinColumns=@JoinColumn(name="id_profesional"),
-	uniqueConstraints= {@UniqueConstraint(columnNames= {"id_rol", "id_profesional"})})
-	private List<Rol> roles;
+	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JoinTable(name="rol", joinColumns= @JoinColumn(name="id_rol"),
+	//inverseJoinColumns=@JoinColumn(name="id_profesional"),
+	///uniqueConstraints= {@UniqueConstraint(columnNames= {"id_rol", "id_profesional"})})
+	//private List<Rol> roles;
 
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="id_rol")
+	@JsonIgnore
+	//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Rol rol;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="id_profesional")
+	@JsonIgnore
+//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Profesional profesional;
+	
 
+    
 	@Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
     //	System.out.println(rol.getDescripcionRol()+"LA DESCRIPCION QUE TRAE");
         Set<Authority> autoridades = new HashSet<>();
-       this.roles.forEach(usuarioRol -> {
+    //   this.roles.forEach(usuarioRol -> {
     	   System.out.println("ME TRAE");
-        System.out.println(usuarioRol.getDescripcionRol());
-            autoridades.add(new Authority(usuarioRol.getDescripcionRol()));
-        });
+        System.out.println(rol.getDescripcionRol());
+            autoridades.add(new Authority(rol.getDescripcionRol()));
+       // });
         return autoridades;
     }
 
@@ -113,13 +128,48 @@ public class Usuario implements UserDetails {
 	}
 
 
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
 	public boolean isEnabled() {
 		return enabled;
 	}
 
+
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+
+
+	public Rol getRol() {
+		return rol;
+	}
+
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+
+	public Profesional getProfesional() {
+		return profesional;
+	}
+
+
+	public void setProfesional(Profesional profesional) {
+		this.profesional = profesional;
+	}
+
+
+
+	
 	
 	
 	
