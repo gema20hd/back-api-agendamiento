@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.psicodidact.agendamiento.entidades.autoridades.Authority;
+
 import lombok.*;
+
+
+import java.util.HashSet;
+import java.util.Set;
+
 
 
 @NoArgsConstructor
@@ -26,7 +37,8 @@ import lombok.*;
 @Data
 @Entity
 @Table(name = "usuario")
-public class Usuario implements Serializable {
+public class Usuario implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,15 +50,75 @@ public class Usuario implements Serializable {
 
 	@Column(name = "clave_usuario")
 	private String password;
-
-	private Boolean enabled;
 	
+    private boolean enabled = true;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="rol", joinColumns= @JoinColumn(name="id_rol"),
 	inverseJoinColumns=@JoinColumn(name="id_profesional"),
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"id_rol", "id_profesional"})})
 	private List<Rol> roles;
+
+
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+    //	System.out.println(rol.getDescripcionRol()+"LA DESCRIPCION QUE TRAE");
+        Set<Authority> autoridades = new HashSet<>();
+       this.roles.forEach(usuarioRol -> {
+    	   System.out.println("ME TRAE");
+        System.out.println(usuarioRol.getDescripcionRol());
+            autoridades.add(new Authority(usuarioRol.getDescripcionRol()));
+        });
+        return autoridades;
+    }
+
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	
 	
 	
