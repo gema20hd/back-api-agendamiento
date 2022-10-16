@@ -7,17 +7,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class PsicodidatAgendamientoCitasApplication  {
+public class PsicodidatAgendamientoCitasApplication implements CommandLineRunner {
 
-	//@Autowired
-	//private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PsicodidatAgendamientoCitasApplication.class, args);
 		System.out.println("Hola Mundo");
 	}
 
-	/*@Override
+	@Override
 	public void run(String... args) throws Exception {
 		
 		String password = "12345";
@@ -29,6 +29,6 @@ public class PsicodidatAgendamientoCitasApplication  {
 		
 
 	}
-	*/
+	
 
 }

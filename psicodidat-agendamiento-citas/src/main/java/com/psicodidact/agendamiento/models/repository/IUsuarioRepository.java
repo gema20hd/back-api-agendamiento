@@ -8,7 +8,7 @@ import com.psicodidact.agendamiento.models.entity.Usuario;
 
 
 
-public interface IUsuario extends JpaRepository<Usuario,Long> {
+public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
 
 	@Query("select u from Usuario u where u.username=?1")
     public Usuario findByUsername(String username);

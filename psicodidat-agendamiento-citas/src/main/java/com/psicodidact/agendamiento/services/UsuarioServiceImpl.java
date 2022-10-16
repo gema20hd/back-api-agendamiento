@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.psicodidact.agendamiento.models.entity.Usuario;
-import com.psicodidact.agendamiento.models.repository.IUsuario;
+import com.psicodidact.agendamiento.models.repository.IUsuarioRepository;
 
 
 
@@ -27,7 +27,7 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	private Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
 	@Autowired
-	private IUsuario usuarioRepository;
+	private IUsuarioRepository usuarioRepository;
 	
 	@Override
 	@Transactional(readOnly=true)
