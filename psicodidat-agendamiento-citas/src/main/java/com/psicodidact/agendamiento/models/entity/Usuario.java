@@ -34,12 +34,12 @@ public class Usuario implements Serializable {
 	private Long idUsuario;
 
 	@Column(name = "nombre_usuario")
-	private String nombreUsuario;
+	private String username;
 
 	@Column(name = "clave_usuario")
-	private String claveUsuario;
+	private String password;
 
-	private Boolean estado;
+	private Boolean enabled;
 	
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
