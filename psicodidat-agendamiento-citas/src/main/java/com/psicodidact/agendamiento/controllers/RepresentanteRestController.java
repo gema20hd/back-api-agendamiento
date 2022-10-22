@@ -12,24 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psicodidact.agendamiento.models.entity.Profesional;
-import com.psicodidact.agendamiento.models.entity.TipoSangre;
-import com.psicodidact.agendamiento.models.repository.ITipoSangreRepository;
+import com.psicodidact.agendamiento.models.entity.Representante;
 import com.psicodidact.agendamiento.services.IProfesionalService;
-import com.psicodidact.agendamiento.services.ITipoSangreService;
+import com.psicodidact.agendamiento.services.IRepresentanteService;
 
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
-public class TipoSangreRestController {
+public class RepresentanteRestController {
 
 
 	@Autowired
-	private ITipoSangreService tipoSangreService;
+	private IRepresentanteService representanteService;
 	
-	@GetMapping("/tipoSangre")
-	public List<TipoSangre> index() {
-		return tipoSangreService.findAll();
+	@GetMapping("/representantes")
+	public List<Representante> index() {
+		return representanteService.findAll();
 	}
 	
 	
