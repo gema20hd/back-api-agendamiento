@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.psicodidact.agendamiento.models.entity.Antecedente;
 
 
-public interface IAntecedentes extends CrudRepository<Antecedente, Long>{
+public interface IAntecedentesRepository extends CrudRepository<Antecedente, Long>{
 
 }

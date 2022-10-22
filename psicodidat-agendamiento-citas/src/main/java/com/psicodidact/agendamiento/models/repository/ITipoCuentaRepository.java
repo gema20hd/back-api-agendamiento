@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 
-public interface ITipoCuenta  extends CrudRepository<TipoCuenta, Long> {
+public interface ITipoCuentaRepository  extends CrudRepository<TipoCuenta, Long> {
 
 }

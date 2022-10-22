@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.psicodidact.agendamiento.models.entity.Genero;
 
 
-public interface IGenero extends CrudRepository<Genero, Long>{
+public interface IGeneroRepository extends CrudRepository<Genero, Long>{
 
 }

@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.psicodidact.agendamiento.models.entity.Representante;
 
 
-public interface IRepresentante extends CrudRepository<Representante, Long>{
+public interface IRepresentanteRepository extends CrudRepository<Representante, Long>{
 
 }

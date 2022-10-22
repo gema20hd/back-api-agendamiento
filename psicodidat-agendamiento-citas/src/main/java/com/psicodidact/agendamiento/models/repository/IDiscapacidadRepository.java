@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
 
 
-public interface IDiscapacidad extends CrudRepository<Discapacidad, Long> {
+public interface IDiscapacidadRepository extends CrudRepository<Discapacidad, Long> {
 
 }

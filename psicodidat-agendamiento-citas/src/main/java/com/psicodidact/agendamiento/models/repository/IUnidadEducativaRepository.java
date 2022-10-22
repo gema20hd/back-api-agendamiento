@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 
-public interface IUnidadEducativa extends CrudRepository<UnidadEducativa, Long> {
+public interface IUnidadEducativaRepository extends CrudRepository<UnidadEducativa, Long> {
 
 }

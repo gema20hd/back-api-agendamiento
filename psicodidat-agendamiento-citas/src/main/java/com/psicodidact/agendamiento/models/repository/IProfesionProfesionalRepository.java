@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 
 
-public interface IProfesionProfesional extends CrudRepository<ProfesionProfesional, Long> {
+public interface IProfesionProfesionalRepository extends CrudRepository<ProfesionProfesional, Long> {
 
 }

@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.psicodidact.agendamiento.models.entity.Trabajo;
 
-public interface ITrabajo extends CrudRepository<Trabajo, Long>{
+public interface ITrabajoRepository extends CrudRepository<Trabajo, Long>{
 
 }

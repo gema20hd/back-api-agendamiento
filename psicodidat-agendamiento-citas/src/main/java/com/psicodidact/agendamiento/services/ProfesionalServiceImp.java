@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.psicodidact.agendamiento.models.entity.Profesional;
 import com.psicodidact.agendamiento.models.entity.Usuario;
-import com.psicodidact.agendamiento.models.repository.IProfesional;
+import com.psicodidact.agendamiento.models.repository.IProfesionalRepository;
 
 @Service
-public class ProfesionalImp  implements IProfesionalService {
+public class ProfesionalServiceImp  implements IProfesionalService {
 
 	
 	@Autowired
-	private IProfesional iProfesional;
+	private IProfesionalRepository iProfesional;
 
 	@Override
 	public List<Profesional> findAll() {

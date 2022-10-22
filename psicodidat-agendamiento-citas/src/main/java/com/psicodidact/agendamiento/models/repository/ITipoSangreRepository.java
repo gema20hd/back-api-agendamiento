@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
 
-public interface ITipoSangre extends CrudRepository<TipoSangre, Long> {
+public interface ITipoSangreRepository extends CrudRepository<TipoSangre, Long> {
 
 }

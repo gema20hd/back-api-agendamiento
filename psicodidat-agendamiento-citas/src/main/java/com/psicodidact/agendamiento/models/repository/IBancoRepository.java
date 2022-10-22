@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.psicodidact.agendamiento.models.entity.Banco;
 
 
-public interface IBanco  extends CrudRepository<Banco, Long>{
+public interface IBancoRepository  extends CrudRepository<Banco, Long>{
 
 }
