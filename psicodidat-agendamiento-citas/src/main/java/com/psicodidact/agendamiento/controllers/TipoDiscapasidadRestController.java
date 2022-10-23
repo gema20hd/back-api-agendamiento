@@ -24,7 +24,7 @@ public class TipoDiscapasidadRestController {
 	@Autowired
 	private ITipoDiscapacidadService tipoDiscapacidadService;
 	
-	@GetMapping("/profesionales")
+	@GetMapping("/tiposDiscapacidades")
 	public List<TipoDiscapacidad> index() {
 		return tipoDiscapacidadService.findAll();
 	}

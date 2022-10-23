@@ -27,7 +27,7 @@ public class TipoSangreRestController {
 	@Autowired
 	private ITipoSangreService tipoSangreService;
 	
-	@GetMapping("/profesionales")
+	@GetMapping("/tipoSangre")
 	public List<TipoSangre> index() {
 		return tipoSangreService.findAll();
 	}
