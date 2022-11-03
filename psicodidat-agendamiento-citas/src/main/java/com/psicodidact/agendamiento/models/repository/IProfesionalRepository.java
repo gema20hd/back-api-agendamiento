@@ -27,27 +27,27 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	@Query("select p from Profesional p where p.apellidoMaternoProfesional=?1")
 	public Profesional findByMotherLastName(String apellidoMaternos);
 	
-	@Query("SELECT * FROM Genero")
+	@Query("select g from  Genero g")
 	public List<Genero> findAllGender();
 	
-	@Query("SELECT * FROM EstadoCivil")
+	@Query("select e from EstadoCivil e")
 	public List<EstadoCivil> findAllMaritalStatus();
 	
-	@Query("SELECT * FROM Discapacidad")
+	@Query("select d from Discapacidad d")
 	public List<Discapacidad> findAllDisability();
 	
-	@Query("SELECT * FROM TipoSangre")
-	public List<TipoSangre> findAllTipoSangre(); 
+	@Query("select ts from TipoSangre ts")
+	public List<TipoSangre> findAllTypeBlood(); 
 
-	@Query("SELECT * FROM ProfesionProfesional")
+	@Query("select pp from ProfesionProfesional pp")
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
-	@Query("SELECT * FROM TipoCuenta")
+	@Query("select tc from TipoCuenta tc")
 	public List<TipoCuenta> findAllAccounType();
 	
-	@Query("SELECT * FROM Banco")
+	@Query("select b from Banco b")
 	public List<Banco> findAllBank();
 	
-	@Query("SELECT * FROM TipoDiscapacidad")
+	@Query("select td from TipoDiscapacidad td")
 	public List<TipoDiscapacidad> findAllTypeDisability();
 }

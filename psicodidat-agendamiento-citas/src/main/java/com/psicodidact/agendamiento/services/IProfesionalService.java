@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 
+import com.psicodidact.agendamiento.models.entity.Banco;
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
 import com.psicodidact.agendamiento.models.entity.EstadoCivil;
 import com.psicodidact.agendamiento.models.entity.Genero;
@@ -39,13 +40,13 @@ public interface IProfesionalService {
 	
 	public List<Discapacidad> findAllDisability();
 	
-	public List<TipoSangre> findAllTipoSangre(); 
+	public List<TipoSangre> findAllTypeBlood(); 
 
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
 	public List<TipoCuenta> findAllAccounType();
 	
-	public List<TipoCuenta> findAllBank();
+	public List<Banco> findAllBank();
 	
 	public List<TipoDiscapacidad> findAllTypeDisability();
 	

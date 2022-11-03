@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.psicodidact.agendamiento.models.entity.Banco;
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
 import com.psicodidact.agendamiento.models.entity.EstadoCivil;
 import com.psicodidact.agendamiento.models.entity.Genero;
@@ -50,67 +51,72 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Profesional findByIdentification(String identification) {
 		return this.profesional.findByIdentification(identification);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Profesional findByLastName(String apellidoPaterno) {
 		return this.profesional.findByLastName(apellidoPaterno);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Profesional findByMotherLastName(String apellidoMaterno) {
 		return this.findByMotherLastName(apellidoMaterno);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Genero> findAllGender() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.profesional.findAllGender();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<EstadoCivil> findAllMaritalStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.findAllMaritalStatus();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Discapacidad> findAllDisability() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.findAllDisability();
 	}
 
 	@Override
-	public List<TipoSangre> findAllTipoSangre() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public List<TipoSangre> findAllTypeBlood() {
+		return this.findAllTypeBlood();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<ProfesionProfesional> findAllProfessionProfessional() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.findAllProfessionProfessional();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<TipoCuenta> findAllAccounType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.profesional.findAllAccounType();
 	}
 
 	@Override
-	public List<TipoCuenta> findAllBank() {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(readOnly = true)
+	public List<Banco> findAllBank() {
+		return this.profesional.findAllBank();
 	}
 
+
 	@Override
+	@Transactional(readOnly = true)
 	public List<TipoDiscapacidad> findAllTypeDisability() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.profesional.findAllTypeDisability();
 	}
+
 
 	
 }

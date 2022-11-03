@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -71,32 +72,66 @@ public class Profesional implements Serializable {
     @Column(name = "titulo_cuarto_nivel_profesional")
     private String tituloCuartoNivelProfesional;
     
+    //private TipoCuenta tipoCuenta;
+    
+   // private Banco banco;
+    
+    //private TipoDiscapacidad tipoDiscapacidad;
+    
+  
+	/*
+	 * @ManyToOne(fetch=FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name="id_tipo_cuenta")
+	 * 
+	 * @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) private String
+	 * tipoCuenta;
+	 * 
+	 * @ManyToOne(fetch=FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name="id_banco")
+	 * 
+	 * @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) private String
+	 * banco;
+	 * 
+	 * @ManyToOne(fetch=FetchType.LAZY)
+	 * 
+	 * @JoinColumn(name="id_tipo_discapacidad")
+	 * 
+	 * @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) private String
+	 * tipoDiscapacidad;
+	 */
+    @NotNull(message = "El estado civil no puede ser nulo")
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_estado_civil")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private EstadoCivil estadoCivil;
 	
+    @NotNull(message = "El tipo de sangre no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_tipo_sangre")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoSangre tipoSangre;
 	
+	@NotNull(message = "La discapacidad no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_discapacidad")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Discapacidad discapacidad;
 	
+	@NotNull(message = "El genero no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_genero")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Genero genero;
 	
-	
+	@NotNull(message = "La profesión no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_profesion_profesional")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private ProfesionProfesional profesionProfesional;
 
+	@NotNull(message = "La cuenta no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_cuenta")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
