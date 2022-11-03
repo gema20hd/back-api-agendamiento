@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -41,7 +42,7 @@ public class Profesional implements Serializable {
     private String apellidoPaternoProfesional;
 
     @Column(name = "apellido_materno_profesional")
-    private String apellidoMaternoProfesional;
+    private Date apellidoMaternoProfesional;
 
     @Column(name = "fecha_nacimiento_profesional")
     private String fechaNacimientoProfesional;
