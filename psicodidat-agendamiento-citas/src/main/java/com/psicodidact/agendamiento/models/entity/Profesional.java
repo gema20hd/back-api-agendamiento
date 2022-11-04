@@ -43,7 +43,7 @@ public class Profesional implements Serializable {
     private String apellidoPaternoProfesional;
 
     @Column(name = "apellido_materno_profesional")
-    private Date apellidoMaternoProfesional;
+    private String apellidoMaternoProfesional;
 
     @Column(name = "fecha_nacimiento_profesional")
     private String fechaNacimientoProfesional;

@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
 
@@ -36,7 +36,7 @@ import lombok.*;
 @Table(name = "usuario")
 public class Usuario implements Serializable{
 
-	// private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
@@ -59,8 +59,7 @@ public class Usuario implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="id_profesional")
-	@JsonIgnore
-//	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Profesional profesional;
 
 
