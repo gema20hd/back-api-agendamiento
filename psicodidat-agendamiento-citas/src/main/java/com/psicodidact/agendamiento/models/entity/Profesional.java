@@ -72,35 +72,7 @@ public class Profesional implements Serializable {
     @Column(name = "titulo_cuarto_nivel_profesional")
     private String tituloCuartoNivelProfesional;
     
-    //private TipoCuenta tipoCuenta;
-    
-   // private Banco banco;
-    
-    //private TipoDiscapacidad tipoDiscapacidad;
-    
-  
-	/*
-	 * @ManyToOne(fetch=FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name="id_tipo_cuenta")
-	 * 
-	 * @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) private String
-	 * tipoCuenta;
-	 * 
-	 * @ManyToOne(fetch=FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name="id_banco")
-	 * 
-	 * @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) private String
-	 * banco;
-	 * 
-	 * @ManyToOne(fetch=FetchType.LAZY)
-	 * 
-	 * @JoinColumn(name="id_tipo_discapacidad")
-	 * 
-	 * @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) private String
-	 * tipoDiscapacidad;
-	 */
+
     @NotNull(message = "El estado civil no puede ser nulo")
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_estado_civil")

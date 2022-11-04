@@ -23,79 +23,79 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 
 	
 	@Autowired
-	private IProfesionalRepository profesional;
+	private IProfesionalRepository IProfesional;
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Profesional> findAll() {	
-		return (List<Profesional>) this.profesional.findAll();
+		return (List<Profesional>) this.IProfesional.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Profesional findById(Long id) {
-		return this.profesional.findById(id).orElse(null);
+		return this.IProfesional.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public Profesional save(Profesional profesional) {
-		return this.profesional.save(profesional);
+		return this.IProfesional.save(profesional);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-	 this.profesional.deleteById(id);
+	 this.IProfesional.deleteById(id);
 		
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Profesional findByIdentification(String identification) {
-		return this.profesional.findByIdentification(identification);
+		return this.IProfesional.findByIdentification(identification);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Profesional findByLastName(String apellidoPaterno) {
-		return this.profesional.findByLastName(apellidoPaterno);
+		return this.IProfesional.findByLastName(apellidoPaterno);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Profesional findByMotherLastName(String apellidoMaterno) {
-		return this.findByMotherLastName(apellidoMaterno);
+		return this.IProfesional.findByMotherLastName(apellidoMaterno);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Genero> findAllGender() {
-		return this.profesional.findAllGender();
+		return this.IProfesional.findAllGender();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<EstadoCivil> findAllMaritalStatus() {
-		return this.findAllMaritalStatus();
+		return this.IProfesional.findAllMaritalStatus();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Discapacidad> findAllDisability() {
-		return this.findAllDisability();
+		return this.IProfesional.findAllDisability();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<TipoSangre> findAllTypeBlood() {
-		return this.findAllTypeBlood();
+		return this.IProfesional.findAllTypeBlood();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<ProfesionProfesional> findAllProfessionProfessional() {
-		return this.findAllProfessionProfessional();
+		return this.IProfesional.findAllProfessionProfessional();
 	}
 
 	

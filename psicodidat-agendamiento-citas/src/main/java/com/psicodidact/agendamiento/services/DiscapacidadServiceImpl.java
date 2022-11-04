@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
+import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.Usuario;
 import com.psicodidact.agendamiento.models.repository.IDiscapacidadRepository;
 
@@ -20,29 +21,31 @@ public class DiscapacidadServiceImpl  implements IDiscapacidadService {
 
 	@Override
 	public List<Discapacidad> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Discapacidad>) iDiscapacidad.findAll();
 	}
-	@Override
-	public Page<Discapacidad> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	@Override
 	public Discapacidad findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return iDiscapacidad.findById(id).orElse(null);
 	}
+
 	@Override
-	public Discapacidad save(Discapacidad Discapacidad) {
-		// TODO Auto-generated method stub
-		return null;
+	public Discapacidad save(Discapacidad discapacidad) {
+		return iDiscapacidad.save(discapacidad);
 	}
+
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		iDiscapacidad.deleteById(id);
 		
 	}
+
+	@Override
+	public List<TipoDiscapacidad> findAllTypeDisability() {
+		return iDiscapacidad.findAllTypeDisability();
+	}
+
+	
 
 }
 
