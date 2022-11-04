@@ -42,12 +42,5 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	@Query("select pp from ProfesionProfesional pp")
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
-	@Query("select tc from TipoCuenta tc")
-	public List<TipoCuenta> findAllAccounType();
-	
-	@Query("select b from Banco b")
-	public List<Banco> findAllBank();
-	
-	@Query("select td from TipoDiscapacidad td")
-	public List<TipoDiscapacidad> findAllTypeDisability();
+
 }

@@ -54,7 +54,7 @@ public class ProfesionalRestController {
 		return profesionalService.findAll();
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		
@@ -78,7 +78,7 @@ public class ProfesionalRestController {
 	}
 	
 	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/{dni}")
 	public ResponseEntity<?> findByIdentification(@PathVariable String identificacion) {
 		
@@ -102,7 +102,7 @@ public class ProfesionalRestController {
 	}
 	
 	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/{lastName}")
 	public ResponseEntity<?> findByLastName(@PathVariable String apellidoPaterno) {
 		
@@ -126,7 +126,7 @@ public class ProfesionalRestController {
 	}
 	
 	
-	@Secured({"ROLE_ADMIN", "ROLE_USER"})
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/{lastName2}")
 	public ResponseEntity<?> findByMotherLastName(@PathVariable String apellidoMaterno) {
 		
@@ -181,27 +181,6 @@ public class ProfesionalRestController {
 		return this.profesionalService.findAllProfessionProfessional();
 	}
 	
-	
-	@Secured("ROLE_ADMIN")
-	@GetMapping("/profesionales/tipoCuenta")
-	public List<TipoCuenta> findAllAccounType(){
-		return this.profesionalService.findAllAccounType();
-	}
-	
-	
-	//@Secured("ROLE_ADMIN")
-	@GetMapping("/profesionales/banco")
-	public List<Banco> findAllBank(){
-		return this.profesionalService.findAllBank();
-	}
-	
-	@Secured("ROLE_ADMIN")
-	@GetMapping("/profesionales/tipoDiscapacidad")
-	public List<TipoDiscapacidad> findAllTypeDisability(){
-		return this.profesionalService.findAllTypeDisability();
-	}
-	
-	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/profesionales")
 	public ResponseEntity<?> create(@Valid @RequestBody Profesional profesional, BindingResult result) {
@@ -234,7 +213,7 @@ public class ProfesionalRestController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@PutMapping("/profesionales/{c}")
+	@PutMapping("/profesionales/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result, @PathVariable Long id) {
 
 		Profesional profesionalActual = profesionalService.findById(id);
@@ -299,7 +278,7 @@ public class ProfesionalRestController {
 	
 	
 	@Secured("ROLE_ADMIN")
-	@DeleteMapping("/clientes/{id}")
+	@DeleteMapping("/profesionales/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		
 		Map<String, Object> response = new HashMap<>();

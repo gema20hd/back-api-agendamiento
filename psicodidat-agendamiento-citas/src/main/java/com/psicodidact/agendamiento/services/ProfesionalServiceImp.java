@@ -98,25 +98,6 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 		return this.findAllProfessionProfessional();
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<TipoCuenta> findAllAccounType() {
-		return this.profesional.findAllAccounType();
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<Banco> findAllBank() {
-		return this.profesional.findAllBank();
-	}
-
-
-	@Override
-	@Transactional(readOnly = true)
-	public List<TipoDiscapacidad> findAllTypeDisability() {
-		return this.profesional.findAllTypeDisability();
-	}
-
-
+	
 	
 }

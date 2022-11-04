@@ -21,10 +21,20 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/profesionales").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").hasAnyRole("USER", "ADMIN")
-		/*.antMatchers(HttpMethod.POST, "api/profesionales").hasRole("ADMIN")
-		.antMatchers("/api/pacientes**").hasRole("ADMIN")*/
+		http.authorizeRequests()
+		.antMatchers(HttpMethod.GET, "/api/profesionales").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/{lastName}").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/{lastName2").hasAnyRole( "ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/{dni}").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.POST, "api/profesionales").hasRole("ADMIN")
+		.antMatchers(HttpMethod.PUT, "api/profesionales/{id}").hasRole("ADMIN")
+		.antMatchers(HttpMethod.DELETE, "api/profesionales/{id}").hasRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/genero").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/estadoCivil").hasAnyRole( "ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/discapacidad").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/tipoSangre").hasAnyRole( "ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesional/profesionProfesional").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}

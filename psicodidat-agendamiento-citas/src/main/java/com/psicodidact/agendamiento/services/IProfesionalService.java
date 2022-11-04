@@ -44,11 +44,7 @@ public interface IProfesionalService {
 
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
-	public List<TipoCuenta> findAllAccounType();
-	
-	public List<Banco> findAllBank();
-	
-	public List<TipoDiscapacidad> findAllTypeDisability();
+
 	
 
 
