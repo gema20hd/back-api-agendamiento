@@ -55,6 +55,26 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 		return usuarioRepository.findByUsername(username);
 	}
 
+	@Override
+	@Transactional(readOnly=true)
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Usuario save(Usuario usuario) {
+		return usuarioRepository.save(usuario);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		usuarioRepository.deleteById(id);
+		
+	}
+
+
 
 
 }
