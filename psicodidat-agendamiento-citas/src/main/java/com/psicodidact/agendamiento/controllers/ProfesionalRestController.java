@@ -78,75 +78,72 @@ public class ProfesionalRestController {
 	}
 	
 	
-	/*
-	 * @Secured({"ROLE_ADMIN"})
-	 * 
-	 * @GetMapping("/profesional/{dni}") public ResponseEntity<?>
-	 * findByIdentification(@PathVariable String identificacion) {
-	 * 
-	 * Profesional profesional = null; Map<String, Object> response = new
-	 * HashMap<>();
-	 * 
-	 * try { profesional = profesionalService.findByIdentification(identificacion);
-	 * } catch(DataAccessException e) { response.put("mensaje",
-	 * "Error al realizar la consulta en la base de datos"); response.put("error",
-	 * e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-	 * return new ResponseEntity<Map<String, Object>>(response,
-	 * HttpStatus.INTERNAL_SERVER_ERROR); }
-	 * 
-	 * if(profesional == null) { response.put("mensaje",
-	 * "El profesional con la identificación: ".concat(identificacion.toString().
-	 * concat(" no existe en la base de datos!"))); return new
-	 * ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
-	 * 
-	 * return new ResponseEntity<Profesional>(profesional, HttpStatus.OK); }
-	 * 
-	 * 
-	 * @Secured({"ROLE_ADMIN"})
-	 * 
-	 * @GetMapping("/profesionales/{lastName}") public ResponseEntity<?>
-	 * findByLastName(@PathVariable String apellidoPaterno) {
-	 * 
-	 * Profesional profesional = null; Map<String, Object> response = new
-	 * HashMap<>();
-	 * 
-	 * try { profesional = profesionalService.findByLastName(apellidoPaterno); }
-	 * catch(DataAccessException e) { response.put("mensaje",
-	 * "Error al realizar la consulta en la base de datos"); response.put("error",
-	 * e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-	 * return new ResponseEntity<Map<String, Object>>(response,
-	 * HttpStatus.INTERNAL_SERVER_ERROR); }
-	 * 
-	 * if(profesional == null) { response.put("mensaje",
-	 * "El profesional con el apellido: ".concat(apellidoPaterno.toString().
-	 * concat(" no existe en la base de datos!"))); return new
-	 * ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
-	 * 
-	 * return new ResponseEntity<Profesional>(profesional, HttpStatus.OK); }
-	 * 
-	 * 
-	 * @Secured({"ROLE_ADMIN"})
-	 * 
-	 * @GetMapping("/profesionales/{lastName2}") public ResponseEntity<?>
-	 * findByMotherLastName(@PathVariable String apellidoMaterno) {
-	 * 
-	 * Profesional profesional = null; Map<String, Object> response = new
-	 * HashMap<>();
-	 * 
-	 * try { profesional = profesionalService.findByIdentification(apellidoMaterno);
-	 * } catch(DataAccessException e) { response.put("mensaje",
-	 * "Error al realizar la consulta en la base de datos"); response.put("error",
-	 * e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-	 * return new ResponseEntity<Map<String, Object>>(response,
-	 * HttpStatus.INTERNAL_SERVER_ERROR); }
-	 * 
-	 * if(profesional == null) { response.put("mensaje",
-	 * "El profesional con el apellido: ".concat(apellidoMaterno.toString().
-	 * concat(" no existe en la base de datos!"))); return new
-	 * ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
-	 * 
-	 * return new ResponseEntity<Profesional>(profesional, HttpStatus.OK); }
-	 */
+	
+	  //@Secured({"ROLE_ADMIN"})
+	  @GetMapping("/profesional/identificacion/{dni}") public ResponseEntity<?>
+	  findByIdentification(@PathVariable String identificacion) {
+	  
+	  Profesional profesional = null; Map<String, Object> response = new
+	  HashMap<>();
+	  
+	  try { profesional = profesionalService.findByIdentification(identificacion);
+	  } catch(DataAccessException e) { response.put("mensaje",
+	  "Error al realizar la consulta en la base de datos"); response.put("error",
+	  e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+	  return new ResponseEntity<Map<String, Object>>(response,
+	  HttpStatus.INTERNAL_SERVER_ERROR); }
+	  
+	  if(profesional == null) { response.put("mensaje",
+	  "El profesional con la identificación: ".concat(identificacion.toString().
+	  concat(" no existe en la base de datos!"))); return new
+	  ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
+	  
+	  return new ResponseEntity<Profesional>(profesional, HttpStatus.OK); }
+	  
+	  
+	  //@Secured({"ROLE_ADMIN"})
+	  @GetMapping("/profesionales/apellidoPaterno/{lastName}") public ResponseEntity<?>
+	  findByLastName(@PathVariable String apellidoPaterno) {
+	  
+	  Profesional profesional = null; Map<String, Object> response = new
+	  HashMap<>();
+	  
+	  try { profesional = profesionalService.findByLastName(apellidoPaterno); }
+	  catch(DataAccessException e) { response.put("mensaje",
+	  "Error al realizar la consulta en la base de datos"); response.put("error",
+	  e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+	  return new ResponseEntity<Map<String, Object>>(response,
+	  HttpStatus.INTERNAL_SERVER_ERROR); }
+	  
+	  if(profesional == null) { response.put("mensaje",
+	  "El profesional con el apellido: ".concat(apellidoPaterno.toString().
+	  concat(" no existe en la base de datos!"))); return new
+	  ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
+	  
+	  return new ResponseEntity<Profesional>(profesional, HttpStatus.OK); }
+	  
+	  
+	  //@Secured({"ROLE_ADMIN"})
+	  @GetMapping("/profesionales/apellidoMaterno/{lastName2}") public ResponseEntity<?>
+	  findByMotherLastName(@PathVariable String apellidoMaterno) {
+	  
+	  Profesional profesional = null; Map<String, Object> response = new
+	  HashMap<>();
+	  
+	  try { profesional = profesionalService.findByIdentification(apellidoMaterno);
+	  } catch(DataAccessException e) { response.put("mensaje",
+	  "Error al realizar la consulta en la base de datos"); response.put("error",
+	  e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+	  return new ResponseEntity<Map<String, Object>>(response,
+	  HttpStatus.INTERNAL_SERVER_ERROR); }
+	  
+	  if(profesional == null) { response.put("mensaje",
+	  "El profesional con el apellido: ".concat(apellidoMaterno.toString().
+	  concat(" no existe en la base de datos!"))); return new
+	  ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
+	  
+	  return new ResponseEntity<Profesional>(profesional, HttpStatus.OK); }
+	 
 	//@Secured("ROLE_ADMIN")
 	@GetMapping("/profesionales/genero")
 	public List<Genero> findAllGender(){

@@ -72,7 +72,7 @@ public class Profesional implements Serializable {
     private String hojaVida;
 
     @Column(name = "nivel_educacion")
-    private String nivelEducacion;
+    private String nivelEducacion; //lista en el from 
 
     @Column(name = "titulo_cuarto_nivel_profesional")
     private String tituloCuartoNivelProfesional;
