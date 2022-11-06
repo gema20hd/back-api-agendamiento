@@ -1,10 +1,8 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
 
 
 
@@ -27,83 +25,35 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
 
-
-
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable{
+	public Usuario(String username, String password, boolean enabled, Profesional profesional) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.profesional = profesional;
+	}
 
-	@Transient 
-	UsuarioAux usuarioAux = new UsuarioAux();
-	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@Column(name = "nombre_usuario",unique = true, length = 20)
+	@NotEmpty(message = "no puede estar vacio")
+	@Column(name = "nombre_usuario",unique = true, length = 20,nullable = false)
 	private String username;
 
 	@Column(name = "clave_usuario")
 	private String password;
-
-
-	private boolean enabled = true;
-
+	private boolean enabled;
 	
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-  
-	public String getUsername() {
-    	System.out.println("Hola Mundo"+username);
-		return username;
-	}
-
-	//@PrePersist
-	public void setUsername(String username) {
-		this.username =  usuarioAux.usuarioCorreo(username);
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = usuarioAux.passwordEncry(password);
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public List<Rol> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
-	}
-
-	public Profesional getProfesional() {
-		return profesional;
-	}
-
-	public void setProfesional(Profesional profesional) {
-		this.profesional = profesional;
-	}
-
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="id_usuario"),
 	inverseJoinColumns=@JoinColumn(name="id_rol"),

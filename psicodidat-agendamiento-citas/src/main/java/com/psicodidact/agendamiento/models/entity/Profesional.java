@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -32,8 +34,8 @@ public class Profesional implements Serializable {
     @Column(name ="id_profesional")
     private Long idProfesional;
 
-
-    @Column(name = "identificacion_profesional")
+	@NotEmpty(message = "no puede estar vacio")
+    @Column(name = "identificacion_profesional",nullable = false, unique = true)
     private String identificacionProfesional;
 
     @Column(name = "nombres_profesional")
@@ -54,7 +56,10 @@ public class Profesional implements Serializable {
     @Column(name = "telefono_emergencia_profesional")
     private String telefonoEmergenciaProfesional;
 
-    @Column(name = "direccion_domicilio_profesional")
+    
+	@NotEmpty(message = "no puede estar vacio")
+	@Email(message = "no es una dirección de correo bien formada")
+    @Column(name = "direccion_domicilio_profesional",nullable = false, unique = true)
     private String direccionDomicilioProfesional;
 
     @Column(name = "correo_electronico_profesional")

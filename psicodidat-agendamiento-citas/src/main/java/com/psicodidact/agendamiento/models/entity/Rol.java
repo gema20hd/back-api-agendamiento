@@ -31,9 +31,7 @@ public class Rol implements Serializable{
 	@Column(name="descripcion_rol")
 	private String descripcionRol;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idUsuario")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Usuario> usuarios;
+	
 
 	
 	
