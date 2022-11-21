@@ -2,7 +2,17 @@ package com.psicodidact.agendamiento.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
+
+import com.psicodidact.agendamiento.models.entity.Banco;
+import com.psicodidact.agendamiento.models.entity.Discapacidad;
+import com.psicodidact.agendamiento.models.entity.EstadoCivil;
+import com.psicodidact.agendamiento.models.entity.Genero;
+import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 import com.psicodidact.agendamiento.models.entity.Profesional;
+import com.psicodidact.agendamiento.models.entity.TipoSangre;
 
 
 
@@ -12,6 +22,31 @@ public interface IProfesionalService {
 
 	public List<Profesional> findAll();
 	
+
+	public Profesional findById(Long id);
+	
+	public Profesional save(Profesional profesional);
+	
+	public void delete(Long id);
+	
+	public Profesional findByIdentification(String identification);
+	
+	public Profesional findByLastName(String apellidoPaterno);
+	
+	public Profesional findByMotherLastName(String apellidoMaterno);
+	
+	public List<Genero> findAllGender();
+	
+	public List<EstadoCivil> findAllMaritalStatus();
+	
+	public List<Discapacidad> findAllDisability();
+	
+	public List<TipoSangre> findAllTypeBlood(); 
+
+	public List<ProfesionProfesional> findAllProfessionProfessional();
+	
+
+
 	
 
 
