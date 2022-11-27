@@ -40,6 +40,8 @@ public interface IProfesionalService {
 	
 	public List<Discapacidad> findAllDisability();
 	
+	public List<TipoDiscapacidad> findAllTypeDisability();
+	
 	public List<TipoSangre> findAllTypeBlood(); 
 
 	public List<ProfesionProfesional> findAllProfessionProfessional();

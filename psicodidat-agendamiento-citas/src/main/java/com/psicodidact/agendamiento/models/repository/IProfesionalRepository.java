@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.psicodidact.agendamiento.models.entity.Banco;
+
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
 import com.psicodidact.agendamiento.models.entity.EstadoCivil;
 import com.psicodidact.agendamiento.models.entity.Genero;
 import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 import com.psicodidact.agendamiento.models.entity.Profesional;
-import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
 
@@ -21,17 +20,25 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	@Query("select p from Profesional p where p.identificacionProfesional=?1")
 	public Profesional findByIdentification(String identification);
 	
-	@Query("select p from Profesional p where p.apellidoPaternoProfesional=?1")
+	@Query("select p from Profesional p where p.apellidoPaternoProfesional like %?1%")
 	public Profesional findByLastName(String apellidoPaterno);
 	
-	@Query("select p from Profesional p where p.apellidoMaternoProfesional=?1")
-	public Profesional findByMotherLastName(String apellidoMaternos);
+	@Query("select p from Profesional p where p.apellidoMaternoProfesional like %?1%")
+	public Profesional findByMotherLastName(String apellidoMaterno);
+	
+
+	public List<Profesional> findByLastNameContainingIgnoreCase(String term);
+	
+	public List<Profesional> findByMotherLastNameStartingWithIgnoreCase(String term);
 	
 	@Query("select g from  Genero g")
 	public List<Genero> findAllGender();
 	
 	@Query("select e from EstadoCivil e")
 	public List<EstadoCivil> findAllMaritalStatus();
+	
+	@Query("select td from TipoDiscapacidad td")
+	public List<TipoDiscapacidad> findAllTypeDisability();
 	
 	@Query("select d from Discapacidad d")
 	public List<Discapacidad> findAllDisability();

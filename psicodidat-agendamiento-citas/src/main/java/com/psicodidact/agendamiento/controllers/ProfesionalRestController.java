@@ -81,7 +81,7 @@ public class ProfesionalRestController {
 	
 	  //@Secured({"ROLE_ADMIN"})
 	  @GetMapping("/profesional/identificacion/{dni}") public ResponseEntity<?>
-	  findByIdentification(@PathVariable String identificacion) {
+	  findByIdentification(@PathVariable() String identificacion) {
 	  
 	  Profesional profesional = null; Map<String, Object> response = new
 	  HashMap<>();
@@ -102,8 +102,8 @@ public class ProfesionalRestController {
 	  
 	  
 	  //@Secured({"ROLE_ADMIN"})
-	  @GetMapping("/profesionales/apellidoPaterno/{lastName}") public ResponseEntity<?>
-	  findByLastName(@PathVariable String apellidoPaterno) {
+	  @GetMapping("/profesionales/apellido/paterno/{lastName}") public ResponseEntity<?>
+	  findByLastName(@PathVariable()  String apellidoPaterno) {
 	  
 	  Profesional profesional = null; Map<String, Object> response = new
 	  HashMap<>();
@@ -124,7 +124,7 @@ public class ProfesionalRestController {
 	  
 	  
 	  //@Secured({"ROLE_ADMIN"})
-	  @GetMapping("/profesionales/apellidoMaterno/{lastName2}") public ResponseEntity<?>
+	  @GetMapping("/profesionales/apellido/materno/madre/{lastName2}") public ResponseEntity<?>
 	  findByMotherLastName(@PathVariable String apellidoMaterno) {
 	  
 	  Profesional profesional = null; Map<String, Object> response = new
@@ -163,6 +163,10 @@ public class ProfesionalRestController {
 		return this.profesionalService.findAllDisability();
 	}
 	
+	@GetMapping("/profesionales/tipoDiscapacidad")
+	public List<TipoDiscapacidad> findAllTypeDisability(){
+		return this.profesionalService.findAllTypeDisability();
+	}
 	
 	//@Secured("ROLE_ADMIN")
 	@GetMapping("/profesionales/tipoSangre")

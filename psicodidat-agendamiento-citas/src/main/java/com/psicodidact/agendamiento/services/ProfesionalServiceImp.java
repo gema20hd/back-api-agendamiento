@@ -98,6 +98,11 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 		return this.IProfesional.findAllProfessionProfessional();
 	}
 
+	@Override
+	public List<TipoDiscapacidad> findAllTypeDisability() {
+		return this.IProfesional.findAllTypeDisability();
+	}
+
 	
 	
 }
