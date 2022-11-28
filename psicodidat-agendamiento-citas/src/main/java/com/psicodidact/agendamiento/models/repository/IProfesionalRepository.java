@@ -2,6 +2,7 @@ package com.psicodidact.agendamiento.models.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -27,9 +28,9 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	public Profesional findByMotherLastName(String apellidoMaterno);
 	
 
-	public List<Profesional> findByLastNameContainingIgnoreCase(String term);
+	public List<Profesional> findByApellidoPaternoProfesionalContainingIgnoreCase(String term);
 	
-	public List<Profesional> findByMotherLastNameStartingWithIgnoreCase(String term);
+	public List<Profesional> findByApellidoMaternoProfesionalContainingIgnoreCase(String term);
 	
 	@Query("select g from  Genero g")
 	public List<Genero> findAllGender();

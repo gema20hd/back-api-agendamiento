@@ -30,9 +30,9 @@ public interface IProfesionalService {
 	
 	public Profesional findByIdentification(String identification);
 	
-	public Profesional findByLastName(String apellidoPaterno);
+	public List<Profesional> findByLastName(String apellidoPaterno);
 	
-	public Profesional findByMotherLastName(String apellidoMaterno);
+	public List<Profesional> findByMotherLastName(String apellidoMaterno);
 	
 	public List<Genero> findAllGender();
 	

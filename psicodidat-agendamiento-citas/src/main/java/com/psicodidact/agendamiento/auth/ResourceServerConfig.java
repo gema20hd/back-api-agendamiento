@@ -22,8 +22,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers(HttpMethod.GET, "/api/profesionales").hasAnyRole("ROLE_ADMIN")
-		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").hasAnyRole("ROLE_ADMIN")
+		.antMatchers(HttpMethod.GET, "/api/profesionales").hasAnyRole("ROLE_ADMIN","ROLE_USER")
+		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").hasAnyRole("ROLE_ADMIN","ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/profesionales/apellido/paterno/{lastName}").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/profesionales/apellido/materno/madre/{lastName2}").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/profesional/identificacion/{dni}").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
