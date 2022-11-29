@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,8 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
+	
+	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();  
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -54,6 +57,54 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	public Usuario findByUsername(String username) {
 		return usuarioRepository.findByUsername(username);
 	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
+	}
+
+	
+	@Override
+	@Transactional
+	public Usuario save(Usuario usuario) {
+		Usuario user = new Usuario(usuarioCorreo(usuario.getUsername()), 
+				passwordEncry(usuario.getPassword()),usuario.isEnabled(),usuario.getProfesional());
+		return usuarioRepository.save(user);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		usuarioRepository.deleteById(id);
+		
+	}
+
+	public String usuarioCorreo(String u) {
+		String[] usuario = null;
+		usuario = u.split("@");
+		String us = username(usuario);
+		
+		return us;
+
+	}
+
+	public  String username(String[] MyArray) {
+		String t = "";
+		
+		for (int i = 0; i <= MyArray.length - 1; i++) {
+			t = MyArray[0];
+			
+		}
+		return t;
+	}
+
+	public String passwordEncry(String password) {
+		String passwordBcrypt = passwordEncoder.encode(password);
+		System.out.println("Hola usuario service......"+passwordBcrypt);
+		return passwordBcrypt;
+	}
+
 
 
 
