@@ -16,6 +16,8 @@ import com.psicodidact.agendamiento.models.entity.Profesional;
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
+import com.psicodidact.agendamiento.models.repository.IBancoRepository;
+import com.psicodidact.agendamiento.models.repository.ICuentaRepository;
 import com.psicodidact.agendamiento.models.repository.IProfesionalRepository;
 
 @Service
@@ -25,6 +27,15 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 	@Autowired
 	private IProfesionalRepository IProfesional;
 
+	
+	@Autowired
+	private ICuentaRepository iCuenta;
+
+	
+	@Autowired
+	private IBancoRepository iBanco;
+
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Profesional> findAll() {	
@@ -99,10 +110,12 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<TipoDiscapacidad> findAllTypeDisability() {
 		return this.IProfesional.findAllTypeDisability();
 	}
 
-	
+
+
 	
 }

@@ -13,13 +13,15 @@ public interface IBancoService {
 
 	public List<Banco> findAll();
 	
-	public Page<Banco> findAll(Pageable pageable);
+	//public Page<Banco> findAll(Pageable pageable);
 	
 	public Banco findById(Long id);
 	
 	public Banco save(Banco Banco);
 	
 	public void delete(Long id);
+	
+	
 	
 
 

@@ -11,6 +11,8 @@ public interface ITipoCuentaService {
 
 	TipoCuenta findById(Long id);
 
-	TipoCuenta save(TipoCuenta tipoDiscapacidad);
+	TipoCuenta save(TipoCuenta tipoCuenta);
+	
+	public void delete(Long id);
 
 }

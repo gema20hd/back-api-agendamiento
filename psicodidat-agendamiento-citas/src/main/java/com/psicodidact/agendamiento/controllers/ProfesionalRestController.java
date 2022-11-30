@@ -34,6 +34,7 @@ import com.psicodidact.agendamiento.models.entity.Profesional;
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
+import com.psicodidact.agendamiento.services.ICuentaService;
 import com.psicodidact.agendamiento.services.IProfesionalService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
@@ -43,6 +44,7 @@ public class ProfesionalRestController {
 
 	@Autowired
 	private IProfesionalService profesionalService;
+	
 
 	// @Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales")

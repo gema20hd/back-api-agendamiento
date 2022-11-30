@@ -20,28 +20,22 @@ public class BancoServiceImpl  implements IBancoService {
 
 	@Override
 	public List<Banco> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Banco>) iBanco.findAll();
 	}
+
 	@Override
-	public Page<Banco> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Banco findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public Banco save(Banco Banco) {
-		// TODO Auto-generated method stub
-		return null;
+	public Banco save(Banco banco) {
+		return iBanco.save(banco);
 	}
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		iBanco.deleteById(id);
 		
+	}
+
+	@Override
+	public Banco findById(Long id) {
+		return iBanco.findById(id).orElse(null);
 	}
 
 }

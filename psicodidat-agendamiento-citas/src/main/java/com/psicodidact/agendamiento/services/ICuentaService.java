@@ -20,11 +20,15 @@ public interface ICuentaService {
 	public Cuenta save(Cuenta Cuenta);
 	
 	public void delete(Long id);
-	
-	
-	public List<TipoCuenta> findAllAccounType();
 
+	public List<TipoCuenta> findAllAccounType();
+	
 	public List<Banco> findAllBank();
+	
+	public List<Banco> findByDescripcionBancoContainingIgnoreCase(String term);
+
+	public Banco findByBank(Long id);
+
 
 
 

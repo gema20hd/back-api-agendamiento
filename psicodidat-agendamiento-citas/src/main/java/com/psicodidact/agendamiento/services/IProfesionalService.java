@@ -46,7 +46,17 @@ public interface IProfesionalService {
 
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
-
+	//public List<Banco> findBydescripcionBancoContainingIgnoreCase(String term);
+	
+	/*public List<Banco> findAllBank(); 
+	
+	public Banco findByIdBank(Long id);
+	
+	public Banco findByIdBill(Long id);
+	
+	public Banco save(Banco banco);
+	*/
+	
 	
 
 

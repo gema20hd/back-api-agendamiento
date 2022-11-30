@@ -13,23 +13,27 @@ public class TipoCuentaServiceImpl  implements ITipoCuentaService{
 
 	
 	@Autowired
-	private ITipoCuentaRepository tipoCuenta;
+	private ITipoCuentaRepository ITipoCuenta;
+	
 	@Override
 	public List<TipoCuenta> findAll() {
-		// TODO Auto-generated method stub
-		return (List<TipoCuenta>) tipoCuenta.findAll();
+		return (List<TipoCuenta>) ITipoCuenta.findAll();
 	}
 
 	@Override
 	public TipoCuenta findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ITipoCuenta.findById(null).orElse(null);
 	}
 
 	@Override
-	public TipoCuenta save(TipoCuenta tipoDiscapacidad) {
-		// TODO Auto-generated method stub
-		return null;
+	public TipoCuenta save(TipoCuenta tipoCuenta) {
+		return ITipoCuenta.save(tipoCuenta);
+	}
+
+	@Override
+	public void delete(Long id) {
+		ITipoCuenta.deleteById(id);
+		
 	}
 
 }

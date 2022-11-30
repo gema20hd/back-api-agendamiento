@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.psicodidact.agendamiento.models.entity.Banco;
 import com.psicodidact.agendamiento.models.entity.Cuenta;
+import com.psicodidact.agendamiento.models.entity.Profesional;
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 
 
@@ -17,6 +18,8 @@ public List<TipoCuenta> findAllAccounType();
 
 @Query("select b from Banco b")
 public List<Banco> findAllBank();
+
+
 
 
 }

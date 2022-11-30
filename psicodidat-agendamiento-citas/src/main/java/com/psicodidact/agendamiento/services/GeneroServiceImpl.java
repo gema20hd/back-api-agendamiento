@@ -20,27 +20,23 @@ public class GeneroServiceImpl  implements IGeneroService {
 
 	@Override
 	public List<Genero> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Genero>) iGenero.findAll();
 	}
 	@Override
 	public Page<Genero> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 	public Genero findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return iGenero.findById(id).orElse(null);
 	}
 	@Override
-	public Genero save(Genero Genero) {
-		// TODO Auto-generated method stub
-		return null;
+	public Genero save(Genero genero) {
+		return iGenero.save(genero);
 	}
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		iGenero.deleteById(id);
 		
 	}
 
