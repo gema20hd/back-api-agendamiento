@@ -39,36 +39,6 @@ public class Especialidad implements Serializable{
 	public String getDescripcionEspecialidad() {
 		return descripcionEspecialidad;
 	}
-
-
-	
-
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idEspecialidadServicioCompra")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<ServicioCompra> servicioCompraEspecialidad;
-
-	public List<ServicioCompra> getServicioCompraEspecialidad() {
-		return servicioCompraEspecialidad;
-	}
-
-	public void setServicioCompraEspecialidad(List<ServicioCompra> servicioCompraEspecialidad) {
-		this.servicioCompraEspecialidad = servicioCompraEspecialidad;
-	}
-
-	public void setDescripcionEspecialidad(String descripcionEspecialidad) {
-		this.descripcionEspecialidad = descripcionEspecialidad;
-	}
-
-	public Especialidad(Long idEspecialidad, String descripcionEspecialidad) {
-		super();
-		this.idEspecialidad = idEspecialidad;
-		this.descripcionEspecialidad = descripcionEspecialidad;
-	}
-	
-	public Especialidad() {
-
-	}
-	
 	
 	
 }
