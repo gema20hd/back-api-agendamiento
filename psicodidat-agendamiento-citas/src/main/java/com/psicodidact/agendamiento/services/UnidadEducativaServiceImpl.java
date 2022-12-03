@@ -2,40 +2,35 @@ package com.psicodidact.agendamiento.services;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 import com.psicodidact.agendamiento.models.repository.IUnidadEducativaRepository;
 
 @Service
-public class UnidadEducativaImpl  implements IUnidadEducativaService{
-	
+public class UnidadEducativaServiceImpl implements IUnidadEducativaService {
+
 	@Autowired
-	private IUnidadEducativaRepository unidadEducativa;
+	private IUnidadEducativaRepository iUnidadEducativa;
 
 	@Override
-	@Transactional()
 	public List<UnidadEducativa> findAll() {
-		return (List<UnidadEducativa>) unidadEducativa.findAll();
+		return (List<UnidadEducativa>) iUnidadEducativa.findAll();
+	}
+
+	@Override
+	public UnidadEducativa findById(Long id) {
+		return (UnidadEducativa) iUnidadEducativa.findById(id).orElse(null);
+	}
+
+	@Override
+	public UnidadEducativa save(UnidadEducativa unidadEducativa) {
+		return iUnidadEducativa.save(unidadEducativa);
 	}
 
 	
-	@Override
-	@Transactional()
-	public UnidadEducativa findById(Long id) {
-		return unidadEducativa.findById(id).orElse(null);
-	}
-
-	@Override
-	@Transactional
-	public UnidadEducativa save(UnidadEducativa unidad) {
-		return unidadEducativa.save(unidad);
-	}
-
-
-
 
 }
