@@ -78,12 +78,16 @@ public class ProfesionalRestController {
 
 	// @Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/identificacion/{dni}")
-	public ResponseEntity<?> findByIdentification(@PathVariable("dni") String identificacion) {
+	@ResponseStatus(HttpStatus.OK)
+	public List<Profesional> findByI(@PathVariable("dni") String identificacion) {
+		return profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(identificacion);
+	}
+	/*public ResponseEntity<?> findByIdentification(@PathVariable("dni") String identificacion) {
 		Profesional profesional = null;
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			profesional = profesionalService.findByIdentification(identificacion);
+			profesional = profesionalService.findI(identificacion);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -98,20 +102,21 @@ public class ProfesionalRestController {
 
 		return new ResponseEntity<Profesional>(profesional, HttpStatus.OK);
 	}
+	*/
 	
 
 	// @Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/apellido/paterno/{lastName}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Profesional> findByLastName(@PathVariable("lastName") String apellidoPaterno) {
-		return profesionalService.findByLastName(apellidoPaterno);
+		return profesionalService.findByApellidoPaternoProfesionalContainingIgnoreCase(apellidoPaterno);
 	}
 
 	// @Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales/apellido/materno/{lastName2}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Profesional> findByMotherLastName(@PathVariable("lastName2") String apellidoMaterno) {
-		return profesionalService.findByMotherLastName(apellidoMaterno);
+		return profesionalService.findByApellidoMaternoProfesionalContainingIgnoreCase(apellidoMaterno);
 	}
 
 	// @Secured("ROLE_ADMIN")

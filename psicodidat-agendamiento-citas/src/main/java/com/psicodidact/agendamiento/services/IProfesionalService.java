@@ -28,11 +28,21 @@ public interface IProfesionalService {
 	
 	public void delete(Long id);
 	
+	/*
 	public Profesional findByIdentification(String identification);
 	
 	public List<Profesional> findByLastName(String apellidoPaterno);
 	
 	public List<Profesional> findByMotherLastName(String apellidoMaterno);
+	
+	*/
+	public List<Profesional> findByIdentificacionProfesionalContainingIgnoreCase(String term);
+
+	public List<Profesional> findByApellidoPaternoProfesionalContainingIgnoreCase(String term);
+	
+	public List<Profesional> findByApellidoMaternoProfesionalContainingIgnoreCase(String term);
+	
+	
 	
 	public List<Genero> findAllGender();
 	

@@ -63,19 +63,19 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Profesional findByIdentification(String identification) {
-		return this.IProfesional.findByIdentification(identification);
+	public List<Profesional> findByIdentificacionProfesionalContainingIgnoreCase(String identification) {
+		return this.IProfesional.findByIdentificacionProfesionalContainingIgnoreCase(identification);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Profesional>findByLastName(String apellidoPaterno) {
+	public List<Profesional>findByApellidoPaternoProfesionalContainingIgnoreCase(String apellidoPaterno) {
 		return  this.IProfesional.findByApellidoPaternoProfesionalContainingIgnoreCase(apellidoPaterno);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Profesional> findByMotherLastName(String apellidoMaterno) {
+	public List<Profesional> findByApellidoMaternoProfesionalContainingIgnoreCase(String apellidoMaterno) {
 		return  this.IProfesional.findByApellidoMaternoProfesionalContainingIgnoreCase(apellidoMaterno);
 	}
 
