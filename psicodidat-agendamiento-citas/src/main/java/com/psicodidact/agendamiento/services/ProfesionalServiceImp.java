@@ -7,14 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.psicodidact.agendamiento.models.entity.Banco;
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
 import com.psicodidact.agendamiento.models.entity.EstadoCivil;
 import com.psicodidact.agendamiento.models.entity.Genero;
 import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 import com.psicodidact.agendamiento.models.entity.Profesional;
-import com.psicodidact.agendamiento.models.entity.TipoCuenta;
-import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
 import com.psicodidact.agendamiento.models.repository.IBancoRepository;
 import com.psicodidact.agendamiento.models.repository.ICuentaRepository;

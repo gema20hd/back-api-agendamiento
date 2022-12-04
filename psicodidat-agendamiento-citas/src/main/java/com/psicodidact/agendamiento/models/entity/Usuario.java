@@ -21,6 +21,11 @@ import javax.validation.constraints.NotEmpty;
 
 
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
@@ -40,7 +45,9 @@ public class Usuario implements Serializable{
 		this.profesional = profesional;
 	}
 
+
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")

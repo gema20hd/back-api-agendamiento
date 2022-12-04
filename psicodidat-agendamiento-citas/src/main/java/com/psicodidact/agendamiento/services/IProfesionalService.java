@@ -12,9 +12,10 @@ import com.psicodidact.agendamiento.models.entity.EstadoCivil;
 import com.psicodidact.agendamiento.models.entity.Genero;
 import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 import com.psicodidact.agendamiento.models.entity.Profesional;
-import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
+
+
 
 
 
@@ -22,6 +23,7 @@ public interface IProfesionalService {
 
 	public List<Profesional> findAll();
 	
+
 	public Profesional findById(Long id);
 	
 	public Profesional save(Profesional profesional);
@@ -56,6 +58,7 @@ public interface IProfesionalService {
 
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
+
 	//public List<Banco> findBydescripcionBancoContainingIgnoreCase(String term);
 	
 	/*public List<Banco> findAllBank(); 
@@ -67,7 +70,10 @@ public interface IProfesionalService {
 	public Banco save(Banco banco);
 	*/
 	
-	
+
+
+
+
 
 
 }
