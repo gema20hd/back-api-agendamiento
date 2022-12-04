@@ -106,13 +106,13 @@ public class EspecialidadRestController {
 		}
 		
 		
-		//@Secured("ROLE_ADMIN")
 		@PutMapping("/especialidades/{id}")
 		public ResponseEntity<?> update(@Valid @RequestBody Especialidad especialidad, BindingResult result, @PathVariable Long id) {
 
 			Especialidad especialidadActual = especialidadService.findById(id);
 
 			Especialidad especialidadUpdated = null;
+
 
 			Map<String, Object> response = new HashMap<>();
 
@@ -135,6 +135,10 @@ public class EspecialidadRestController {
 
 			try {
 				especialidadActual.setDescripcionEspecialidad(especialidad.getDescripcionEspecialidad());
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0f2ed720452846ef9c0a14fdafb78e8b2473a995
 				especialidadUpdated = especialidadService.save(especialidadActual);
 
 			} catch (DataAccessException e) {
