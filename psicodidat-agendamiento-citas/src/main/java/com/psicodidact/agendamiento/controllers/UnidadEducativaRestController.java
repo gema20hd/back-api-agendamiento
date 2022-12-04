@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
@@ -149,26 +150,10 @@ public class UnidadEducativaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/unidad/nombre/{nombreUnidadEducativa}") 
-	public ResponseEntity<?> findByNombreUnidadEducativaIgnoreCase(@PathVariable String nombreUnidadEducativa) {
-		
-		UnidadEducativa unidadEducativa = null;
-		Map<String, Object> response = new HashMap<>();
-		
-		try {
-			unidadEducativa = unidadEducativaService.findByNombreIgnoreCase(nombreUnidadEducativa);
-		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		if(unidadEducativa == null) {
-			response.put("mensaje", "La Unidad Educativa con el nombre: ".concat(nombreUnidadEducativa.toString().concat(" no existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
-		
-		return new ResponseEntity<UnidadEducativa>(unidadEducativa, HttpStatus.OK);
+	@GetMapping("/unidad/nombre/{nombre}") 
+	@ResponseStatus(HttpStatus.OK)
+	public List<UnidadEducativa> findByNombreUnidadEducativaContainingIgnoreCase(@PathVariable("nombre") String term) {
+		return unidadEducativaService.findByNombreUnidadEducativaContainingIgnoreCase(term);
 	}
 	
 }

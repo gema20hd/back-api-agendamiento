@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.psicodidact.agendamiento.models.entity.Especialidad;
+import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 
 public interface IEspecialidadService {
 
@@ -19,6 +20,8 @@ public interface IEspecialidadService {
 	
 	public void delete(Long id);
 	
-	public Especialidad findByDescripcionEspecialidadIgnoreCase( String descripcionEspecialidad);
+	public List<Especialidad> findByDescripcionEspecialidadContainingIgnoreCase(String term);
+	
+
 
 }

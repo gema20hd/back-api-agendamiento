@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.psicodidact.agendamiento.models.entity.Banco;
@@ -31,6 +32,7 @@ import com.psicodidact.agendamiento.models.entity.Profesional;
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
+import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 import com.psicodidact.agendamiento.services.IEspecialidadService;
 import com.psicodidact.agendamiento.services.IProfesionalService;
 
@@ -170,27 +172,12 @@ public class EspecialidadRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		}
 		
-		@GetMapping("/especialidad/descripcion/{descripcionEspecialidad}") public
-		  ResponseEntity<?> findByDescripcionEspecialidadIgnoreCase(@PathVariable
-		  String descripcionEspecialidad) {
-		  
-		  Especialidad especialidad = null; Map<String, Object> response = new
-		  HashMap<>();
-		  
-		  try { especialidad =
-		  especialidadService.findByDescripcionEspecialidadIgnoreCase(descripcionEspecialidad);
-		  } catch(DataAccessException e) { response.put("mensaje",
-		  "Error al realizar la consulta en la base de datos"); response.put("error",
-		  e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-		  return new ResponseEntity<Map<String, Object>>(response,
-		  HttpStatus.INTERNAL_SERVER_ERROR); }
-		  
-		  if(especialidad == null) { response.put("mensaje",
-		  "La especialidad con la descripción: ".concat(descripcionEspecialidad.
-		  toString().concat(" no existe en la base de datos!"))); return new
-		  ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
-		  
-		  return new ResponseEntity<Especialidad>(especialidad, HttpStatus.OK); }
+		
+		@GetMapping("/especialidad/descripcion/{descripcion}") 
+		@ResponseStatus(HttpStatus.OK)
+		public List<Especialidad> findByDescripcionEspecialidadContainingIgnoreCase(@PathVariable("descripcion") String term) {
+			return especialidadService.findByDescripcionEspecialidadContainingIgnoreCase(term);
+		}
 	
 	
 }

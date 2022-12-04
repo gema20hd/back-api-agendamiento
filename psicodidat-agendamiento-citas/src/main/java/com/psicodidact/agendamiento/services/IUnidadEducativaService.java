@@ -13,5 +13,5 @@ public interface IUnidadEducativaService {
 
 	UnidadEducativa save(UnidadEducativa unidad);
 	
-	public UnidadEducativa findByNombreIgnoreCase( String nombreUnidadEducativa);
+	public List<UnidadEducativa> findByNombreUnidadEducativaContainingIgnoreCase(String term);
 }

@@ -31,6 +31,16 @@ public class UnidadEducativaServiceImpl implements IUnidadEducativaService {
 		return iUnidadEducativa.save(unidadEducativa);
 	}
 
+
+
+	@Override
+	public List<UnidadEducativa> findByNombreUnidadEducativaContainingIgnoreCase(String term) {
+		return iUnidadEducativa.findByNombreUnidadEducativaContainingIgnoreCase(term);
+
+	}
+
+
+
 	
 
 }

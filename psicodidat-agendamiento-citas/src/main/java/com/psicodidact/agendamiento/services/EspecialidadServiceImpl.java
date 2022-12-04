@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.psicodidact.agendamiento.models.entity.Especialidad;
+import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 import com.psicodidact.agendamiento.models.repository.IEspecialidadRepository;
 
 
@@ -37,5 +38,17 @@ public class EspecialidadServiceImpl implements IEspecialidadService{
 	public void delete(Long id) {
 		iEspecialidad.deleteById(id);
 	}
+
+
+	@Override
+	public List<Especialidad> findByDescripcionEspecialidadContainingIgnoreCase(String term) {
+		return  iEspecialidad.findByDescripcionEspecialidadContainingIgnoreCase(term);
+	}
+
+
+
+
+
+	
 
 }
