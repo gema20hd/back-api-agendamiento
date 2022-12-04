@@ -27,7 +27,7 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	@Query("select p from Profesional p where p.apellidoMaternoProfesional like %?1%")
 	public Profesional findByMotherLastName(String apellidoMaterno);
 	
-	public List<Profesional> findByIdentificacionProfesionalContainingIgnoreCase(String term);
+	public List<Profesional> findByIdentificacionProfesionalContainingIgnoreCase(String term); // gema 
 
 	public List<Profesional> findByApellidoPaternoProfesionalContainingIgnoreCase(String term);
 	
