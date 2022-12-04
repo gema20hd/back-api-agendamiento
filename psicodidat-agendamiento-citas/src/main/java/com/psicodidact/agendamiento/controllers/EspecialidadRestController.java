@@ -135,10 +135,6 @@ public class EspecialidadRestController {
 
 			try {
 				especialidadActual.setDescripcionEspecialidad(especialidad.getDescripcionEspecialidad());
-<<<<<<< HEAD
-=======
-
->>>>>>> 0f2ed720452846ef9c0a14fdafb78e8b2473a995
 				especialidadUpdated = especialidadService.save(especialidadActual);
 
 			} catch (DataAccessException e) {
@@ -173,6 +169,28 @@ public class EspecialidadRestController {
 			
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		}
+		
+		@GetMapping("/especialidad/descripcion/{descripcionEspecialidad}") public
+		  ResponseEntity<?> findByDescripcionEspecialidadIgnoreCase(@PathVariable
+		  String descripcionEspecialidad) {
+		  
+		  Especialidad especialidad = null; Map<String, Object> response = new
+		  HashMap<>();
+		  
+		  try { especialidad =
+		  especialidadService.findByDescripcionEspecialidadIgnoreCase(descripcionEspecialidad);
+		  } catch(DataAccessException e) { response.put("mensaje",
+		  "Error al realizar la consulta en la base de datos"); response.put("error",
+		  e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+		  return new ResponseEntity<Map<String, Object>>(response,
+		  HttpStatus.INTERNAL_SERVER_ERROR); }
+		  
+		  if(especialidad == null) { response.put("mensaje",
+		  "La especialidad con la descripción: ".concat(descripcionEspecialidad.
+		  toString().concat(" no existe en la base de datos!"))); return new
+		  ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND); }
+		  
+		  return new ResponseEntity<Especialidad>(especialidad, HttpStatus.OK); }
 	
 	
 }

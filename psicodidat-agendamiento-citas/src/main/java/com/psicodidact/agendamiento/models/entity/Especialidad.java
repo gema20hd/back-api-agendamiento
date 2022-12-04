@@ -38,22 +38,5 @@ public class Especialidad implements Serializable{
 	
 	@Column(name="descripcion_especialidad")
 	private String descripcionEspecialidad;
-
-
-<<<<<<< HEAD
-=======
-	public void setIdEspecialidad(Long idEspecialidad) {
-		this.idEspecialidad = idEspecialidad;
-	}
-
-	public String getDescripcionEspecialidad() {
-		return descripcionEspecialidad;
-	}
-
-	public void setDescripcionEspecialidad(String descripcionEspecialidad) {
-		this.descripcionEspecialidad = descripcionEspecialidad;
-	}
->>>>>>> 0f2ed720452846ef9c0a14fdafb78e8b2473a995
-	
 	
 }

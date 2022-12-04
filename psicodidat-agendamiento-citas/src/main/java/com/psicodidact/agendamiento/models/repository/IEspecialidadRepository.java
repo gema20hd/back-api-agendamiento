@@ -12,6 +12,8 @@ import com.psicodidact.agendamiento.models.entity.Especialidad;
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 
 public interface IEspecialidadRepository extends CrudRepository<Especialidad, Long>{
+	@Query(value = "SELECT * FROM especialidad WHERE LOWER(descripcion_especialidad) LIKE %?1%", nativeQuery = true)
+	List<Especialidad> findByDescripcionEspecialidadIgnoreCase (String descripcionEspecialidad);
 
 }
 
