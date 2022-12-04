@@ -135,9 +135,6 @@ public class EspecialidadRestController {
 
 			try {
 				especialidadActual.setDescripcionEspecialidad(especialidad.getDescripcionEspecialidad());
-				especialidadActual.setServicioCompraEspecialidad(especialidad.getServicioCompraEspecialidad());
-
-
 				especialidadUpdated = especialidadService.save(especialidadActual);
 
 			} catch (DataAccessException e) {
