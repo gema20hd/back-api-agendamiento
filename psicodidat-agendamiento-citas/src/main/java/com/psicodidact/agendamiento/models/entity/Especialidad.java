@@ -39,6 +39,10 @@ public class Especialidad implements Serializable{
 	public String getDescripcionEspecialidad() {
 		return descripcionEspecialidad;
 	}
+
+	public void setDescripcionEspecialidad(String descripcionEspecialidad) {
+		this.descripcionEspecialidad = descripcionEspecialidad;
+	}
 	
 	
 }
