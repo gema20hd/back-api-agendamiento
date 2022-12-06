@@ -173,7 +173,7 @@ public class EspecialidadRestController {
 		}
 		
 		
-		@GetMapping("/especialidad/descripcion/{descripcion}") 
+		@GetMapping("/especialidades/descripcion/{descripcion}") 
 		@ResponseStatus(HttpStatus.OK)
 		public List<Especialidad> findByDescripcionEspecialidadContainingIgnoreCase(@PathVariable("descripcion") String term) {
 			return especialidadService.findByDescripcionEspecialidadContainingIgnoreCase(term);
