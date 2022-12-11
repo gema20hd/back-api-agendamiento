@@ -132,10 +132,7 @@ public class UnidadEducativaRestController {
 			unidadEducativaActual.setNombreUnidadEducativa(unidadEducativa.getNombreUnidadEducativa());
 			unidadEducativaActual.setDireccionUnidadEducativa(unidadEducativa.getDireccionUnidadEducativa());
 			unidadEducativaActual.setCodigoInstitucion(unidadEducativa.getCodigoInstitucion());
-			unidadEducativaActual.setIdUnidadEducativa(unidadEducativa.getIdUnidadEducativa());
 			
-			
-
 			unidadEducativaUpdated = unidadEducativaService.save(unidadEducativaActual);
 
 		} catch (DataAccessException e) {

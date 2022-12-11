@@ -50,7 +50,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/api/profesional/discapacidad").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/tipoSangre").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/profesionProfesional").permitAll()
-		
+		.antMatchers(HttpMethod.PUT, "/api/unidadesEducativas/{id}").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/unidadesEducativas").permitAll()
 	
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
