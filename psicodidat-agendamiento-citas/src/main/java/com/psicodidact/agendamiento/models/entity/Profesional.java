@@ -1,6 +1,9 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +19,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
@@ -47,6 +51,9 @@ public class Profesional implements Serializable {
     @Column(name = "apellido_materno_profesional")
     private String apellidoMaternoProfesional;
 
+    
+   // @JsonFormat(pattern = "ddMMyyyy")
+   // private Date fechaNacimientoProfesional;
     @Column(name = "fecha_nacimiento_profesional")
     private String fechaNacimientoProfesional;
 
@@ -114,4 +121,6 @@ public class Profesional implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Cuenta cuenta;
 
+	
+	
 }
