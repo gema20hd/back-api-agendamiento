@@ -150,10 +150,16 @@ public class UnidadEducativaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/unidad/nombre/{nombre}") 
+	@GetMapping("/unidadesEducativas/nombre/{nombre}") 
 	@ResponseStatus(HttpStatus.OK)
 	public List<UnidadEducativa> findByNombreUnidadEducativaContainingIgnoreCase(@PathVariable("nombre") String term) {
 		return unidadEducativaService.findByNombreUnidadEducativaContainingIgnoreCase(term);
+	}
+	
+	@GetMapping("/unidadesEducativas/codigo/{codigo}") 
+	@ResponseStatus(HttpStatus.OK)
+	public List<UnidadEducativa> findByCodigoUnidadEducativaContainingIgnoreCase(@PathVariable("codigo") String term) {
+		return unidadEducativaService.findByCodigoInstitucionContainingIgnoreCase(term);
 	}
 	
 }
