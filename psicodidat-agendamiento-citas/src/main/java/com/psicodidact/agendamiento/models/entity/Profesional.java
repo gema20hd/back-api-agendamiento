@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -64,12 +65,12 @@ public class Profesional implements Serializable {
     private String telefonoEmergenciaProfesional;
 
     
-	@NotEmpty(message = "no puede estar vacio")
-	@Email(message = "no es una dirección de correo bien formada")
-    @Column(name = "direccion_domicilio_profesional",nullable = false, unique = true)
+    @Column(name = "direccion_domicilio_profesional")
     private String direccionDomicilioProfesional;
-
-    @Column(name = "correo_electronico_profesional")
+	
+	@NotEmpty(message = "no puede estar vacio")
+	@Email(message = "no es una dirección de domicilio bien formada")
+    @Column(name = "correo_electronico_profesional",nullable = false, unique = true)
     private String correoElectronicoProfesional;
 
     @Column(name = "estado_profesional")

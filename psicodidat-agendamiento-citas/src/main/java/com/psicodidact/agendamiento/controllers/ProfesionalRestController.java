@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
@@ -23,19 +25,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.psicodidact.agendamiento.models.entity.Banco;
+import com.psicodidact.agendamiento.models.entity.Cuenta;
 import com.psicodidact.agendamiento.models.entity.Discapacidad;
 import com.psicodidact.agendamiento.models.entity.EstadoCivil;
 import com.psicodidact.agendamiento.models.entity.Genero;
 import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 import com.psicodidact.agendamiento.models.entity.Profesional;
+import com.psicodidact.agendamiento.models.entity.Rol;
 import com.psicodidact.agendamiento.models.entity.TipoCuenta;
 import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
+import com.psicodidact.agendamiento.models.entity.Usuario;
+import com.psicodidact.agendamiento.models.repository.IProfesionProfesionalRepository;
+import com.psicodidact.agendamiento.services.IBancoService;
 import com.psicodidact.agendamiento.services.ICuentaService;
+import com.psicodidact.agendamiento.services.IDiscapacidadService;
+import com.psicodidact.agendamiento.services.IEstadoCivilService;
+import com.psicodidact.agendamiento.services.IGeneroService;
+import com.psicodidact.agendamiento.services.IProfesionProfesionalService;
+import com.psicodidact.agendamiento.services.IProfesionService;
 import com.psicodidact.agendamiento.services.IProfesionalService;
+import com.psicodidact.agendamiento.services.IRolService;
+import com.psicodidact.agendamiento.services.ITipoCuentaService;
+import com.psicodidact.agendamiento.services.ITipoSangreService;
+import com.psicodidact.agendamiento.services.IUsuarioService;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
@@ -44,8 +61,27 @@ public class ProfesionalRestController {
 
 	@Autowired
 	private IProfesionalService profesionalService;
+	@Autowired
+	private ICuentaService cuentaService;
+	@Autowired
+	private IUsuarioService usuarioService;
+	@Autowired
+	private ITipoCuentaService tipoCuentaService;
+	@Autowired
+	private IRolService rolesService;
+	@Autowired
+	private IBancoService bancoService;
+	@Autowired
+	private IEstadoCivilService estadoCivilService;
+	@Autowired
+	private IGeneroService generoService;
+	@Autowired
+	private ITipoSangreService tipoSangreService;
+	@Autowired
+	private IDiscapacidadService discapacidadService;
+	@Autowired
+	private IProfesionProfesionalService profesionService;
 	
-
 	// @Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales")
 	public List<Profesional> index() {
@@ -267,5 +303,71 @@ public class ProfesionalRestController {
 
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+	
+	@PostMapping(value="/profesionales/dependiente", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> createDependientesProfesional(@Valid @RequestBody Map<String, Object> mapProfesional) {
 
+		Profesional profesionalNew = null;
+		Usuario usuarioNew = null;
+		Cuenta cuentaNew = null;
+		TipoCuenta tipoCuentaNew = null;
+		
+		Map<String, Object> response = new HashMap<>();
+
+		try {
+			
+			Profesional profesional = new Profesional();
+			Usuario usuario = new Usuario();
+			Cuenta cuenta = new Cuenta();
+			TipoCuenta tipoCuenta = new TipoCuenta();
+			
+			profesional.setIdentificacionProfesional(mapProfesional.get("identificacionProfesional").toString());
+			profesional.setNombresProfesional(mapProfesional.get("nombresProfesional").toString());
+			profesional.setApellidoPaternoProfesional(mapProfesional.get("apellidoPaternoProfesional").toString());
+			profesional.setApellidoMaternoProfesional(mapProfesional.get("apellidoMaternoProfesional").toString());
+			profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
+			profesional.setCelularProfesional(mapProfesional.get("celularProfesional").toString());
+			profesional.setTelefonoEmergenciaProfesional(mapProfesional.get("telefonoEmergenciaProfesional").toString());
+			profesional.setDireccionDomicilioProfesional(mapProfesional.get("direccionDomicilioProfesional").toString());
+			profesional.setCorreoElectronicoProfesional(mapProfesional.get("correoElectronicoProfesional").toString());
+			profesional.setHojaVida(mapProfesional.get("hojaVida").toString());
+			profesional.setNivelEducacion(mapProfesional.get("nivelEducacion").toString());
+			profesional.setTituloCuartoNivelProfesional(mapProfesional.get("tituloCuartoNivelProfesional").toString());
+			profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
+			profesional.setTipoSangre(tipoSangreService.findById(Long.parseLong(mapProfesional.get("idTipoSangre").toString())));
+			profesional.setProfesionProfesional(profesionService.findById(Long.parseLong(mapProfesional.get("idProfesionProfesional").toString())));
+			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
+			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
+			profesional.setEstadoProfesional(true);
+			cuenta.setNumeroCuenta(mapProfesional.get("numero de cuenta").toString());
+			cuenta.setTipoCuenta(tipoCuentaService.findById(Long.parseLong(mapProfesional.get("idTipoCuenta").toString())));//error parsear tipo de cuenta
+			cuenta.setBanco(bancoService.findById(Long.parseLong(mapProfesional.get("idBanco").toString())));//error al parsear Banco
+			cuentaNew = cuentaService.save(cuenta); 
+			profesional.setCuenta(cuentaNew);
+			profesionalNew = profesionalService.save(profesional);
+			
+			usuario.setPassword(mapProfesional.get("password").toString());
+			List<Rol> nuevaLista = new ArrayList<>();
+
+			nuevaLista.add(rolesService.findById(Long.parseLong(mapProfesional.get("idRol").toString())));
+
+			usuario.setRoles(nuevaLista);
+			usuario.setUsername(mapProfesional.get("numero de cuenta").toString());
+			usuario.setEnabled(true);
+			usuario.setProfesional(profesionalNew);
+			usuarioNew = usuarioService.save(usuario);
+			
+			
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al agregar al usuario en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		response.put("mensaje", "El usuario ha sido creado con éxito!");
+		response.put("profesional", profesionalNew);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	
 }
