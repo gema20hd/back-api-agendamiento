@@ -191,7 +191,7 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
-	@PostMapping("/profesionales")
+	@PostMapping("/profesionales/noFunciona")
 	public ResponseEntity<?> create(@Valid @RequestBody Profesional profesional, BindingResult result) {
 
 		Profesional profesionalNew = null;
@@ -304,7 +304,7 @@ public class ProfesionalRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
-	@PostMapping(value="/profesionales/dependiente", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value="/profesionales", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createDependientesProfesional(@Valid @RequestBody Map<String, Object> mapProfesional) {
 
 		Profesional profesionalNew = null;
