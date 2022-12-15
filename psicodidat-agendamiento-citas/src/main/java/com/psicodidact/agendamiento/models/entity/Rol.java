@@ -32,6 +32,7 @@ public class Rol implements Serializable{
 	private String descripcionRol;
 	
 	
+	
 
 	
 	

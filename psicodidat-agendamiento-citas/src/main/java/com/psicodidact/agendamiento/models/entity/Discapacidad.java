@@ -36,7 +36,7 @@ public class Discapacidad implements Serializable {
 	private Long idDiscapacidad;
 	
 	@Column(name = "porcentaje_discapacidad")
-	private String porcetajeDiscapacidad;
+	private Integer porcetajeDiscapacidad;
 	
 	@Column(name = "descripcion_discapacidad")
 	private String descripcionDiscapacidad;

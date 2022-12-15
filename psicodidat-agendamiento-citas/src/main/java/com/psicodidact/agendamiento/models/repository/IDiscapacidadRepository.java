@@ -13,4 +13,5 @@ public interface IDiscapacidadRepository extends CrudRepository<Discapacidad, Lo
 
 	@Query("select td from TipoDiscapacidad td")
 	public List<TipoDiscapacidad> findAllTypeDisability();
+	
 }

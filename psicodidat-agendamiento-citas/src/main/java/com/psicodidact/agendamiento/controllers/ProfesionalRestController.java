@@ -51,6 +51,7 @@ import com.psicodidact.agendamiento.services.IProfesionService;
 import com.psicodidact.agendamiento.services.IProfesionalService;
 import com.psicodidact.agendamiento.services.IRolService;
 import com.psicodidact.agendamiento.services.ITipoCuentaService;
+import com.psicodidact.agendamiento.services.ITipoDiscapacidadService;
 import com.psicodidact.agendamiento.services.ITipoSangreService;
 import com.psicodidact.agendamiento.services.IUsuarioService;
 
@@ -81,6 +82,11 @@ public class ProfesionalRestController {
 	private IDiscapacidadService discapacidadService;
 	@Autowired
 	private IProfesionProfesionalService profesionService;
+	@Autowired
+	private ITipoDiscapacidadService tipoDiscapacidad; 
+	
+
+
 	
 	// @Secured({"ROLE_ADMIN"})
 	@GetMapping("/profesionales")
@@ -306,7 +312,7 @@ public class ProfesionalRestController {
 	
 	@PostMapping(value="/profesionales", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createDependientesProfesional(@Valid @RequestBody Map<String, Object> mapProfesional) {
-
+        Discapacidad discapcidadNew = null;
 		Profesional profesionalNew = null;
 		Usuario usuarioNew = null;
 		Cuenta cuentaNew = null;
@@ -316,10 +322,16 @@ public class ProfesionalRestController {
 
 		try {
 			
+			Discapacidad discapcidad = new Discapacidad();
 			Profesional profesional = new Profesional();
 			Usuario usuario = new Usuario();
 			Cuenta cuenta = new Cuenta();
 			TipoCuenta tipoCuenta = new TipoCuenta();
+			
+			discapcidad.setTipoDiscapacidad(tipoDiscapacidad.findById(Long.parseLong(mapProfesional.get("idTipoDiscapacidad").toString())));//error pa
+			discapcidad.setPorcetajeDiscapacidad(Integer.parseInt(mapProfesional.get("porcetajeDiscapacidad").toString()));
+			discapcidad.setDescripcionDiscapacidad(mapProfesional.get("descripcionDiscapacidad").toString());
+			
 			
 			profesional.setIdentificacionProfesional(mapProfesional.get("identificacionProfesional").toString());
 			profesional.setNombresProfesional(mapProfesional.get("nombresProfesional").toString());
@@ -333,26 +345,36 @@ public class ProfesionalRestController {
 			profesional.setHojaVida(mapProfesional.get("hojaVida").toString());
 			profesional.setNivelEducacion(mapProfesional.get("nivelEducacion").toString());
 			profesional.setTituloCuartoNivelProfesional(mapProfesional.get("tituloCuartoNivelProfesional").toString());
-			profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
+		
+			//profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
 			profesional.setTipoSangre(tipoSangreService.findById(Long.parseLong(mapProfesional.get("idTipoSangre").toString())));
 			profesional.setProfesionProfesional(profesionService.findById(Long.parseLong(mapProfesional.get("idProfesionProfesional").toString())));
 			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
 			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
 			profesional.setEstadoProfesional(true);
+			
 			cuenta.setNumeroCuenta(mapProfesional.get("numero de cuenta").toString());
 			cuenta.setTipoCuenta(tipoCuentaService.findById(Long.parseLong(mapProfesional.get("idTipoCuenta").toString())));//error parsear tipo de cuenta
 			cuenta.setBanco(bancoService.findById(Long.parseLong(mapProfesional.get("idBanco").toString())));//error al parsear Banco
+			
+			discapcidadNew = discapacidadService.save(discapcidad);
+			profesional.setDiscapacidad(discapcidadNew);
+			
 			cuentaNew = cuentaService.save(cuenta); 
+			
 			profesional.setCuenta(cuentaNew);
+			
 			profesionalNew = profesionalService.save(profesional);
 			
 			usuario.setPassword(mapProfesional.get("password").toString());
 			List<Rol> nuevaLista = new ArrayList<>();
+			nuevaLista.add(new Rol(5L, "nUEVA"));
 
-			nuevaLista.add(rolesService.findById(Long.parseLong(mapProfesional.get("idRol").toString())));
+			//nuevaLista.add(rolesService.findById(Long.parseLong(mapProfesional.get("idRol").toString())));
 
 			usuario.setRoles(nuevaLista);
-			usuario.setUsername(mapProfesional.get("numero de cuenta").toString());
+			
+			usuario.setUsername(mapProfesional.get("correoElectronicoProfesional").toString());
 			usuario.setEnabled(true);
 			usuario.setProfesional(profesionalNew);
 			usuarioNew = usuarioService.save(usuario);
