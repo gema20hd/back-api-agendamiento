@@ -12,24 +12,24 @@ import com.psicodidact.agendamiento.models.repository.ITipoDiscapacidadRepositor
 public class TipoDiscapacidadServiceImpl implements ITipoDiscapacidadService{
 	
 	@Autowired
-	private ITipoDiscapacidadRepository tipoDiscapacidad;
+	private ITipoDiscapacidadRepository itipoDiscapacidad;
 
 	@Override
 	public List<TipoDiscapacidad> findAll() {
 		// TODO Auto-generated method stub
-		return (List<TipoDiscapacidad>) tipoDiscapacidad.findAll();
+		return (List<TipoDiscapacidad>) itipoDiscapacidad.findAll();
 	}
 
 	@Override
 	public TipoDiscapacidad findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return itipoDiscapacidad.findById(id).get();
 	}
 
 	@Override
 	public TipoDiscapacidad save(TipoDiscapacidad tipoDiscapacidad) {
 		// TODO Auto-generated method stub
-		return null;
+		return itipoDiscapacidad.save(tipoDiscapacidad);
 	}
 
 }

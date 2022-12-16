@@ -35,7 +35,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/api/profesional/estadoCivil").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/api/profesional/discapacidad").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/api/profesional/tipoSangre").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
-		.antMatchers(HttpMethod.GET, "/api/profesional/profesionProfesional").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/profesional/profesionProfesiol").permitAll()
 		*/
 		.antMatchers(HttpMethod.GET, "/api/profesionales").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").permitAll()
@@ -46,11 +46,67 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.PUT, "api/profesionales/{id}").permitAll()
 		.antMatchers(HttpMethod.DELETE, "api/profesionales/{id}").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/genero").permitAll()
+		
 		.antMatchers(HttpMethod.GET, "/api/profesional/estadoCivil").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/discapacidad").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/tipoSangre").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/profesionProfesional").permitAll()
-	
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/pacientes").permitAll()
+		.antMatchers(HttpMethod.POST,"/api/pacientes").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/pacientes/{id_Paciente}").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/pacientes/{id}").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/pacientes/cedula/{cedula_Paciente}").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/pacientes/apellido/{apellido_Paciente}").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/representantes").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/representantes").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/representantes/{id_Representante}").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/representantes/{id}").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/representantes/cedula/{cedula_Representante}").permitAll()
+		
+		.antMatchers(HttpMethod.GET, "/api/antecedente").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/antecedente").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/antecedente/{id}").permitAll()
+
+				
+				
+		.antMatchers(HttpMethod.GET, "/api/discapacidad").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/discapacidad").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/discapacidad/{id}").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/estadoCivil").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/genero").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/nivelEducacion").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/tiposDiscapacidades").permitAll()
+		.antMatchers(HttpMethod.POST, "api/tiposDiscapacidades").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/tiposDiscapacidades/{id_TipoDiscapacidad}").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/tipoSangre").permitAll()
+		
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/tiposTrabajos").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/tiposTrabajos").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/tiposTrabajos/{id_TipoTrabajo}").permitAll()
+		
+		
+		.antMatchers(HttpMethod.GET, "/api/trabajos").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/trabajos").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/trabajos/{id}").permitAll()
+		
+		.antMatchers(HttpMethod.GET, "/api/unidadesEducativas").permitAll()
+		
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}

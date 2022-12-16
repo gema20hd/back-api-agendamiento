@@ -2,6 +2,8 @@ package com.psicodidact.agendamiento.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,17 +33,38 @@ public class PacienteServiceImpl  implements IPacienteService {
 	@Override
 	public Paciente findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return iPaciente.findById(id).get();
 	}
 	@Override
-	public Paciente save(Paciente Paciente) {
+	public Paciente save(Paciente paciente) {
 		// TODO Auto-generated method stub
-		return null;
+		return iPaciente.save(paciente);
 	}
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	@Transactional
+	public Paciente actualizar(Paciente paciente) {
+		// TODO Auto-generated method stub
+		return iPaciente.save(paciente);
+	}
+	
+	
+	@Override
+	public Paciente buscarPorCedulaPaciente(String identificacionPaciente) {
+		// TODO Auto-generated method stub
+		return iPaciente.findByIdentificacionPaciente(identificacionPaciente);
+	}
+	
+	
+	@Override
+	public List<Paciente> buscarPacienteByApellidoPaterno(String apellidoPaterno) {
+		// TODO Auto-generated method stub
+		return iPaciente.findByApellidoPaternoPacienteJPQL(apellidoPaterno);
+	}
+
 
 }

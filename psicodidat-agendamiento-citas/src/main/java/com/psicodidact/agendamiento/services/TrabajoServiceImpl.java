@@ -15,23 +15,29 @@ public class TrabajoServiceImpl  implements ITrabajoService{
 	
 
 	@Autowired
-	private ITrabajoRepository trabajo;
+	private ITrabajoRepository itrabajo;
 
 	@Override
 	public List<Trabajo> findAll() {
-		return (List<Trabajo>) trabajo.findAll();
+		return (List<Trabajo>) itrabajo.findAll();
 	}
 
 	@Override
 	public Trabajo findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+		return itrabajo.findById(id).get();	
+     }
+     
+     
 	@Override
 	public Trabajo save(Trabajo trabajo) {
 		// TODO Auto-generated method stub
-		return null;
+		return itrabajo.save(trabajo);
+	}
+
+	@Override
+	public Trabajo actualizar(Trabajo trabajo) {
+		// TODO Auto-generated method stub
+		return itrabajo.save(trabajo);
 	}
 	
 

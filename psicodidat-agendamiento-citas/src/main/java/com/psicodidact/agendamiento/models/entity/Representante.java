@@ -1,6 +1,7 @@
 
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -44,8 +47,9 @@ public class Representante implements Serializable{
 	@Column(name="nombres_representante")
 	private String nombresRepresentante;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_nacimiento_representante")
-	private String fechaNacimientoRepresentante;
+	private Date fechaNacimientoRepresentante;
 	
 	@Column(name="correo_electronico_representante")
 	private String correoElectronicoRepresentante;

@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,15 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
 @Data
 @Entity
 @Table(name="paciente")
@@ -39,8 +42,10 @@ public class Paciente implements Serializable{
 	@Column(name="apellido_paterno_paciente")
 	private String apellidoPaternoPaciente;
 	
+	
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_nacimiento_paciente")
-	private String fechaNacimientoPaciente;
+	private Date fechaNacimientoPaciente;
 	
 	@Column(name="celular_paciente")
 	private String celularPaciente;
@@ -58,7 +63,7 @@ public class Paciente implements Serializable{
 	private String apellidoMaternoPaciente;
 	
 	@Column(name="estado_paciente")
-	private String estadoPaciente;
+	private Boolean estadoPaciente;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_representante")

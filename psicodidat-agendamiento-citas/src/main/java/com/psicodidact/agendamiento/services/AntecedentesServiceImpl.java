@@ -31,17 +31,22 @@ public class AntecedentesServiceImpl  implements IAntecedentesService {
 	@Override
 	public Antecedente findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return iAntecedente.findById(id).get();
 	}
 	@Override
-	public Antecedente save(Antecedente Antecedente) {
-		// TODO Auto-generated method stub
-		return null;
+	public Antecedente save(Antecedente antecedente) {
+		return iAntecedente.save(antecedente);
 	}
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public Antecedente actualizar(Antecedente antecedentes) {
+		// TODO Auto-generated method stub
+		return iAntecedente.save(antecedentes);
+	}
+
 
 }

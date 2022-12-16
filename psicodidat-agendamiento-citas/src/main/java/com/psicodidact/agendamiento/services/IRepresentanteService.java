@@ -12,4 +12,12 @@ public interface IRepresentanteService {
 	Representante findById(Long id);
 
 	Representante save(Representante representate);
+	
+     void eliminar(Long id);
+	
+	Representante actualizar(Representante representate);
+	
+	
+   Representante buscarPorCedulaRepresentante(String identificacionRepresentante);
+	
 }

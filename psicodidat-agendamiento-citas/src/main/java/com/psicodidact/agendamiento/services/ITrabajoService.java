@@ -13,4 +13,5 @@ public interface ITrabajoService {
 
 	Trabajo save(Trabajo trabajo);
 
+	Trabajo actualizar(Trabajo trabajo);
 }
