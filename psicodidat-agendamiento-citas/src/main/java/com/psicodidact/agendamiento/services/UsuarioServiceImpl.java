@@ -111,8 +111,10 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	}
 
 	@Override
-	public Integer insertRolesDeUsuario(Long id) {
-		return usuarioRepository.insertUsuarioRoles(id,5L);
+	public Integer insertRolesDeUsuario(Long id,Long idRol) {
+		
+		idRol=5L;
+		return usuarioRepository.insertUsuarioRoles(id,idRol);
 		
 	}
 

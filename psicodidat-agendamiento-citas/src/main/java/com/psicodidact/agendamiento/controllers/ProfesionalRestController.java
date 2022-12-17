@@ -227,7 +227,7 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
-	@PutMapping("/profesionales/{id}")
+	@PutMapping("/profesionales/updateProfesional")
 	public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result,
 			@PathVariable Long id) {
 
@@ -386,7 +386,7 @@ public class ProfesionalRestController {
 			usuario.setProfesional(profesionalNew);
 			usuarioNew = usuarioService.save(usuario);
 			try {
-			usuarioService.insertRolesDeUsuario(usuarioNew.getIdUsuario());
+			usuarioService.insertRolesDeUsuario(usuarioNew.getIdUsuario(), 5L);
 			}catch (Exception e) {
 				response.put("mensaje", "El usuario ha sido creado con éxito!");
 				response.put("profesional", profesionalNew);
@@ -404,15 +404,15 @@ public class ProfesionalRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@PostMapping(value="/profesionales/updateProfesional", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> updateProfesional(@Valid @RequestBody Map<String, Object> mapProfesional, BindingResult result) {
+	@PostMapping(value="/profesionales/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> updateProfesional(@Valid @RequestBody Map<String, Object> mapProfesional, BindingResult result,@PathVariable Long id) {
         
 		Profesional profesionalNew = null;
 		Map<String, Object> response = new HashMap<>();
 
 		try {
 			
-			Profesional profesional = profesionalService.findById(Long.parseLong(mapProfesional.get("idProfesional").toString()));
+			Profesional profesional = profesionalService.findById(id);
 			//discapcidad.setTipoDiscapacidad(tipoDiscapacidad.findById(Long.parseLong(mapProfesional.get("idTipoDiscapacidad").toString())));
 			//discapcidad.setPorcetajeDiscapacidad(Integer.parseInt(mapProfesional.get("porcetajeDiscapacidad").toString()));
 			//discapcidad.setDescripcionDiscapacidad(mapProfesional.get("descripcionDiscapacidad").toString());
