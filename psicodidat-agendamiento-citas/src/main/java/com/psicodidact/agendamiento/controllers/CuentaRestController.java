@@ -168,11 +168,11 @@ public class CuentaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("/cuentas/bancos")
+	/*@GetMapping("/cuentas/bancos")
 	public List<Banco> findAllBank() {
 		return cuentaService.findAllBank();
 	}
-
+*/
 	@GetMapping("/cuentas/tipoCuentas")
 	public List<TipoCuenta> findAllTypeCount() {
 		return cuentaService.findAllAccounType();

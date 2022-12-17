@@ -33,6 +33,6 @@ public class TipoCuenta implements Serializable {
 	private Long idTipoCuenta;
 	
 	@Column(name = "descripcion_tipo_cuenta")
-	private String descripcioTipoCuenta;
+	private String descripcionTipoCuenta;
 
 }

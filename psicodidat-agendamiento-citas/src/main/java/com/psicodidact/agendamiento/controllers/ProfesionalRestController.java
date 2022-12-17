@@ -227,7 +227,7 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
-	@PutMapping("/profesionales/updateProfesional")
+	
 	public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result,
 			@PathVariable Long id) {
 
@@ -328,7 +328,7 @@ public class ProfesionalRestController {
 			Cuenta cuenta = new Cuenta();
 			TipoCuenta tipoCuenta = new TipoCuenta();
 			
-			discapcidad.setTipoDiscapacidad(tipoDiscapacidad.findById(Long.parseLong(mapProfesional.get("idTipoDiscapacidad").toString())));//error pa
+			discapcidad.setTipoDiscapacidad(tipoDiscapacidad.findById(Long.parseLong(mapProfesional.get("idTipoDiscapcidad").toString())));//error pa
 			discapcidad.setPorcetajeDiscapacidad(Integer.parseInt(mapProfesional.get("porcetajeDiscapacidad").toString()));
 			discapcidad.setDescripcionDiscapacidad(mapProfesional.get("descripcionDiscapacidad").toString());
 			
@@ -375,12 +375,12 @@ public class ProfesionalRestController {
 			profesionalNew = profesionalService.save(profesional);
 			
 			usuario.setPassword(mapProfesional.get("password").toString());
-			List<Rol> nuevaLista = new ArrayList<>();
-			nuevaLista.add(new Rol(5L, "nUEVA"));
+			//List<Rol> nuevaLista = new ArrayList<>();
+			//nuevaLista.add(new Rol(5L, "nUEVA"));
 
 			//nuevaLista.add(rolesService.findById(Long.parseLong(mapProfesional.get("idRol").toString())));
 			
-			usuario.setRoles(nuevaLista);
+			//usuario.setRoles(nuevaLista);
 			usuario.setUsername(mapProfesional.get("correoElectronicoProfesional").toString());
 			usuario.setEnabled(true);
 			usuario.setProfesional(profesionalNew);
@@ -404,8 +404,9 @@ public class ProfesionalRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@PostMapping(value="/profesionales/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> updateProfesional(@Valid @RequestBody Map<String, Object> mapProfesional, BindingResult result,@PathVariable Long id) {
+	//actulizar
+	@PutMapping("/profesionales/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody Map<String, Object> mapProfesional, BindingResult result, @PathVariable Long id) {
         
 		Profesional profesionalNew = null;
 		Map<String, Object> response = new HashMap<>();
@@ -443,28 +444,10 @@ public class ProfesionalRestController {
 			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
 			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
 			profesional.setEstadoProfesional(true);
-			//cuenta.setNumeroCuenta(mapProfesional.get("numero de cuenta").toString());
-			//cuenta.setTipoCuenta(tipoCuentaService.findById(Long.parseLong(mapProfesional.get("idTipoCuenta").toString())));
-			//cuenta.setBanco(bancoService.findById(Long.parseLong(mapProfesional.get("idBanco").toString())));
-			//discapcidadNew = discapacidadService.save(discapcidad);
 			profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
-			//cuentaNew = cuentaService.save(cuenta); 
 			profesional.setCuenta(cuentaService.findById(Long.parseLong(mapProfesional.get("idCuenta").toString())));
-			
 			profesionalNew = profesionalService.save(profesional);
 			
-			//usuario.setPassword(mapProfesional.get("password").toString());
-			//List<Rol> nuevaLista = new ArrayList<>();
-			//nuevaLista.add(new Rol(5L, "nUEVA"));
-
-			//nuevaLista.add(rolesService.findById(Long.parseLong(mapProfesional.get("idRol").toString())));
-
-			//usuario.setRoles(nuevaLista);
-			
-			//usuario.setUsername(mapProfesional.get("correoElectronicoProfesional").toString());
-			//usuario.setEnabled(true);
-			//usuario.setProfesional(profesionalNew);
-			//usuarioNew = usuarioService.save(usuario);
 			
 			
 		} catch (DataAccessException e) {
@@ -473,7 +456,7 @@ public class ProfesionalRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-		response.put("mensaje", "El usuario ha sido creado con éxito!");
+		response.put("mensaje", "El usuario ha sido actualizado con éxito!");
 		response.put("profesional", profesionalNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}

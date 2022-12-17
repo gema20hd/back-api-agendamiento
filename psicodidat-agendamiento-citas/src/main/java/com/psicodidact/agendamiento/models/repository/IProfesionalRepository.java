@@ -53,7 +53,6 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	public List<TipoSangre> findAllTypeBlood(); 
 
 	@Query("select pp from ProfesionProfesional pp")
-	
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
 	
