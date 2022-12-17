@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.psicodidact.agendamiento.models.entity.Banco;
 import com.psicodidact.agendamiento.models.entity.Usuario;
@@ -36,6 +37,12 @@ public class BancoServiceImpl  implements IBancoService {
 	@Override
 	public Banco findById(Long id) {
 		return iBanco.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Banco> findByDescripcionBancoContainingIgnoreCase(String term) {
+		return iBanco.findByDescripcionBancoContainingIgnoreCase(term);
 	}
 
 }

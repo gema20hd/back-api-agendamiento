@@ -24,7 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.authorizeRequests()
 		/*
 		.antMatchers(HttpMethod.GET, "/api/profesionales").hasAnyRole("ROLE_ADMIN","ROLE_USER")
-		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").hasAnyRole("ROLE_ADMIN","ROLE_USER")
+		.antMatchers(HttpMethod.GET, "/api/profesional/{id}").hasAnyRole("ROLE_ADMIN")
 		.antMatchers(HttpMethod.GET, "/profesionales/apellido/paterno/{lastName}").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/profesionales/apellido/materno/madre/{lastName2}").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
 		.antMatchers(HttpMethod.GET, "/profesional/identificacion/{dni}").hasAnyRole("ROLE_ADMIN", "ROLE_USER")
@@ -51,7 +51,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/api/profesional/discapacidad").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/tipoSangre").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/profesionProfesional").permitAll()
-		
+
 		
 		.antMatchers(HttpMethod.GET, "/api/pacientes").permitAll()
 		.antMatchers(HttpMethod.POST,"/api/pacientes").permitAll()
@@ -104,9 +104,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/api/trabajos").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/trabajos").permitAll()
 		.antMatchers(HttpMethod.PUT, "/api/trabajos/{id}").permitAll()
-		
 		.antMatchers(HttpMethod.GET, "/api/unidadesEducativas").permitAll()
 		
+		.antMatchers(HttpMethod.PUT, "/api/unidadesEducativas/{id}").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/unidadesEducativas").permitAll()
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}

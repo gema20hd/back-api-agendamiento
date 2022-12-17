@@ -47,5 +47,6 @@ public class Cuenta implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private TipoCuenta tipoCuenta;
 
-
 }
+
+	

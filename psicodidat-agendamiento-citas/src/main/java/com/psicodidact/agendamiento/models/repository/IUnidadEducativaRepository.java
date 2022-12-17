@@ -12,4 +12,5 @@ public interface IUnidadEducativaRepository extends CrudRepository<UnidadEducati
 
 
 	public List<UnidadEducativa> findByNombreUnidadEducativaContainingIgnoreCase(String term);
+	public List<UnidadEducativa> findByCodigoInstitucionContainingIgnoreCase(String term);
 }

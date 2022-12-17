@@ -20,6 +20,7 @@ public interface IBancoService {
 	public Banco save(Banco Banco);
 	
 	public void delete(Long id);
+	public List<Banco> findByDescripcionBancoContainingIgnoreCase(String term);
 	
 	
 	

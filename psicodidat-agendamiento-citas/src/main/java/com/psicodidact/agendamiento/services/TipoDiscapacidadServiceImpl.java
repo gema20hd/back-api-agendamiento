@@ -22,8 +22,8 @@ public class TipoDiscapacidadServiceImpl implements ITipoDiscapacidadService{
 
 	@Override
 	public TipoDiscapacidad findById(Long id) {
-		// TODO Auto-generated method stub
-		return itipoDiscapacidad.findById(id).get();
+		return itipoDiscapacidad.findById(id).orElse(null);
+
 	}
 
 	@Override

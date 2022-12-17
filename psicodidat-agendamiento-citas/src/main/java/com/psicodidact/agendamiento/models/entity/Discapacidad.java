@@ -37,6 +37,7 @@ public class Discapacidad implements Serializable {
 	
 	@Column(name = "porcentaje_discapacidad")
 	private int porcetajeDiscapacidad;
+
 	
 	@Column(name = "descripcion_discapacidad")
 	private String descripcionDiscapacidad;

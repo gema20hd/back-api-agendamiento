@@ -13,7 +13,7 @@ public interface IEstadoCivilService {
 
 	public List<EstadoCivil> findAll();
 	
-	public Page<EstadoCivil> findAll(Pageable pageable);
+	//public Page<EstadoCivil> findAll(Pageable pageable);
 	
 	public EstadoCivil findById(Long id);
 	

@@ -30,6 +30,9 @@ public interface IProfesionalService {
 	
 	public void delete(Long id);
 	
+	//public Profesional update(Profesional profesional, Long id);
+	
+	
 	/*
 	public Profesional findByIdentification(String identification);
 	

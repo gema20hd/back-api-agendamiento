@@ -21,14 +21,14 @@ public class TipoSangreServiceImpl implements ITipoSangreService {
 
 	@Override
 	public TipoSangre findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return tipoSangre.findByIdTipoSangre(id);
 	}
 
 	@Override
-	public TipoSangre save(TipoSangre tipoSangre) {
-		// TODO Auto-generated method stub
-		return null;
+	public TipoSangre save(TipoSangre tipoSangres) {
+		
+		return tipoSangre.save(tipoSangres);
 	}
 
 }

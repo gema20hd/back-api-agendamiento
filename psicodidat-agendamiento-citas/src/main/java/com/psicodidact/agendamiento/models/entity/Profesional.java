@@ -1,7 +1,11 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +20,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.*;
@@ -47,6 +52,9 @@ public class Profesional implements Serializable {
     @Column(name = "apellido_materno_profesional")
     private String apellidoMaternoProfesional;
 
+    
+   // @JsonFormat(pattern = "ddMMyyyy")
+   // private Date fechaNacimientoProfesional;
     @Column(name = "fecha_nacimiento_profesional")
     private String fechaNacimientoProfesional;
 
@@ -57,12 +65,12 @@ public class Profesional implements Serializable {
     private String telefonoEmergenciaProfesional;
 
     
-	@NotEmpty(message = "no puede estar vacio")
-	@Email(message = "no es una dirección de correo bien formada")
-    @Column(name = "direccion_domicilio_profesional",nullable = false, unique = true)
+    @Column(name = "direccion_domicilio_profesional")
     private String direccionDomicilioProfesional;
-
-    @Column(name = "correo_electronico_profesional")
+	
+	@NotEmpty(message = "no puede estar vacio")
+	@Email(message = "no es una dirección de domicilio bien formada")
+    @Column(name = "correo_electronico_profesional",nullable = false, unique = true)
     private String correoElectronicoProfesional;
 
     @Column(name = "estado_profesional")
@@ -114,4 +122,6 @@ public class Profesional implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Cuenta cuenta;
 
+	
+	
 }

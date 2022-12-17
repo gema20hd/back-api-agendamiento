@@ -3,9 +3,13 @@ package com.psicodidact.agendamiento.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.activation.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -70,7 +74,8 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	public Usuario save(Usuario usuario) {
 		Usuario user = new Usuario(usuarioCorreo(usuario.getUsername()), 
 				passwordEncry(usuario.getPassword()),usuario.isEnabled(),usuario.getProfesional());
-		return usuarioRepository.save(user);
+		Usuario usernew= usuarioRepository.save(user);
+		return usernew;
 	}
 
 	@Override
@@ -105,7 +110,18 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 		return passwordBcrypt;
 	}
 
+	@Override
+	public Integer insertRolesDeUsuario(Long id,Long idRol) {
+		
+		idRol=5L;
+		return usuarioRepository.insertUsuarioRoles(id,idRol);
+		
+	}
 
+	
+	 
+	
+	
 
 
 }
