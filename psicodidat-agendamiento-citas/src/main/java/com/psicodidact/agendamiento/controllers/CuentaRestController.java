@@ -43,6 +43,8 @@ public class CuentaRestController {
 
 	@Autowired
 	private ICuentaService cuentaService;
+	@Autowired
+	private IBancoService bancoService;
 
 	@GetMapping("/cuentas")
 	public List<Cuenta> findAll() {
@@ -202,7 +204,7 @@ public class CuentaRestController {
 	@GetMapping("cuentas/bancos/filtro/{descripcion}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Banco> findByDescripcionBanco(@PathVariable("descripcion") String descripcionBanco) {
-		return cuentaService.findByDescripcionBancoContainingIgnoreCase(descripcionBanco);
+		return bancoService.findByDescripcionBancoContainingIgnoreCase(descripcionBanco);
 	}
 
 }
