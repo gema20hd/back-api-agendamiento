@@ -337,7 +337,7 @@ public class ProfesionalRestController {
 			profesional.setNombresProfesional(mapProfesional.get("nombresProfesional").toString());
 			profesional.setApellidoPaternoProfesional(mapProfesional.get("apellidoPaternoProfesional").toString());
 			profesional.setApellidoMaternoProfesional(mapProfesional.get("apellidoMaternoProfesional").toString());
-			profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
+			//profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
 			profesional.setCelularProfesional(mapProfesional.get("celularProfesional").toString());
 			profesional.setTelefonoEmergenciaProfesional(mapProfesional.get("telefonoEmergenciaProfesional").toString());
 			profesional.setDireccionDomicilioProfesional(mapProfesional.get("direccionDomicilioProfesional").toString());
@@ -351,7 +351,7 @@ public class ProfesionalRestController {
 			profesional.setProfesionProfesional(profesionService.findById(Long.parseLong(mapProfesional.get("idProfesionProfesional").toString())));
 			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
 			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
-			profesional.setEstadoProfesional(true);
+			//profesional.setEstadoProfesional(true);
 			
 			cuenta.setNumeroCuenta(mapProfesional.get("numero de cuenta").toString());
 			cuenta.setTipoCuenta(tipoCuentaService.findById(Long.parseLong(mapProfesional.get("idTipoCuenta").toString())));//error parsear tipo de cuenta
@@ -430,7 +430,7 @@ public class ProfesionalRestController {
 			profesional.setNombresProfesional(mapProfesional.get("nombresProfesional").toString());
 			profesional.setApellidoPaternoProfesional(mapProfesional.get("apellidoPaternoProfesional").toString());
 			profesional.setApellidoMaternoProfesional(mapProfesional.get("apellidoMaternoProfesional").toString());
-			profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
+			//profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
 			profesional.setCelularProfesional(mapProfesional.get("celularProfesional").toString());
 			profesional.setTelefonoEmergenciaProfesional(mapProfesional.get("telefonoEmergenciaProfesional").toString());
 			profesional.setDireccionDomicilioProfesional(mapProfesional.get("direccionDomicilioProfesional").toString());
@@ -443,7 +443,7 @@ public class ProfesionalRestController {
 			profesional.setProfesionProfesional(profesionService.findById(Long.parseLong(mapProfesional.get("idProfesionProfesional").toString())));
 			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
 			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
-			profesional.setEstadoProfesional(true);
+			//profesional.setEstadoProfesional(true);
 			profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
 			profesional.setCuenta(cuentaService.findById(Long.parseLong(mapProfesional.get("idCuenta").toString())));
 			profesionalNew = profesionalService.save(profesional);

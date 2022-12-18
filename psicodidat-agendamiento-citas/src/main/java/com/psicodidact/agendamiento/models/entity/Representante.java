@@ -4,16 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -67,7 +57,19 @@ public class Representante implements Serializable{
 	private String direccionDomicilioRepresentan;
 	
 	@Column(name="estado_representante")
-	private Boolean estadoRepresentante;
+	private String estadoRepresentante;
+	
+    @Column(name = "edad_representante")
+    private int edadRepresentante;
+    
+	@Column(name = "fecha_creacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacion;
+	
+	@PrePersist
+	public void prePersist() {
+		this.fechaCreacion= new Date();
+	}
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_estado_civil")

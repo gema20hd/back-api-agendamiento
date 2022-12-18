@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +11,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="detalle_factura_pago")
 public class DetalleFacturaPago implements Serializable {
@@ -26,11 +39,11 @@ public class DetalleFacturaPago implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_factura_pago")
-	private FacturaPago idfacturaPagoDetalleFacturaPago;
+	private FacturaPago facturaPagoDetalleFacturaPago;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_detalle_compra")
-	private DetalleCompra idDetalleCompraDetalleFacturaPago;
+	private DetalleCompra detalleCompraDetalleFacturaPago;
 	
 	@Column(name="unidad_detalle_factura_pago")
 	private int unidadDetalleFacturaPago;
@@ -38,61 +51,16 @@ public class DetalleFacturaPago implements Serializable {
 	@Column(name="valor_pagar_detalle_factura_pago")
 	private float valorPagarDetalleFacturaPago;
 
-	public Long getIdDetalleFacturaPago() {
-		return idDetalleFacturaPago;
-	}
-
-	public void setIdDetalleFacturaPago(Long idDetalleFacturaPago) {
-		this.idDetalleFacturaPago = idDetalleFacturaPago;
-	}
-
-	public FacturaPago getIdfacturaPagoDetalleFacturaPago() {
-		return idfacturaPagoDetalleFacturaPago;
-	}
-
-	public void setIdfacturaPagoDetalleFacturaPago(FacturaPago idfacturaPagoDetalleFacturaPago) {
-		this.idfacturaPagoDetalleFacturaPago = idfacturaPagoDetalleFacturaPago;
-	}
-
-	public DetalleCompra getIdDetalleCompraDetalleFacturaPago() {
-		return idDetalleCompraDetalleFacturaPago;
-	}
-
-	public void setIdDetalleCompraDetalleFacturaPago(DetalleCompra idDetalleCompraDetalleFacturaPago) {
-		this.idDetalleCompraDetalleFacturaPago = idDetalleCompraDetalleFacturaPago;
-	}
-
-	public int getUnidadDetalleFacturaPago() {
-		return unidadDetalleFacturaPago;
-	}
-
-	public void setUnidadDetalleFacturaPago(int unidadDetalleFacturaPago) {
-		this.unidadDetalleFacturaPago = unidadDetalleFacturaPago;
-	}
-
-	public float getValorPagarDetalleFacturaPago() {
-		return valorPagarDetalleFacturaPago;
-	}
-
-	public void setValorPagarDetalleFacturaPago(float valorPagarDetalleFacturaPago) {
-		this.valorPagarDetalleFacturaPago = valorPagarDetalleFacturaPago;
-	}
-
-	public DetalleFacturaPago(Long idDetalleFacturaPago, FacturaPago idfacturaPagoDetalleFacturaPago,
-			DetalleCompra idDetalleCompraDetalleFacturaPago, int unidadDetalleFacturaPago,
-			float valorPagarDetalleFacturaPago) {
-		super();
-		this.idDetalleFacturaPago = idDetalleFacturaPago;
-		this.idfacturaPagoDetalleFacturaPago = idfacturaPagoDetalleFacturaPago;
-		this.idDetalleCompraDetalleFacturaPago = idDetalleCompraDetalleFacturaPago;
-		this.unidadDetalleFacturaPago = unidadDetalleFacturaPago;
-		this.valorPagarDetalleFacturaPago = valorPagarDetalleFacturaPago;
-	}
+	@Column(name = "create_at")
+	@Temporal(TemporalType.DATE)
+	private Date createAt;
 	
-
-	public DetalleFacturaPago() {
-
+	@PrePersist
+	public void prePersist() {
+		this.createAt = new Date();
 	}
+
+	
 	
 	
 }

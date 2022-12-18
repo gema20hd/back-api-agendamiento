@@ -15,6 +15,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="pago")
 public class Pago implements Serializable{
@@ -49,111 +58,7 @@ public class Pago implements Serializable{
 	@Column(name="nombre_banco_pago")
 	private String nombreBancoPago;
 
-	public Long getIdPago() {
-		return idPago;
-	}
 
-	public void setIdPago(Long idPago) {
-		this.idPago = idPago;
-	}
-
-	public String getTipoPago() {
-		return tipoPago;
-	}
-
-	public void setTipoPago(String tipoPago) {
-		this.tipoPago = tipoPago;
-	}
-
-	public String getNumeroTransferenciaPago() {
-		return numeroTransferenciaPago;
-	}
-
-	public void setNumeroTransferenciaPago(String numeroTransferenciaPago) {
-		this.numeroTransferenciaPago = numeroTransferenciaPago;
-	}
-
-	public String getNumeroTransaccionPago() {
-		return numeroTransaccionPago;
-	}
-
-	public void setNumeroTransaccionPago(String numeroTransaccionPago) {
-		this.numeroTransaccionPago = numeroTransaccionPago;
-	}
-
-	public String getTipoTarjetaPago() {
-		return tipoTarjetaPago;
-	}
-
-	public void setTipoTarjetaPago(String tipoTarjetaPago) {
-		this.tipoTarjetaPago = tipoTarjetaPago;
-	}
-
-	public String getNumeroChequePago() {
-		return numeroChequePago;
-	}
-
-	public void setNumeroChequePago(String numeroChequePago) {
-		this.numeroChequePago = numeroChequePago;
-	}
-
-	public String getNumeroReciboPago() {
-		return numeroReciboPago;
-	}
-
-	public void setNumeroReciboPago(String numeroReciboPago) {
-		this.numeroReciboPago = numeroReciboPago;
-	}
-
-	public String getNumeroFacturaPago() {
-		return numeroFacturaPago;
-	}
-
-	public void setNumeroFacturaPago(String numeroFacturaPago) {
-		this.numeroFacturaPago = numeroFacturaPago;
-	}
-
-	public String getNombreBancoPago() {
-		return nombreBancoPago;
-	}
-
-	public void setNombreBancoPago(String nombreBancoPago) {
-		this.nombreBancoPago = nombreBancoPago;
-	}
-
-	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idPago")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<FacturaPago> facturaPagoPago;
-
-	public List<FacturaPago> getFacturaPagoPago() {
-		return facturaPagoPago;
-	}
-
-	public void setFacturaPagoPago(List<FacturaPago> facturaPagoPago) {
-		this.facturaPagoPago = facturaPagoPago;
-	}
-	
-	
-	
-	public Pago(Long idPago, String tipoPago, String numeroTransferenciaPago, String numeroTransaccionPago,
-			String tipoTarjetaPago, String numeroChequePago, String numeroReciboPago, String numeroFacturaPago,
-			String nombreBancoPago) {
-		super();
-		this.idPago = idPago;
-		this.tipoPago = tipoPago;
-		this.numeroTransferenciaPago = numeroTransferenciaPago;
-		this.numeroTransaccionPago = numeroTransaccionPago;
-		this.tipoTarjetaPago = tipoTarjetaPago;
-		this.numeroChequePago = numeroChequePago;
-		this.numeroReciboPago = numeroReciboPago;
-		this.numeroFacturaPago = numeroFacturaPago;
-		this.nombreBancoPago = nombreBancoPago;
-	}
-	
-	public Pago() {
-
-	}
 	
 
 

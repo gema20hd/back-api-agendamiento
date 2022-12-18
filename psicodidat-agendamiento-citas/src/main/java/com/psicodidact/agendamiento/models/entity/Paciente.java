@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -63,7 +64,20 @@ public class Paciente implements Serializable{
 	private String apellidoMaternoPaciente;
 	
 	@Column(name="estado_paciente")
-	private Boolean estadoPaciente;
+	private String estadoPaciente;
+	
+    @Column(name = "edad_paciente")
+    private String edadPaciente;
+	
+    
+	@Column(name = "fecha_creacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacion;
+	
+	@PrePersist
+	public void prePersist() {
+		this.fechaCreacion= new Date();
+	}
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_representante")

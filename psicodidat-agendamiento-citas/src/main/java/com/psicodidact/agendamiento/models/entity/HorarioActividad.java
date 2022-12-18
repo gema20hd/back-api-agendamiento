@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +13,24 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.*;
 
+	@NoArgsConstructor
+	@AllArgsConstructor
+	@Builder
 	@Data
 	@Entity
 	@Table(name = "horario_actividad")
 	public class HorarioActividad implements Serializable{
 
-	    @Id
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Id
 	    @Column(name = "id_horario_actividad")
 	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
 	    @SequenceGenerator(name = "sequence", sequenceName = "horario_actividad_seq", allocationSize = 1)
@@ -38,7 +49,7 @@ import lombok.*;
 	    private String duracionMinutosHorario;
 	    
 	    @Column(name = "estado_horario")
-	    private boolean estadoHorario;
+	    private String estadoHorario;
 	    
 	    @Column(name = "numero_horario")
 	    private int numeroHorario;

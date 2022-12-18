@@ -14,7 +14,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="servicio")
 public class Servicio implements Serializable{
@@ -29,47 +38,5 @@ public class Servicio implements Serializable{
 	@Column(name="descripcion_servicio")
 	private String descripcionServicio;
 
-	public Long getIdServicio() {
-		return idServicio;
-	}
-
-	public void setIdServicio(Long idServicio) {
-		this.idServicio = idServicio;
-	}
-
-	public String getDescripcionServicio() {
-		return descripcionServicio;
-	}
-
-	public void setDescripcionServicio(String descripcionServicio) {
-		this.descripcionServicio = descripcionServicio;
-	}
-
-
-	
-
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idServicioServicioCompra")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<ServicioCompra> ServicioCompraServicio;
-
-	public List<ServicioCompra> getServicioCompraServicio() {
-		return ServicioCompraServicio;
-	}
-
-	public void setServicioCompraServicio(List<ServicioCompra> servicioCompraServicio) {
-		ServicioCompraServicio = servicioCompraServicio;
-	}
-
-	
-	
-	public Servicio(Long idServicio, String descripcionServicio) {
-		super();
-		this.idServicio = idServicio;
-		this.descripcionServicio = descripcionServicio;
-	}
-	
-	public Servicio() {
-
-	}
 	
 }

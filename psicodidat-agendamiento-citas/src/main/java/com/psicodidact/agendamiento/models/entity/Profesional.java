@@ -15,7 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -56,7 +59,7 @@ public class Profesional implements Serializable {
    // @JsonFormat(pattern = "ddMMyyyy")
    // private Date fechaNacimientoProfesional;
     @Column(name = "fecha_nacimiento_profesional")
-    private String fechaNacimientoProfesional;
+    private Date fechaNacimientoProfesional;
 
     @Column(name = "celular_profesional")
     private String celularProfesional;
@@ -74,16 +77,28 @@ public class Profesional implements Serializable {
     private String correoElectronicoProfesional;
 
     @Column(name = "estado_profesional")
-    private Boolean estadoProfesional;
+    private String estadoProfesional;
 
     @Column(name = "hoja_vida")
     private String hojaVida;
 
     @Column(name = "nivel_educacion")
-    private String nivelEducacion; //lista en el from 
-
+    private String nivelEducacion; //lista en el from  
+   
     @Column(name = "titulo_cuarto_nivel_profesional")
     private String tituloCuartoNivelProfesional;
+    
+    @Column(name = "edad_profesional")
+    private int edadProfesional;
+    
+	@Column(name = "fecha_creacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacion;
+	
+	@PrePersist
+	public void prePersist() {
+		this.fechaCreacion= new Date();
+	}
     
 
     @NotNull(message = "El estado civil no puede ser nulo")
@@ -121,7 +136,10 @@ public class Profesional implements Serializable {
 	@JoinColumn(name="id_cuenta")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Cuenta cuenta;
+	
 
+	
+	
 	
 	
 }

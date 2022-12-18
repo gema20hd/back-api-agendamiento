@@ -13,10 +13,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="factura_pago")
 public class FacturaPago implements Serializable {
@@ -29,93 +41,26 @@ public class FacturaPago implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_pago")
-	private Pago idPago;
+	private Pago pago;
 	
 	
-	@Column(name="fecha_emision_pago")
-	private Date fechaEmisionFacturaPago;
 	
+	@Column(name = "fecha_emision_pago")
+	@Temporal(TemporalType.DATE)
+	private Date fecha_emision_pago;
+	
+	@PrePersist
+	public void prePersist() {
+		this.fecha_emision_pago= new Date();
+	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_paciente")
-	private Paciente idPacienteFacturaPago;
-
-
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idfacturaPagoDetalleFacturaPago")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<DetalleFacturaPago> detalleFacturaPagofacturaPago;
-
-
-	public Long getIdFacturaPago() {
-		return idFacturaPago;
-	}
-
-
-	public void setIdFacturaPago(Long idFacturaPago) {
-		this.idFacturaPago = idFacturaPago;
-	}
-
-
-	public Pago getIdPago() {
-		return idPago;
-	}
-
-
-	public void setIdPago(Pago idPago) {
-		this.idPago = idPago;
-	}
+	private Paciente paciente;
 
 
 
 
-
-	public List<DetalleFacturaPago> getDetalleFacturaPagofacturaPago() {
-		return detalleFacturaPagofacturaPago;
-	}
-
-
-	public void setDetalleFacturaPagofacturaPago(List<DetalleFacturaPago> detalleFacturaPagofacturaPago) {
-		this.detalleFacturaPagofacturaPago = detalleFacturaPagofacturaPago;
-	}
-
-
-
-
-
-	public Date getFechaEmisionFacturaPago() {
-		return fechaEmisionFacturaPago;
-	}
-
-
-	public void setFechaEmisionFacturaPago(Date fechaEmisionFacturaPago) {
-		this.fechaEmisionFacturaPago = fechaEmisionFacturaPago;
-	}
-
-
-	public Paciente getIdPacienteFacturaPago() {
-		return idPacienteFacturaPago;
-	}
-
-
-	public void setIdPacienteFacturaPago(Paciente idPacienteFacturaPago) {
-		this.idPacienteFacturaPago = idPacienteFacturaPago;
-	}
-
-
-	public FacturaPago() {
-		
-	}
-
-
-	public FacturaPago(Long idFacturaPago, Pago idPago, Date fechaEmisionFacturaPago, Paciente idPacienteFacturaPago
-		) {
-		super();
-		this.idFacturaPago = idFacturaPago;
-		this.idPago = idPago;
-		this.fechaEmisionFacturaPago = fechaEmisionFacturaPago;
-		this.idPacienteFacturaPago = idPacienteFacturaPago;
-		
-	}
 	
 	
 	
