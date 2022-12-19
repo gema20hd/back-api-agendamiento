@@ -16,7 +16,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="servicio_compra")
 public class ServicioCompra implements Serializable {
@@ -31,11 +40,11 @@ public class ServicioCompra implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_especialidad")
-	private Especialidad idEspecialidadServicioCompra;
+	private Especialidad especialidad;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_servicio")
-	private Servicio idServicioServicioCompra;
+	private Servicio servicio;
 	
 	@Column(name="descripcion_servicio_compra")
 	private String descripcionServicioCompra;
@@ -43,73 +52,9 @@ public class ServicioCompra implements Serializable {
 	@Column(name="costo_servicio_compra")
 	private float costoServicioCompra;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idServicioDetalleCompra")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<DetalleCompra> detalleCompraServicioCompra;
-
-	public Long getIdServicioCompra() {
-		return idServicioCompra;
-	}
-
-	public void setIdServicioCompra(Long idServicioCompra) {
-		this.idServicioCompra = idServicioCompra;
-	}
-
-	public Especialidad getIdEspecialidadServicioCompra() {
-		return idEspecialidadServicioCompra;
-	}
-
-	public void setIdEspecialidadServicioCompra(Especialidad idEspecialidadServicioCompra) {
-		this.idEspecialidadServicioCompra = idEspecialidadServicioCompra;
-	}
-
-	public Servicio getIdServicioServicioCompra() {
-		return idServicioServicioCompra;
-	}
-
-	public void setIdServicioServicioCompra(Servicio idServicioServicioCompra) {
-		this.idServicioServicioCompra = idServicioServicioCompra;
-	}
-
-	public String getDescripcionServicioCompra() {
-		return descripcionServicioCompra;
-	}
-
-	public void setDescripcionServicioCompra(String descripcionServicioCompra) {
-		this.descripcionServicioCompra = descripcionServicioCompra;
-	}
-
-	public float getCostoServicioCompra() {
-		return costoServicioCompra;
-	}
-
-	public void setCostoServicioCompra(float costoServicioCompra) {
-		this.costoServicioCompra = costoServicioCompra;
-	}
-
-	public List<DetalleCompra> getDetalleCompraServicioCompra() {
-		return detalleCompraServicioCompra;
-	}
-
-	public void setDetalleCompraServicioCompra(List<DetalleCompra> detalleCompraServicioCompra) {
-		this.detalleCompraServicioCompra = detalleCompraServicioCompra;
-	}
-
-	public ServicioCompra(Long idServicioCompra, Especialidad idEspecialidadServicioCompra,
-			Servicio idServicioServicioCompra, String descripcionServicioCompra, float costoServicioCompra,
-			List<DetalleCompra> detalleCompraServicioCompra) {
-		super();
-		this.idServicioCompra = idServicioCompra;
-		this.idEspecialidadServicioCompra = idEspecialidadServicioCompra;
-		this.idServicioServicioCompra = idServicioServicioCompra;
-		this.descripcionServicioCompra = descripcionServicioCompra;
-		this.costoServicioCompra = costoServicioCompra;
-		this.detalleCompraServicioCompra = detalleCompraServicioCompra;
-	}
 	
-	public ServicioCompra() {
 
-	}
+	
 
 	
 	

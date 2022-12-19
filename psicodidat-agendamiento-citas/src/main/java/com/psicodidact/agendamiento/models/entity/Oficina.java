@@ -16,7 +16,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="oficina")
 public class Oficina implements Serializable{
@@ -37,77 +45,11 @@ public class Oficina implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_sucursal")
-	private Sucursal idSucursalOficina;
+	private Sucursal sucursalOficina;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idOficinaCita")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Cita> citaOficina;
 
 
-	public Long getIdOficina() {
-		return idOficina;
-	}
 
-
-	public void setIdOficina(Long idOficina) {
-		this.idOficina = idOficina;
-	}
-
-
-	public String getDescripcionOficina() {
-		return descripcionOficina;
-	}
-
-
-	public void setDescripcionOficina(String descripcionOficina) {
-		this.descripcionOficina = descripcionOficina;
-	}
-
-
-	public String getColorOficina() {
-		return colorOficina;
-	}
-
-
-	public void setColorOficina(String colorOficina) {
-		this.colorOficina = colorOficina;
-	}
-
-
-	public Sucursal getIdSucursalOficina() {
-		return idSucursalOficina;
-	}
-
-
-	public void setIdSucursalOficina(Sucursal idSucursalOficina) {
-		this.idSucursalOficina = idSucursalOficina;
-	}
-
-
-	public List<Cita> getCitaOficina() {
-		return citaOficina;
-	}
-
-
-	public void setCitaOficina(List<Cita> citaOficina) {
-		this.citaOficina = citaOficina;
-	}
-
-
-	public Oficina(Long idOficina, String descripcionOficina, String colorOficina, Sucursal idSucursalOficina,
-			List<Cita> citaOficina) {
-		super();
-		this.idOficina = idOficina;
-		this.descripcionOficina = descripcionOficina;
-		this.colorOficina = colorOficina;
-		this.idSucursalOficina = idSucursalOficina;
-		this.citaOficina = citaOficina;
-	}
-	
-	public Oficina() {
-
-	}
-	
 	
 }

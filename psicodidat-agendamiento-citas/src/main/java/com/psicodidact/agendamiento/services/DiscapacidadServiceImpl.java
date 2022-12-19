@@ -45,6 +45,12 @@ public class DiscapacidadServiceImpl  implements IDiscapacidadService {
 		return iDiscapacidad.findAllTypeDisability();
 	}
 
+	@Override
+	public Discapacidad actualizarDiscapacidad(Discapacidad discapacidad) {
+		// TODO Auto-generated method stub
+		return iDiscapacidad.save(discapacidad);
+	}
+
 	
 
 }

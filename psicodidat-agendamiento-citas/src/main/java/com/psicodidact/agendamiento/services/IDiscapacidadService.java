@@ -24,5 +24,5 @@ public interface IDiscapacidadService {
 	public List<TipoDiscapacidad> findAllTypeDisability();
 	
 
-
+	public Discapacidad actualizarDiscapacidad(Discapacidad discapacidad);
 }

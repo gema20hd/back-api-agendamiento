@@ -39,8 +39,11 @@ public class UnidadEducativaServiceImpl implements IUnidadEducativaService {
 
 	}
 
+	@Override
+	public List<UnidadEducativa> findByCodigoInstitucionContainingIgnoreCase(String term) {
+		// TODO Auto-generated method stub
+		return iUnidadEducativa.findByCodigoInstitucionContainingIgnoreCase(term);
+	}
 
-
-	
 
 }

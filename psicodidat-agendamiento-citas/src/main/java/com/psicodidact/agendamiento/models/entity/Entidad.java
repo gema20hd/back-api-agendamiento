@@ -17,7 +17,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Data
-
 @Entity
 @Table(name = "entidad")
 public class Entidad implements Serializable {
@@ -25,7 +24,7 @@ public class Entidad implements Serializable {
 private static final long serialVersionUID = 1L;
 
 @Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+@GeneratedValue(strategy=GenerationType.IDENTITY)
 @Column(name = "id_entidad")
 private Long idEntidad;
 

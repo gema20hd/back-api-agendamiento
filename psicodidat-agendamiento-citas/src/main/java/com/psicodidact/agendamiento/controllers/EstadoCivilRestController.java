@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.psicodidact.agendamiento.models.entity.Actividad;
 import com.psicodidact.agendamiento.models.entity.EstadoCivil;
+import com.psicodidact.agendamiento.services.EstadoCivilServiceImpl;
 import com.psicodidact.agendamiento.services.IActividadService;
 import com.psicodidact.agendamiento.services.IEstadoCivilService;
 
@@ -23,7 +24,7 @@ public class EstadoCivilRestController {
 
 
 	@Autowired
-	private IEstadoCivilService estadoCivilService;
+	private EstadoCivilServiceImpl estadoCivilService;
 	
 	@GetMapping("/estadoCivil")
 	public List<EstadoCivil> index() {

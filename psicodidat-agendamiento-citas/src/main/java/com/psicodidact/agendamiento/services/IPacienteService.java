@@ -21,6 +21,10 @@ public interface IPacienteService {
 	
 	public void delete(Long id);
 	
-
+    public Paciente actualizar(Paciente paciente);
+	
+	Paciente buscarPorCedulaPaciente(String identificacionPaciente);
+	
+	List<Paciente> buscarPacienteByApellidoPaterno(String apellidoPaterno);
 
 }

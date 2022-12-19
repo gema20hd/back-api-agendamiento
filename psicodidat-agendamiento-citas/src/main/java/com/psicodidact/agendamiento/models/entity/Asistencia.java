@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,11 +11,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
+@Data
 @Table(name ="asistencia")
 public class Asistencia  implements Serializable{
 
@@ -26,69 +40,22 @@ public class Asistencia  implements Serializable{
 	private Long idAsistencia;
 	
 	@Column(name="estado_asistencia")
-	private boolean estadoAsistencia;
+	private String estadoAsistencia;
 	
 	@Column(name="estado_reagendado")
-	private int estadoReagendado;
+	private String estadoReagendado;
 	
 	@Column(name="estado_justificado")
-	private int estadoJutificado;
+	private String estadoJutificado;
 
-	public Long getIdAsistencia() {
-		return idAsistencia;
-	}
-
-	public void setIdAsistencia(Long idAsistencia) {
-		this.idAsistencia = idAsistencia;
-	}
-
-	public boolean isEstadoAsistencia() {
-		return estadoAsistencia;
-	}
-
-	public void setEstadoAsistencia(boolean estadoAsistencia) {
-		this.estadoAsistencia = estadoAsistencia;
-	}
-
-	public int getEstadoReagendado() {
-		return estadoReagendado;
-	}
-
-	public void setEstadoReagendado(int estadoReagendado) {
-		this.estadoReagendado = estadoReagendado;
-	}
-
-	public int getEstadoJutificado() {
-		return estadoJutificado;
-	}
-
-	public void setEstadoJutificado(int estadoJutificado) {
-		this.estadoJutificado = estadoJutificado;
-	}
-
+	@Column(name = "fecha_creacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacion;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idAsistenciaCita")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Cita> citaAsistencia;
-
-	public List<Cita> getCitaAsistencia() {
-		return citaAsistencia;
-	}
-
-	public void setCitaAsistencia(List<Cita> citaAsistencia) {
-		this.citaAsistencia = citaAsistencia;
-	}
-
-	public Asistencia(Long idAsistencia, boolean estadoAsistencia, int estadoReagendado, int estadoJutificado) {
-		super();
-		this.idAsistencia = idAsistencia;
-		this.estadoAsistencia = estadoAsistencia;
-		this.estadoReagendado = estadoReagendado;
-		this.estadoJutificado = estadoJutificado;
+	@PrePersist
+	public void prePersist() {
+		this.fechaCreacion= new Date();
 	}
 	
-	public Asistencia() {
-
-	}
 	
 }

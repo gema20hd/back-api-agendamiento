@@ -22,7 +22,7 @@ public class TipoCuentaServiceImpl  implements ITipoCuentaService{
 
 	@Override
 	public TipoCuenta findById(Long id) {
-		return ITipoCuenta.findById(null).orElse(null);
+		return ITipoCuenta.findById(id).orElse(null);
 	}
 
 	@Override

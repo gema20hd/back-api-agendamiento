@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,8 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
@@ -57,9 +60,22 @@ public class Usuario implements Serializable{
 	@Column(name = "nombre_usuario",unique = true, length = 20,nullable = false)
 	private String username;
 
+	
 	@Column(name = "clave_usuario")
 	private String password;
+	
+	//private String password2;
+	
 	private boolean enabled;
+	
+	@Column(name = "fecha_creacion")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacion;
+	
+	@PrePersist
+	public void prePersist() {
+		this.fechaCreacion= new Date();
+	}
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="id_usuario"),

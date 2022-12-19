@@ -20,6 +20,9 @@ public interface IAntecedentesService {
 	
 	public void delete(Long id);
 	
+	
+	public Antecedente actualizar(Antecedente antecedentes);
+	
 
 
 }

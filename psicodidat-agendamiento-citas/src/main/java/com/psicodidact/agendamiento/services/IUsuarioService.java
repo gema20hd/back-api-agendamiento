@@ -13,4 +13,6 @@ public interface IUsuarioService {
 	public Usuario save(Usuario usuario);
 	
 	public void delete(Long id);
+	
+	public Integer insertRolesDeUsuario(Long id, Long idRol);
 }

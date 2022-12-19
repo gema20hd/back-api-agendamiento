@@ -14,6 +14,15 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="sub_servicio")
 public class SubServicio implements Serializable{
@@ -28,47 +37,7 @@ public class SubServicio implements Serializable{
 	@Column(name="descripcion_sub_servicio")
 	private String descripcionSubServicio;
 
-	public Long getIdSubServicio() {
-		return idSubServicio;
-	}
-
-	public void setIdSubServicio(Long idSubServicio) {
-		this.idSubServicio = idSubServicio;
-	}
-
-	public String getDescripcionSubServicio() {
-		return descripcionSubServicio;
-	}
-
-	public void setDescripcionSubServicio(String descripcionSubServicio) {
-		this.descripcionSubServicio = descripcionSubServicio;
-	}
-
-
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idSubServicioCita")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Cita> subServicioCita;
-
-
 	
-	public List<Cita> getSubServicioCita() {
-		return subServicioCita;
-	}
-
-	public void setSubServicioCita(List<Cita> subServicioCita) {
-		this.subServicioCita = subServicioCita;
-	}
-
-	public SubServicio(Long idSubServicio, String descripcionSubServicio) {
-		super();
-		this.idSubServicio = idSubServicio;
-		this.descripcionSubServicio = descripcionSubServicio;
-	}
-	
-
-	public SubServicio() {
-
-	}
 	
 	
 

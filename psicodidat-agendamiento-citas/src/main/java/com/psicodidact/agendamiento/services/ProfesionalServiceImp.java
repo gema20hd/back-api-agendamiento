@@ -115,7 +115,21 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 		return this.IProfesional.findAllTypeDisability();
 	}
 
-
-
-	
+	/*
+	 * @Override
+	 * 
+	 * @Transactional public Profesional update(Profesional profesional, Long id) {
+	 * IProfesional.update(
+	 * 
+	 * profesional.getIdentificacionProfesional(),
+	 * profesional.getNombresProfesional(),
+	 * profesional.getApellidoPaternoProfesional(),
+	 * profesional.getApellidoMaternoProfesional(),
+	 * profesional.getFechaNacimientoProfesional().toString(),
+	 * profesional.getGenero(), profesional.getCorreoElectronicoProfesional(),
+	 * profesional.getEstadoCivil(), profesional.getTipoSangre(),
+	 * profesional.getDireccionDomicilioProfesional(),
+	 * profesional.getDiscapacidad(), profesional.getProfesionProfesional(), id);
+	 * return profesional; }
+	 */
 }

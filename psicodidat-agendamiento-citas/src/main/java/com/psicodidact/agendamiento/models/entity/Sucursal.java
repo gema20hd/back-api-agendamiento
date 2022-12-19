@@ -14,7 +14,16 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
 @Table(name ="sucursal")
 public class Sucursal implements Serializable{
@@ -30,45 +39,7 @@ public class Sucursal implements Serializable{
 	@Column(name="descripcion_sucursal")
 	private String descripcionSucursal;
 
-	public Long getIdSucursal() {
-		return idSucursal;
-	}
-
-	public void setIdSucursal(Long idSucursal) {
-		this.idSucursal = idSucursal;
-	}
-
-	public String getDescripcionSucursal() {
-		return descripcionSucursal;
-	}
-
-	public void setDescripcionSucursal(String descripcionSucursal) {
-		this.descripcionSucursal = descripcionSucursal;
-	}
-
-
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="idSucursalOficina")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Oficina> oficinaSucursal;
-
-	public List<Oficina> getOficinaSucursal() {
-		return oficinaSucursal;
-	}
-
-	public void setOficinaSucursal(List<Oficina> oficinaSucursal) {
-		this.oficinaSucursal = oficinaSucursal;
-	}
-
-	public Sucursal(Long idSucursal, String descripcionSucursal) {
-		super();
-		this.idSucursal = idSucursal;
-		this.descripcionSucursal = descripcionSucursal;
-	}
-	
-	public Sucursal() {
-
-	}
 	
 	
 }

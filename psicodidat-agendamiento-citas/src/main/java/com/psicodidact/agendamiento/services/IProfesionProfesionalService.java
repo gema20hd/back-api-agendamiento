@@ -6,9 +6,9 @@ import com.psicodidact.agendamiento.models.entity.ProfesionProfesional;
 
 
 public interface IProfesionProfesionalService {
-	List<ProfesionProfesional> findAll();
+	public List<ProfesionProfesional> findAll();
 
-	ProfesionProfesional findById(Long id);
+	public ProfesionProfesional findById(Long id);
 
-	ProfesionProfesional save(ProfesionProfesional profesionProfesional);
+	public ProfesionProfesional save(ProfesionProfesional profesionProfesional);
 }

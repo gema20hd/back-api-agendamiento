@@ -6,5 +6,5 @@ import com.psicodidact.agendamiento.models.entity.Representante;
 
 
 public interface IRepresentanteRepository extends CrudRepository<Representante, Long>{
-
+	Representante  findByIdentificacionRepresentante(String identificacionRepresentante);
 }
