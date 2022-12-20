@@ -21,9 +21,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 @Entity
 @Table(name="paciente")
