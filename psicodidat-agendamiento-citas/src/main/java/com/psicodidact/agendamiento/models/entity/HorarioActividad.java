@@ -32,8 +32,9 @@ import lombok.*;
 
 		@Id
 	    @Column(name = "id_horario_actividad")
-	    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
-	    @SequenceGenerator(name = "sequence", sequenceName = "horario_actividad_seq", allocationSize = 1)
+	  //  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
+	   // @SequenceGenerator(name = "sequence", sequenceName = "horario_actividad_seq", allocationSize = 1)
+		@GeneratedValue(strategy=GenerationType.IDENTITY)
 	    private int idHorarioActividad;
 	    
 	    @Column(name = "fecha_horario")

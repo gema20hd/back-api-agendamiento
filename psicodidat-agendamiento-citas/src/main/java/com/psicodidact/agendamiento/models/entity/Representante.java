@@ -53,7 +53,7 @@ public class Representante implements Serializable{
 	@Column(name="parentesco_representante")
 	private String parentescoRepresentante;
 	
-	@Column(name="direccion_domicilio_representan")
+	@Column(name="direccion_domicilio_representante")
 	private String direccionDomicilioRepresentan;
 	
 	@Column(name="estado_representante")

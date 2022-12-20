@@ -43,10 +43,10 @@ public class Asistencia  implements Serializable{
 	private String estadoAsistencia;
 	
 	@Column(name="estado_reagendado")
-	private String estadoReagendado;
+	private int estadoReagendado;
 	
 	@Column(name="estado_justificado")
-	private String estadoJutificado;
+	private int estadoJutificado;
 
 	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.DATE)
