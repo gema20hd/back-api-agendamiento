@@ -124,27 +124,6 @@ public class ProfesionalRestController {
 	public List<Profesional> findByI(@PathVariable("dni") String identificacion) {
 		return profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(identificacion);
 	}
-	/*public ResponseEntity<?> findByIdentification(@PathVariable("dni") String identificacion) {
-		Profesional profesional = null;
-		Map<String, Object> response = new HashMap<>();
-
-		try {
-			profesional = profesionalService.findI(identificacion);
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		if (profesional == null) {
-			response.put("mensaje",
-					"El profesional con el ID: ".concat(identificacion.toString().concat(" no existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
-
-		return new ResponseEntity<Profesional>(profesional, HttpStatus.OK);
-	}
-	*/
 	
 
 	// @Secured({"ROLE_ADMIN"})
@@ -197,7 +176,7 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
-	@PostMapping("/profesionales/noFunciona")
+	@PostMapping("/profesionales")
 	public ResponseEntity<?> create(@Valid @RequestBody Profesional profesional, BindingResult result) {
 
 		Profesional profesionalNew = null;
@@ -227,7 +206,6 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
-	
 	public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result,
 			@PathVariable Long id) {
 
@@ -272,9 +250,7 @@ public class ProfesionalRestController {
 			profesionalActual.setEstadoProfesional(profesional.getEstadoProfesional());
 			profesionalActual.setHojaVida(profesional.getHojaVida());
 			profesionalActual.setCuenta(profesional.getCuenta());
-			// profesionalActual.setTipoCuenta(profesional.getCuenta().getTipoCuenta());
-			// profesionalActual.setBanco(profesional.getCuenta().getBanco());
-			// profesionalActual.setTipoDiscapacidad(profesional.getTipoDiscapacidad());
+		    //profesionalActual.setTipoDiscapacidad(profesional.getDiscapacidad());
 
 			profesionalUpdated = profesionalService.save(profesionalActual);
 
@@ -310,154 +286,5 @@ public class ProfesionalRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
-	@PostMapping(value="/profesionales", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> createDependientesProfesional(@Valid @RequestBody Map<String, Object> mapProfesional,BindingResult result) {
-        Discapacidad discapcidadNew = null;
-		Profesional profesionalNew = null;
-		Usuario usuarioNew = null;
-		Cuenta cuentaNew = null;
-		TipoCuenta tipoCuentaNew = null;
-		
-		Map<String, Object> response = new HashMap<>();
-
-		try {
-			
-			Discapacidad discapcidad = new Discapacidad();
-			Profesional profesional = new Profesional();
-			Usuario usuario = new Usuario();
-			Cuenta cuenta = new Cuenta();
-			TipoCuenta tipoCuenta = new TipoCuenta();
-			
-			discapcidad.setTipoDiscapacidad(tipoDiscapacidad.findById(Long.parseLong(mapProfesional.get("idTipoDiscapcidad").toString())));//error pa
-			discapcidad.setPorcetajeDiscapacidad(Integer.parseInt(mapProfesional.get("porcetajeDiscapacidad").toString()));
-			discapcidad.setDescripcionDiscapacidad(mapProfesional.get("descripcionDiscapacidad").toString());
-			
-			
-			profesional.setIdentificacionProfesional(mapProfesional.get("identificacionProfesional").toString());
-			profesional.setNombresProfesional(mapProfesional.get("nombresProfesional").toString());
-			profesional.setApellidoPaternoProfesional(mapProfesional.get("apellidoPaternoProfesional").toString());
-			profesional.setApellidoMaternoProfesional(mapProfesional.get("apellidoMaternoProfesional").toString());
-			//profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
-			profesional.setCelularProfesional(mapProfesional.get("celularProfesional").toString());
-			profesional.setTelefonoEmergenciaProfesional(mapProfesional.get("telefonoEmergenciaProfesional").toString());
-			profesional.setDireccionDomicilioProfesional(mapProfesional.get("direccionDomicilioProfesional").toString());
-			profesional.setCorreoElectronicoProfesional(mapProfesional.get("correoElectronicoProfesional").toString());
-			profesional.setHojaVida(mapProfesional.get("hojaVida").toString());
-			profesional.setNivelEducacion(mapProfesional.get("nivelEducacion").toString());
-			profesional.setTituloCuartoNivelProfesional(mapProfesional.get("tituloCuartoNivelProfesional").toString());
-		
-			//profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
-			profesional.setTipoSangre(tipoSangreService.findById(Long.parseLong(mapProfesional.get("idTipoSangre").toString())));
-			profesional.setProfesionProfesional(profesionService.findById(Long.parseLong(mapProfesional.get("idProfesionProfesional").toString())));
-			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
-			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
-			//profesional.setEstadoProfesional(true);
-			
-			cuenta.setNumeroCuenta(mapProfesional.get("numero de cuenta").toString());
-			cuenta.setTipoCuenta(tipoCuentaService.findById(Long.parseLong(mapProfesional.get("idTipoCuenta").toString())));//error parsear tipo de cuenta
-			cuenta.setBanco(bancoService.findById(Long.parseLong(mapProfesional.get("idBanco").toString())));//error al parsear Banco
-			
-			discapcidadNew = discapacidadService.save(discapcidad);
-			profesional.setDiscapacidad(discapcidadNew);
-			
-			cuentaNew = cuentaService.save(cuenta); 
-			if (result.hasErrors()) {
-
-				List<String> errors = result.getFieldErrors().stream()
-						.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-						.collect(Collectors.toList());
-
-				response.put("errors", errors);
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-			}
-			profesional.setCuenta(cuentaNew);
-			
-			profesionalNew = profesionalService.save(profesional);
-			
-			usuario.setPassword(mapProfesional.get("password").toString());
-			//List<Rol> nuevaLista = new ArrayList<>();
-			//nuevaLista.add(new Rol(5L, "nUEVA"));
-
-			//nuevaLista.add(rolesService.findById(Long.parseLong(mapProfesional.get("idRol").toString())));
-			
-			//usuario.setRoles(nuevaLista);
-			usuario.setUsername(mapProfesional.get("correoElectronicoProfesional").toString());
-			usuario.setEnabled(true);
-			usuario.setProfesional(profesionalNew);
-			usuarioNew = usuarioService.save(usuario);
-			try {
-			usuarioService.insertRolesDeUsuario(usuarioNew.getIdUsuario(), 5L);
-			}catch (Exception e) {
-				response.put("mensaje", "El usuario ha sido creado con éxito!");
-				response.put("profesional", profesionalNew);
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-			}
-			
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al agregar al usuario en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		response.put("mensaje", "El usuario ha sido creado con éxito!");
-		response.put("profesional", profesionalNew);
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-	}
 	
-	//actulizar
-	@PutMapping("/profesionales/{id}")
-	public ResponseEntity<?> update(@Valid @RequestBody Map<String, Object> mapProfesional, BindingResult result, @PathVariable Long id) {
-        
-		Profesional profesionalNew = null;
-		Map<String, Object> response = new HashMap<>();
-
-		try {
-			
-			Profesional profesional = profesionalService.findById(id);
-			//discapcidad.setTipoDiscapacidad(tipoDiscapacidad.findById(Long.parseLong(mapProfesional.get("idTipoDiscapacidad").toString())));
-			//discapcidad.setPorcetajeDiscapacidad(Integer.parseInt(mapProfesional.get("porcetajeDiscapacidad").toString()));
-			//discapcidad.setDescripcionDiscapacidad(mapProfesional.get("descripcionDiscapacidad").toString());
-			if (result.hasErrors()) {
-
-				List<String> errors = result.getFieldErrors().stream()
-						.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-						.collect(Collectors.toList());
-
-				response.put("errors", errors);
-				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-			}
-			profesional.setIdentificacionProfesional(mapProfesional.get("identificacionProfesional").toString());
-			profesional.setNombresProfesional(mapProfesional.get("nombresProfesional").toString());
-			profesional.setApellidoPaternoProfesional(mapProfesional.get("apellidoPaternoProfesional").toString());
-			profesional.setApellidoMaternoProfesional(mapProfesional.get("apellidoMaternoProfesional").toString());
-			//profesional.setFechaNacimientoProfesional(mapProfesional.get("fechaNacimientoProfesional").toString());
-			profesional.setCelularProfesional(mapProfesional.get("celularProfesional").toString());
-			profesional.setTelefonoEmergenciaProfesional(mapProfesional.get("telefonoEmergenciaProfesional").toString());
-			profesional.setDireccionDomicilioProfesional(mapProfesional.get("direccionDomicilioProfesional").toString());
-			profesional.setCorreoElectronicoProfesional(mapProfesional.get("correoElectronicoProfesional").toString());
-			profesional.setHojaVida(mapProfesional.get("hojaVida").toString());
-			profesional.setNivelEducacion(mapProfesional.get("nivelEducacion").toString());
-			profesional.setTituloCuartoNivelProfesional(mapProfesional.get("tituloCuartoNivelProfesional").toString());
-			//profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
-			profesional.setTipoSangre(tipoSangreService.findById(Long.parseLong(mapProfesional.get("idTipoSangre").toString())));
-			profesional.setProfesionProfesional(profesionService.findById(Long.parseLong(mapProfesional.get("idProfesionProfesional").toString())));
-			profesional.setEstadoCivil(estadoCivilService.findById(Long.parseLong(mapProfesional.get("idEstadoCivil").toString())));
-			profesional.setGenero(generoService.findById(Long.parseLong(mapProfesional.get("idGenero").toString())));
-			//profesional.setEstadoProfesional(true);
-			profesional.setDiscapacidad(discapacidadService.findById(Long.parseLong(mapProfesional.get("idDiscapacidad").toString())));
-			profesional.setCuenta(cuentaService.findById(Long.parseLong(mapProfesional.get("idCuenta").toString())));
-			profesionalNew = profesionalService.save(profesional);
-			
-			
-			
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al agregar al usuario en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		response.put("mensaje", "El usuario ha sido actualizado con éxito!");
-		response.put("profesional", profesionalNew);
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-	}
 }
