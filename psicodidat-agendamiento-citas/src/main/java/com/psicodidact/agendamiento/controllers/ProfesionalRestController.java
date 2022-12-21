@@ -192,7 +192,12 @@ public class ProfesionalRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		if(!profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(profesional.getIdentificacionProfesional()).isEmpty()) {
-        	response.put("mensaje", "Error: no se pudo crear, el profesional con el cedula: "
+        	response.put("validarCedulaRepetida", "Error: no se pudo crear, el profesional con el cedula: "
+					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
+        	response.put("validarCorreoRepetida", "Error: no se pudo crear, el profesional con el correo: "
 					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }

@@ -55,8 +55,8 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	@Query("select pp from ProfesionProfesional pp")
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
+	@Query("select p from Profesional p where p.correoElectronicoProfesional=?1")
+	public Profesional findByCorreo(String correo);
 	
-	
-
 
 }

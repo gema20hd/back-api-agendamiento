@@ -27,8 +27,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.Transient;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -77,9 +75,9 @@ public class Profesional implements Serializable {
     @Column(name = "direccion_domicilio_profesional")
     private String direccionDomicilioProfesional;
 	
-	@NotEmpty(message = "no puede estar vacio")
-	@Email(message = "no es una dirección de domicilio bien formada")
-    @Column(name = "correo_electronico_profesional",nullable = false, unique = true)
+	//@NotEmpty(message = "no puede estar vacio")
+	//@Email(message = "no es una dirección de domicilio bien formada")
+    @Column(name = "correo_electronico_profesional",nullable = false)
     private String correoElectronicoProfesional;
 
     @Column(name = "estado_profesional")
@@ -100,9 +98,6 @@ public class Profesional implements Serializable {
 	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
-	
-	@Transient
-	int edad;
 	
 	@PrePersist
 	public void prePersist() {

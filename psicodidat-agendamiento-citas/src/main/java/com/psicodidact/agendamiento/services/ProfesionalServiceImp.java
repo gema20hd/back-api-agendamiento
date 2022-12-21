@@ -115,6 +115,12 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 		return this.IProfesional.findAllTypeDisability();
 	}
 
+	@Override
+	public Profesional findByCorreo(String correo) {
+		// TODO Auto-generated method stub
+		return this.IProfesional.findByCorreo(correo);
+	}
+
 	/*
 	 * @Override
 	 * 

@@ -61,6 +61,8 @@ public interface IProfesionalService {
 
 	public List<ProfesionProfesional> findAllProfessionProfessional();
 	
+	public Profesional findByCorreo(String correo);
+	
 
 	//public List<Banco> findBydescripcionBancoContainingIgnoreCase(String term);
 	

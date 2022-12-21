@@ -55,6 +55,7 @@ public class UsuariosRestController {
 		
 		try {
 			usuarioNew = usuarioService.save(usuario);
+			usuarioService.insertRolesDeUsuario(usuario.getProfesional().getIdProfesional(), 5L);
 		} catch(DataAccessException e) {
 			response.put("mensaje", "Error al agregar al usuario en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
