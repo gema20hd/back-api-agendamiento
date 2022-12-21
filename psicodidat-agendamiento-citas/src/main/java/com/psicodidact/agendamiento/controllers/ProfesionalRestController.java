@@ -198,9 +198,10 @@ public class ProfesionalRestController {
         }
 		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
         	response.put("validarCorreoRepetida", "Error: no se pudo crear, el profesional con el correo: "
-					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
+					.concat(profesional.getCorreoElectronicoProfesional().concat(" ya existe en la base de datos!")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
+		
 
 		try {
 			profesionalNew = profesionalService.save(profesional);

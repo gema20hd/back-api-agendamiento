@@ -65,6 +65,12 @@ public class CuentaServiceImpl  implements ICuentaService {
 		return iBanco.findById(id).orElse(null);
 	}
 
+	@Override
+	public Cuenta findByNumeroCuenta(String nuemroCuenta) {
+		// TODO Auto-generated method stub
+		return iCuenta.findByNumeroCuenta(nuemroCuenta);
+	}
+
 
 
 

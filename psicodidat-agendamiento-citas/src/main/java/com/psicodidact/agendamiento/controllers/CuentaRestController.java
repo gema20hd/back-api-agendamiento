@@ -56,7 +56,7 @@ public class CuentaRestController {
 
 		Cuenta cuenta = null;
 		Map<String, Object> response = new HashMap<>();
-
+		
 		try {
 			cuenta = cuentaService.findById(id);
 		} catch (DataAccessException e) {
@@ -64,7 +64,7 @@ public class CuentaRestController {
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		
 		if (cuenta == null) {
 			response.put("mensaje",
 					"La cuenta con el ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
@@ -89,7 +89,11 @@ public class CuentaRestController {
 			response.put("errors", errors);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
-
+		if(cuentaService.findByNumeroCuenta(cuenta.getNumeroCuenta())!=null) {
+        	response.put("validarNumeroCuentaRepetida", "Error: no se pudo crear, la cuenta con el correo: "
+					.concat(cuenta.getNumeroCuenta().concat(" ya existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
 		try {
 			cuentaNew = cuentaService.save(cuenta);
 		} catch (DataAccessException e) {
@@ -97,7 +101,7 @@ public class CuentaRestController {
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		
 		response.put("mensaje", "La cuenta ha sido creado con éxito!");
 		response.put("cuenta", cuentaNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);

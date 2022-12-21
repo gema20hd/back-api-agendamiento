@@ -52,7 +52,11 @@ public class UsuariosRestController {
 			response.put("errors", errors);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
-		
+		if(usuarioService.findByUsername(usuario.getUsername())!=null) {
+        	response.put("validarCorreoRepetida", "Error: no se pudo crear, el usuario con el correo: "
+					.concat(usuario.getUsername().concat(" ya existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
 		try {
 			usuarioNew = usuarioService.save(usuario);
 			usuarioService.insertRolesDeUsuario(usuario.getProfesional().getIdProfesional(), 5L);

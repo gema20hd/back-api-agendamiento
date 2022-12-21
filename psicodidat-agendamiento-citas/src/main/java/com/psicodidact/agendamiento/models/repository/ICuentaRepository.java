@@ -19,6 +19,8 @@ public List<TipoCuenta> findAllAccounType();
 @Query("select b from Banco b")
 public List<Banco> findAllBank();
 
+@Query("select p from Cuenta p where p.numeroCuenta=?1")
+public Cuenta findByNumeroCuenta(String nuemroCuenta);
 
 
 

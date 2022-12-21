@@ -28,6 +28,8 @@ public interface ICuentaService {
 	public List<Banco> findByDescripcionBancoContainingIgnoreCase(String term);
 
 	public Banco findByBank(Long id);
+	
+	public Cuenta findByNumeroCuenta(String nuemroCuenta);
 
 
 
