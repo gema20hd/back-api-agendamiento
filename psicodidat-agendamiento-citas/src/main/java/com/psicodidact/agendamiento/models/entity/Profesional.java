@@ -1,6 +1,9 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -22,6 +25,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -95,9 +100,13 @@ public class Profesional implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
 	
+	@Transient
+	int edad;
+	
 	@PrePersist
 	public void prePersist() {
 		this.fechaCreacion= new Date();
+		this.edadProfesional=this.calcularFecha(this.getFechaNacimientoProfesional());
 	}
     
 
@@ -137,9 +146,17 @@ public class Profesional implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Cuenta cuenta;
 	
+    
+	
+	public int calcularFecha(Date nacimiento) {
 
-	
-	
+		LocalDate nacimientoLocalDate = nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate now = LocalDate.now();
+		Period period = Period.between(nacimientoLocalDate, now);
+
+		return  period.getYears();
+
+		}
 	
 	
 }
