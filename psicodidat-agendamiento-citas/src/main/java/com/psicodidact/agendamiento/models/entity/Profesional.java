@@ -1,9 +1,6 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -75,9 +72,9 @@ public class Profesional implements Serializable {
     @Column(name = "direccion_domicilio_profesional")
     private String direccionDomicilioProfesional;
 	
-	//@NotEmpty(message = "no puede estar vacio")
-	//@Email(message = "no es una dirección de domicilio bien formada")
-    @Column(name = "correo_electronico_profesional",nullable = false)
+	@NotEmpty(message = "no puede estar vacio")
+	@Email(message = "no es una dirección de domicilio bien formada")
+    @Column(name = "correo_electronico_profesional",nullable = false, unique = true)
     private String correoElectronicoProfesional;
 
     @Column(name = "estado_profesional")
@@ -102,7 +99,6 @@ public class Profesional implements Serializable {
 	@PrePersist
 	public void prePersist() {
 		this.fechaCreacion= new Date();
-		this.edadProfesional=this.calcularFecha(this.getFechaNacimientoProfesional());
 	}
     
 
@@ -142,17 +138,9 @@ public class Profesional implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Cuenta cuenta;
 	
-    
+
 	
-	public int calcularFecha(Date nacimiento) {
-
-		LocalDate nacimientoLocalDate = nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		LocalDate now = LocalDate.now();
-		Period period = Period.between(nacimientoLocalDate, now);
-
-		return  period.getYears();
-
-		}
+	
 	
 	
 }

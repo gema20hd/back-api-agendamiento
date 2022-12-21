@@ -46,6 +46,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.PUT, "api/profesionales/{id}").permitAll()
 		.antMatchers(HttpMethod.DELETE, "api/profesionales/{id}").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/genero").permitAll()
+		.antMatchers(HttpMethod.POST, "api/cuentas").permitAll()
+		.antMatchers(HttpMethod.POST, "api/usuarios").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/profesional/estadoCivil").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/profesional/discapacidad").permitAll()

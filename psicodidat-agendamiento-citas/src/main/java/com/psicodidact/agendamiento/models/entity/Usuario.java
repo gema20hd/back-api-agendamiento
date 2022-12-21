@@ -19,6 +19,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotEmpty;
 
@@ -56,7 +57,7 @@ public class Usuario implements Serializable{
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@NotEmpty(message = "no puede estar vacio")
+	//@NotEmpty(message = "no puede estar vacio")
 	@Column(name = "nombre_usuario",unique = true, length = 20,nullable = false)
 	private String username;
 
@@ -67,6 +68,9 @@ public class Usuario implements Serializable{
 	//private String password2;
 	
 	private boolean enabled;
+	
+	@Transient
+	private String passwordRepeat;
 	
 	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.DATE)
