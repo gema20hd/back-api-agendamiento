@@ -22,6 +22,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -93,7 +94,7 @@ public class Profesional implements Serializable {
     @Column(name = "titulo_cuarto_nivel_profesional")
     private String tituloCuartoNivelProfesional;
     
-    @Column(name = "edad_profesional")
+    @Transient
     private int edadProfesional;
     
 	@Column(name = "fecha_creacion")
