@@ -41,12 +41,13 @@ import lombok.*;
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable{
-	public Usuario(String username, String password, boolean enabled, Profesional profesional) {
+	public Usuario(String username, String password, boolean enabled, Profesional profesional,Date fechaCreacion) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
 		this.profesional = profesional;
+		this.fechaCreacion= fechaCreacion;
 	}
 
 

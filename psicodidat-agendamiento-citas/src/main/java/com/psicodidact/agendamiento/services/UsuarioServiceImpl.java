@@ -20,7 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
+import com.psicodidact.agendamiento.models.entity.Rol;
 import com.psicodidact.agendamiento.models.entity.Usuario;
 import com.psicodidact.agendamiento.models.repository.IUsuarioRepository;
 
@@ -73,7 +73,7 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	@Transactional
 	public Usuario save(Usuario usuario) {
 		Usuario user = new Usuario(usuarioCorreo(usuario.getUsername()), 
-				passwordEncry(usuario.getPassword()),usuario.isEnabled(),usuario.getProfesional());
+				passwordEncry(usuario.getPassword()),usuario.isEnabled(),usuario.getProfesional(),usuario.getFechaCreacion());
 		Usuario usernew= usuarioRepository.save(user);
 		return usernew;
 	}
@@ -111,7 +111,7 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	}
 
 	@Override
-	public Integer insertRolesDeUsuario(Long id,Long idRol) {
+	public Rol insertRolesDeUsuario(Long id,Long idRol) {
 		return usuarioRepository.insertUsuarioRoles(id,idRol);
 		
 	}

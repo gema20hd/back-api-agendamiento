@@ -2,6 +2,7 @@ package com.psicodidact.agendamiento.services;
 
 import java.util.List;
 
+import com.psicodidact.agendamiento.models.entity.Rol;
 import com.psicodidact.agendamiento.models.entity.Usuario;
 
 public interface IUsuarioService {
@@ -14,5 +15,5 @@ public interface IUsuarioService {
 	
 	public void delete(Long id);
 	
-	public Integer insertRolesDeUsuario(Long id, Long idRol);
+	public Rol insertRolesDeUsuario(Long id, Long idRol);
 }
