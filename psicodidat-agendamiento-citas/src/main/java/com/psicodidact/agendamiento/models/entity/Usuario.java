@@ -41,13 +41,13 @@ import lombok.*;
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable{
-	public Usuario(String username, String password, boolean enabled, Profesional profesional,Date fechaCreacion) {
+	public Usuario(String username, String password, boolean enabled,Date fechaCreacion, Profesional profesional) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.profesional = profesional;
 		this.fechaCreacion= fechaCreacion;
+		this.profesional=profesional;
 	}
 
 
@@ -92,9 +92,6 @@ public class Usuario implements Serializable{
 	@JoinColumn(name="id_profesional")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Profesional profesional;
-
-
-
 
 
 

@@ -45,7 +45,7 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 	@Override
 	@Transactional(readOnly = true)
 	public Profesional findById(Long id) {
-		return this.IProfesional.findById(id).orElse(null);
+		return this.IProfesional.findByIdProfesional(id);
 	}
 
 	@Override
