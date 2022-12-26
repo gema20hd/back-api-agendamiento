@@ -76,8 +76,7 @@ public class UsuarioServiceImpl  implements IUsuarioService, UserDetailsService{
 	@Override
 	@Transactional
 	public Usuario save(Usuario usuario) {
-		
-		Profesional profesional = profesionalService.findById(1L);//usuario.getProfesional().getIdProfesional()
+		Profesional profesional = profesionalService.findById(usuario.getProfesional().getIdProfesional());
 		Usuario user = new Usuario(usuarioCorreo(usuario.getUsername()), 
 				passwordEncry(usuario.getPassword()),usuario.isEnabled(),usuario.getFechaCreacion(), profesional);
 		

@@ -16,6 +16,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,18 +38,21 @@ public class Cuenta implements Serializable{
 	@Column(name = "id_cuenta")
 	private Long idCuenta;
 	
-	@Column(name = "numero_cuenta")
+	@NotEmpty(message = "no puede estar vacio")
+	@Column(name = "numero_cuenta",unique = true)
 	private String numeroCuenta;
 	
 	// recion Mucho a uno 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_banco")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private Banco banco;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_tipo_cuenta")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private TipoCuenta tipoCuenta;
 	
 	@Column(name = "fecha_creacion")

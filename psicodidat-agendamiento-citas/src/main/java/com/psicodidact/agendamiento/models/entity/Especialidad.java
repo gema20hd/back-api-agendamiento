@@ -15,6 +15,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -40,6 +41,7 @@ public class Especialidad implements Serializable{
 	@Column(name="id_especialidad")
 	private Long idEspecialidad;
 	
+	@NotEmpty(message = "no puede estar vacio")
 	@Column(name="descripcion_especialidad")
 	private String descripcionEspecialidad;
 	

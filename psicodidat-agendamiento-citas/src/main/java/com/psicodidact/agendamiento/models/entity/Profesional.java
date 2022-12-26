@@ -47,9 +47,11 @@ public class Profesional implements Serializable {
     @Column(name = "identificacion_profesional",nullable = false, unique = true)
     private String identificacionProfesional;
 
+	@NotEmpty(message = "no puede estar vacio")
     @Column(name = "nombres_profesional")
     private String nombresProfesional;
 
+	@NotEmpty(message = "no puede estar vacio")
     @Column(name = "apellido_paterno_profesional")
     private String apellidoPaternoProfesional;
 
@@ -59,12 +61,15 @@ public class Profesional implements Serializable {
     
    // @JsonFormat(pattern = "ddMMyyyy")
    // private Date fechaNacimientoProfesional;
+    //@NotEmpty(message = "no puede estar vacio")
     @Column(name = "fecha_nacimiento_profesional")
     private Date fechaNacimientoProfesional;
 
+    @NotEmpty(message = "no puede estar vacio")
     @Column(name = "celular_profesional")
     private String celularProfesional;
 
+    @NotEmpty(message = "no puede estar vacio")
     @Column(name = "telefono_emergencia_profesional")
     private String telefonoEmergenciaProfesional;
 
@@ -73,13 +78,15 @@ public class Profesional implements Serializable {
     private String direccionDomicilioProfesional;
 	
 	@NotEmpty(message = "no puede estar vacio")
-	@Email(message = "no es una dirección de domicilio bien formada")
+	@Email(message = "no es una cuenta de email bien formada")
     @Column(name = "correo_electronico_profesional",nullable = false, unique = true)
     private String correoElectronicoProfesional;
 
+	@NotEmpty(message = "no puede estar vacio")
     @Column(name = "estado_profesional")
     private String estadoProfesional;
 
+	@NotEmpty(message = "no puede estar vacio")
     @Column(name = "hoja_vida")
     private String hojaVida;
 
@@ -106,36 +113,42 @@ public class Profesional implements Serializable {
     @ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_estado_civil")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@NotEmpty(message = "no puede estar vacio")
 	private EstadoCivil estadoCivil;
 	
     @NotNull(message = "El tipo de sangre no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_tipo_sangre")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@NotEmpty(message = "no puede estar vacio")
 	private TipoSangre tipoSangre;
 	
 	@NotNull(message = "La discapacidad no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_discapacidad")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private Discapacidad discapacidad;
 	
 	@NotNull(message = "El genero no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_genero")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private Genero genero;
 	
 	@NotNull(message = "La profesión no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_profesion_profesional")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private ProfesionProfesional profesionProfesional;
 
 	@NotNull(message = "La cuenta no puede ser nulo")
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_cuenta")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private Cuenta cuenta;
 	
 

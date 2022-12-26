@@ -191,6 +191,7 @@ public class ProfesionalRestController {
 			response.put("errors", errors);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
+		
 		if(!profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(profesional.getIdentificacionProfesional()).isEmpty()) {
         	response.put("validarCedulaRepetida", "Error: no se pudo crear, el profesional con el cedula: "
 					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
@@ -199,6 +200,8 @@ public class ProfesionalRestController {
 		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
         	response.put("validarCorreoRepetida", "Error: no se pudo crear, el profesional con el correo: "
 					.concat(profesional.getCorreoElectronicoProfesional().concat(" ya existe en la base de datos!")));
+        	
+        	
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
 		
@@ -217,6 +220,7 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
+	@PutMapping("/profesionales/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result,
 			@PathVariable Long id) {
 
@@ -248,19 +252,21 @@ public class ProfesionalRestController {
 			profesionalActual.setApellidoPaternoProfesional(profesional.getApellidoPaternoProfesional());
 			profesionalActual.setApellidoMaternoProfesional(profesional.getApellidoMaternoProfesional());
 			profesionalActual.setFechaNacimientoProfesional(profesional.getFechaNacimientoProfesional());
-			profesionalActual.setGenero(profesional.getGenero());
 			profesionalActual.setCorreoElectronicoProfesional(profesional.getCorreoElectronicoProfesional());
 			profesionalActual.setCelularProfesional(profesional.getCelularProfesional());
 			profesionalActual.setTelefonoEmergenciaProfesional(profesional.getTelefonoEmergenciaProfesional());
-			profesionalActual.setProfesionProfesional(profesional.getProfesionProfesional());
 			profesionalActual.setTituloCuartoNivelProfesional(profesional.getTituloCuartoNivelProfesional());
 			profesionalActual.setDireccionDomicilioProfesional(profesional.getDireccionDomicilioProfesional());
+			profesionalActual.setEstadoProfesional(profesional.getEstadoProfesional());
+			
+			profesionalActual.setHojaVida(profesional.getHojaVida());
 			profesionalActual.setDiscapacidad(profesional.getDiscapacidad());
+			profesionalActual.setGenero(profesional.getGenero());
 			profesionalActual.setTipoSangre(profesional.getTipoSangre());
 			profesionalActual.setEstadoCivil(profesional.getEstadoCivil());
 			profesionalActual.setEstadoProfesional(profesional.getEstadoProfesional());
-			profesionalActual.setHojaVida(profesional.getHojaVida());
 			profesionalActual.setCuenta(profesional.getCuenta());
+			profesionalActual.setProfesionProfesional(profesional.getProfesionProfesional());
 		    //profesionalActual.setTipoDiscapacidad(profesional.getDiscapacidad());
 
 			profesionalUpdated = profesionalService.save(profesionalActual);

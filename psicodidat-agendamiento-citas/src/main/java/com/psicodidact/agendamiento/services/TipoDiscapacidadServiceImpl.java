@@ -16,7 +16,6 @@ public class TipoDiscapacidadServiceImpl implements ITipoDiscapacidadService{
 
 	@Override
 	public List<TipoDiscapacidad> findAll() {
-		// TODO Auto-generated method stub
 		return (List<TipoDiscapacidad>) itipoDiscapacidad.findAll();
 	}
 

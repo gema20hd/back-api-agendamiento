@@ -55,14 +55,14 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
+	@Column(name = "id_usuario",unique = true)
 	private Long idUsuario;
 
-	//@NotEmpty(message = "no puede estar vacio")
+	@NotEmpty(message = "no puede estar vacio")
 	@Column(name = "nombre_usuario",unique = true, length = 20,nullable = false)
 	private String username;
 
-	
+	@NotEmpty(message = "no puede estar vacio")
 	@Column(name = "clave_usuario")
 	private String password;
 	
@@ -91,6 +91,7 @@ public class Usuario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_profesional")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private Profesional profesional;
 
 
