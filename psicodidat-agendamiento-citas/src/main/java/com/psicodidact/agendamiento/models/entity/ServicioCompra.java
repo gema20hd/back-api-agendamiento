@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,14 +39,6 @@ public class ServicioCompra implements Serializable {
 	@Column(name="id_servicio_compra")
 	private Long idServicioCompra;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_especialidad")
-	private Especialidad especialidad;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_servicio")
-	private Servicio servicio;
-	
 	@Column(name="descripcion_servicio_compra")
 	private String descripcionServicioCompra;
 	
@@ -53,10 +46,37 @@ public class ServicioCompra implements Serializable {
 	private float costoServicioCompra;
 	
 	
-
+    @NotNull(message = "La especialidad no puede ser nulo")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_especialidad")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Especialidad especialidad;
 	
-
-	
+    @NotNull(message = "El servicio no puede ser nulo")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_servicio")
+	private Servicio servicio;
+    
+   /* @NotNull(message = "El subservicio no puede ser nulo")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_sub_servicio")
+	private SubServicio subServicio;
+    
+    
+    @NotNull(message = "El paciente no puede ser nulo")
+   	@ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+   	@JoinColumn(name="id_paciente")
+   	private Paciente paciente;
+    
+    @NotNull(message = "La suscursal no puede ser nulo")
+ 	@ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+ 	@JoinColumn(name="id_sucursal")
+ 	private Sucursal sucursal;
+ 	*/
 	
 	
 }
