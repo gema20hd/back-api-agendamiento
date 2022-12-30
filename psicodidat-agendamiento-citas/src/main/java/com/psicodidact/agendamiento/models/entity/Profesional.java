@@ -1,6 +1,10 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -106,6 +110,7 @@ public class Profesional implements Serializable {
 	@PrePersist
 	public void prePersist() {
 		this.fechaCreacion= new Date();
+		
 	}
     
 
@@ -151,7 +156,25 @@ public class Profesional implements Serializable {
 	//@NotEmpty(message = "no puede estar vacio")
 	private Cuenta cuenta;
 	
+	
+	public int calcularEdad(Date nacimiento) {
 
+		LocalDate nacimientoLocalDate = nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate now = LocalDate.now();
+		Period period = Period.between(nacimientoLocalDate, now);
+
+		return period.getYears();
+
+		}
+
+
+	 public Date devolverFecha(Date fechaEntrada) throws ParseException { 
+		    SimpleDateFormat formato = new SimpleDateFormat("dd/M/yyyy");
+		    String fechaString = fechaEntrada.toString(); 
+		    Date miFecha = formato.parse(fechaString); 
+		    return miFecha;
+
+		  }
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.psicodidact.agendamiento.services;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +46,15 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Profesional findById(Long id) {
-		return this.IProfesional.findByIdProfesional(id);
+	public Profesional findById(Long id)  {
+		Profesional profesionalAux = null;
+	
+		    profesionalAux = this.IProfesional.findByIdProfesional(id);
+			profesionalAux.setEdadProfesional(profesionalAux.calcularEdad(profesionalAux.getFechaNacimientoProfesional()));
+			profesionalAux.setFechaNacimientoProfesional(profesionalAux.getFechaNacimientoProfesional());
+		
+		
+		return profesionalAux;
 	}
 
 	@Override
