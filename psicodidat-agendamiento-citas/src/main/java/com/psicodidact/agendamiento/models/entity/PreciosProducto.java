@@ -15,6 +15,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,23 +24,26 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
 @Entity
-@Table(name ="sub_servicio")
-public class SubServicio implements Serializable{
+@Table(name ="precio_producto")
+public class PreciosProducto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_sub_servicio")
-	private Long idSubServicio;
+	@Column(name="id_precio_producto")
+	private Long idPrecioProducto;
 	
-	@Column(name="descripcion_sub_servicio")
-	private String descripcionSubServicio;
-
+	@NotEmpty(message = "no puede estar vacio")
+	@Column(name="precio")
+	private double precio;
 	
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
@@ -49,7 +53,5 @@ public class SubServicio implements Serializable{
 	public void prePersist() {
 		this.createAt = new Date();
 	}
-	
-
 	
 }

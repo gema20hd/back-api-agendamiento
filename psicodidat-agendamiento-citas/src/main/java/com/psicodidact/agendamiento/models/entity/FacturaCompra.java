@@ -1,8 +1,10 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,9 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -28,43 +35,33 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
-@Table(name ="servicio_compra")
-public class ServicioCompra implements Serializable {
+@Table(name ="factura_compra")
+public class FacturaCompra implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_servicio_compra")
-	private Long idServicioCompra;
+	@Column(name="id_factura_compra")
+	private Long idFacturaCompra;
 	
-	@Column(name="descripcion_servicio_compra")
-	private String descripcionServicioCompra;
+	@Column(name="descripcion_factura_compra")
+	private String descripcionFacturaCompra;
 	
-	@Column(name="costo_servicio_compra")
-	private float costoServicioCompra;
 	
-    @NotNull(message = "La especialidad no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_especialidad")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Especialidad especialidad;
+	
+	@Column(name = "fecha_creacion")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date fechaCreacionFacturacion;
+	
+	@PrePersist
+	public void prePersist() {
+		this.fechaCreacionFacturacion= new Date();
+		
+	}
 
-	
-    @NotNull(message = "El servicio no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_servicio")
-	private Servicio servicio;
-    
-   /* @NotNull(message = "El subservicio no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_sub_servicio")
-	private SubServicio subServicio;
-    
-    
     @NotNull(message = "El paciente no puede ser nulo")
    	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -76,7 +73,21 @@ public class ServicioCompra implements Serializable {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
  	@JoinColumn(name="id_sucursal")
  	private Sucursal sucursal;
- 	*/
+    
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_factura")
+	private List<FacturaDetalleCompra> facturaDetalles;
+	
+ 	/*
+	public Double getTotal() {
+		Double total = 0.00;
+		for (FacturaDetalleCompra :item) {
+			total += item;
+		}
+		return total;
+	}
+	*/
 	
 	
 }

@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,6 +41,18 @@ public class Servicio implements Serializable{
 	
 	@Column(name="descripcion_servicio")
 	private String descripcionServicio;
+	
+	@Column(name="precio_servicio")
+	private Double precioServicio;
 
 	
+	
+	@Column(name = "create_at")
+	@Temporal(TemporalType.DATE)
+	private Date createAt;
+	
+	@PrePersist
+	public void prePersist() {
+		this.createAt = new Date();
+	}
 }
