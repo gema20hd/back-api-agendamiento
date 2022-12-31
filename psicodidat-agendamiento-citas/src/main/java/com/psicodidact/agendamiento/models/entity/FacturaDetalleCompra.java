@@ -75,7 +75,7 @@ public class FacturaDetalleCompra  implements Serializable{
 
 	
 	public Double getImporte() {
-		return cantidad.doubleValue() * servicio.getPrecioServicio();
+		return cantidad.doubleValue() * preciosProducto.getPrecio();
 	}
 	
 	/*public Double getTotal() {
@@ -86,25 +86,17 @@ public class FacturaDetalleCompra  implements Serializable{
 		return total;
 	}
 	*/
-	
-    @NotNull(message = "El servicio no puede ser nulo")
+    @NotNull(message = "El factura no puede ser nulo")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_servicio")
-	private Servicio servicio;
-    
-   @NotNull(message = "El subservicio no puede ser nulo")
+	@JoinColumn(name="id_facturaCompra")
+	private FacturaCompra factura;
+
+    @NotNull(message = "El producto no puede ser nulo")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_sub_servicio")
-	private SubServicio subServicio;
-
-	@NotNull(message = "La especialidad no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_especialidad")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Especialidad especialidad;
-
+	@JoinColumn(name="id_precio_producto")
+	private PreciosProducto preciosProducto;
 
 
 

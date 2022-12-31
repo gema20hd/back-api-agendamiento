@@ -42,10 +42,6 @@ public class Servicio implements Serializable{
 	@Column(name="descripcion_servicio")
 	private String descripcionServicio;
 	
-	@Column(name="precio_servicio")
-	private Double precioServicio;
-
-	
 	
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
