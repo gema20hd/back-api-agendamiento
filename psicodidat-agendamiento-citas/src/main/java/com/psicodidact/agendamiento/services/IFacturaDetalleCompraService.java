@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.psicodidact.agendamiento.models.entity.FacturaDetalleCompra;
-import com.psicodidact.agendamiento.models.entity.Paquete;
 import com.psicodidact.agendamiento.models.entity.Servicio;
 
 

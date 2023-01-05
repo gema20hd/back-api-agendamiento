@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
@@ -133,10 +132,14 @@ public class Paciente implements Serializable{
 	private Antecedente antecedente;
 	
 	
+	
 	@JsonIgnoreProperties(value={"paciente", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paciente", cascade = CascadeType.ALL)
 	private List<FacturaCompra> facturas;
 	
+	public Paciente() {
+		this.facturas = new ArrayList<>();
+	}
 	
 
 	

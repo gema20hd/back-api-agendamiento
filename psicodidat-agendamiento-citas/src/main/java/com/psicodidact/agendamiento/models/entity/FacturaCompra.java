@@ -49,9 +49,14 @@ public class FacturaCompra implements Serializable {
 	@Column(name="descripcion_factura_compra")
 	private String descripcionFacturaCompra;
 	
+
+	@Column(name="observacion_factura_compra")
+	private String observacion;
 	
+	@Column(name="total_factura_compra")
+	private Double totalFacturaCompra;
 	
-	@Column(name = "fecha_creacion")
+	@Column(name = "fecha_compra_factura")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacionFacturacion;
@@ -59,6 +64,7 @@ public class FacturaCompra implements Serializable {
 	@PrePersist
 	public void prePersist() {
 		this.fechaCreacionFacturacion= new Date();
+		this.totalFacturaCompra = getTotal();
 		
 	}
 
@@ -74,20 +80,20 @@ public class FacturaCompra implements Serializable {
  	@JoinColumn(name="id_sucursal")
  	private Sucursal sucursal;
     
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_factura")
+    @JsonIgnoreProperties(value={"factura", "hibernateLazyInitializer", "handler"}, allowSetters=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "factura", cascade = CascadeType.ALL)
 	private List<FacturaDetalleCompra> facturaDetalles;
 	
- 	/*
+	
+ 	
 	public Double getTotal() {
 		Double total = 0.00;
-		for (FacturaDetalleCompra :item) {
-			total += item;
+		for (FacturaDetalleCompra item :facturaDetalles) {
+			total = item.getSubtotal() - item.getSubtotal()*item.getDescuentoCompra() ;
 		}
 		return total;
 	}
-	*/
+	
 	
 	
 }

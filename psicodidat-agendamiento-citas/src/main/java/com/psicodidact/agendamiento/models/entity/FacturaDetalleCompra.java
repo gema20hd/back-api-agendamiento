@@ -41,11 +41,6 @@ public class FacturaDetalleCompra  implements Serializable{
 	@Column(name="id_factura_detalle_compra")
 	private Long idFacturaDetalleCompra;
 	
-
-	
-	
-	@Column(name="estado_pago_factura_compra")
-	private String estadoPagoFacturaCompra;
 	
 	@Column(name="periodo_compra_factura")
 	private String periodoCompraFactura;
@@ -53,10 +48,9 @@ public class FacturaDetalleCompra  implements Serializable{
 	@Column(name="descuento_compra")
 	private int descuentoCompra;
 	
-	@Column(name="total_factura_compra")
-	private float totalPagarFacturaCompra;
+	@Column(name="cantidad_producto")
+	private Integer cantidad;
 	
-
 	@Column(name = "fecha_creacion_detalle_factura")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacionDetalle;
@@ -66,37 +60,24 @@ public class FacturaDetalleCompra  implements Serializable{
 		this.fechaCreacionDetalle = new Date();
 	}
 	
-	@Column(name="cantidad_producto")
-	private Integer cantidad;
-	
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
-
-	
-	public Double getImporte() {
+	public Double getSubtotal() {
 		return cantidad.doubleValue() * preciosProducto.getPrecio();
 	}
 	
-	/*public Double getTotal() {
-		Double total = 0.00;
-		for ( item : items) {
-			total += item.getImporte();
-		}
-		return total;
-	}
-	*/
+	
     @NotNull(message = "El factura no puede ser nulo")
 	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_facturaCompra")
+	@JoinColumn(name="id_factura_Compra")
 	private FacturaCompra factura;
 
-    @NotNull(message = "El producto no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
+   
+    @NotNull(message = "El precio del producto no puede ser nulo")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@JoinColumn(name="id_precio_producto")
 	private PreciosProducto preciosProducto;
+
 
 
 

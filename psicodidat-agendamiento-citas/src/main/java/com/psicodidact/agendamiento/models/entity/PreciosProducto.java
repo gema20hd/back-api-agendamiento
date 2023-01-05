@@ -57,23 +57,18 @@ public class PreciosProducto implements Serializable{
 		this.createAt = new Date();
 	}
 	
-	
+
     @NotNull(message = "El servicio no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_servicio")
 	private Servicio servicio;
     
-   @NotNull(message = "El paquete no puede ser nulo")
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	@JoinColumn(name="id_paquete")
-	private SubServicio paquete;
 
 	@NotNull(message = "La especialidad no puede ser nulo")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_especialidad")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Especialidad especialidad;
 
 	

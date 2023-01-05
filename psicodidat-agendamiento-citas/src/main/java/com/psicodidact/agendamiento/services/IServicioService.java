@@ -22,5 +22,7 @@ public interface IServicioService {
 	
 	public void delete(Long id);
 	
+	public List<Servicio> findBydescripcionServicioContainingIgnoreCase(String term);
+	
 	
 }

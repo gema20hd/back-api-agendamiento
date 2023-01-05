@@ -43,7 +43,12 @@ public class FacturaPago implements Serializable {
 	@JoinColumn(name="id_pago")
 	private Pago pago;
 	
+
+	@Column(name="estado_pago_factura_compra")
+	private String estadoPagoFacturaCompra;
 	
+	@Column(name="periodo_compra_factura")
+	private String periodoCompraFactura;
 	
 	@Column(name = "fecha_emision_pago")
 	@Temporal(TemporalType.DATE)
@@ -54,6 +59,7 @@ public class FacturaPago implements Serializable {
 		this.fecha_emision_pago= new Date();
 	}
 	
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_paciente")
 	private Paciente paciente;
