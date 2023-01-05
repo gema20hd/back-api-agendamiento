@@ -120,14 +120,14 @@ public class FacturaCompraRestController {
 	
 	@GetMapping("/facturas/pacientes/{identificacion}")
 	@ResponseStatus(HttpStatus.OK)
-	public Paciente filtrarPacientesIdentificacion(@PathVariable("identificacion") String term){
-		return  pacienteService.buscarPorCedulaPaciente(term);
+	public List<Paciente> filtrarPacientesIdentificacion(@PathVariable("identificacion") String term){
+		return  pacienteService.findByIdentificacionPacienteContainingIgnoreCase(term);
 	}
 	
 	@GetMapping("/facturas/pacientes/{apellido}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Paciente> filtrarPacientesApellido(@PathVariable("apellido") String term){
-		return pacienteService.buscarPacienteByApellidoPaterno(term);
+		return pacienteService.findByApellidoPaternoPacienteContainingIgnoreCase(term);
 	}
 	
 	@GetMapping("/facturas/producto")

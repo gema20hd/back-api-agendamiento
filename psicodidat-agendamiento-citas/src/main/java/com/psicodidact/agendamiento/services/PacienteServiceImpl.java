@@ -65,6 +65,16 @@ public class PacienteServiceImpl  implements IPacienteService {
 		// TODO Auto-generated method stub
 		return iPaciente.findByApellidoPaternoPacienteJPQL(apellidoPaterno);
 	}
+	@Override
+	public List<Paciente> findByIdentificacionPacienteContainingIgnoreCase(String term) {
+		// TODO Auto-generated method stub
+		return iPaciente.findByIdentificacionPacienteContainingIgnoreCase(term);
+	}
+	@Override
+	public List<Paciente> findByApellidoPaternoPacienteContainingIgnoreCase(String term) {
+		// TODO Auto-generated method stub
+		return iPaciente.findByApellidoPaternoPacienteContainingIgnoreCase(term);
+	}
 
 
 }
