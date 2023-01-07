@@ -21,7 +21,7 @@ public interface IFacturaCompraService {
 	
 	public FacturaCompra save(FacturaCompra factura);
 	
-	public void delete(Long id);
+	public void deleteFacturaById (Long id);
 	
 	
 }

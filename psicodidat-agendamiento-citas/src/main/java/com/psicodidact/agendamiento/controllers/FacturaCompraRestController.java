@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,8 +82,40 @@ public class FacturaCompraRestController {
 		return precioService.findAll();
 	}
 	
+	@GetMapping("/facturas/producto")
+	public List<Servicio> findAllProducto() {
+		return this.productoService.findAll();
+	}
+	
+	@GetMapping("/facturas/filtrar-productos/{term}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Servicio> filtrarProductos(@PathVariable String term){
+		return productoService.findBydescripcionServicioContainingIgnoreCase(term);
+	}
+	
+
+	
+	@GetMapping("/facturas/especialidad")
+	public List<Especialidad> findAllEspecialidad() {
+		return this.especialidadService.findAll();
+	}
+	
+	@GetMapping("/facturas/pacienteIdentificacion/{identificacion}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Paciente> filtrarPacientesIdentificacion(@PathVariable("identificacion") String term){
+		return  pacienteService.findByIdentificacionPacienteContainingIgnoreCase(term);
+	}
+	
+	@GetMapping("/facturas/pacientesApellido/{apellido}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Paciente> filtrarPacientesApellido(@PathVariable("apellido") String term){
+		return pacienteService.findByApellidoPaternoPacienteContainingIgnoreCase(term);
+	}
+	
+
+	
 	@GetMapping("/facturas/facturaCompra/{id}")
-	public ResponseEntity<?> findAById(Long id) {
+	public ResponseEntity<?> findAById( @PathVariable Long id) {
 		
 		FacturaCompra factura = null;
 		Map<String, Object> response = new HashMap<>();
@@ -104,36 +137,30 @@ public class FacturaCompraRestController {
 		return new ResponseEntity<FacturaCompra>(factura, HttpStatus.OK);
 	}
 	
-	
-	@GetMapping("/facturas/filtrar-productos/{term}")
-	@ResponseStatus(HttpStatus.OK)
-	public List<Servicio> filtrarProductos(@PathVariable String term){
-		return productoService.findBydescripcionServicioContainingIgnoreCase(term);
-	}
-	
+	@GetMapping("/facturas/facturaDetalleCompra/{id}")
+	public ResponseEntity<?> findAByIdDetalle( @PathVariable Long id) {
+		
+		FacturaDetalleCompra detalle = null;
+		Map<String, Object> response = new HashMap<>();
 
-	
-	@GetMapping("/facturas/especialidad")
-	public List<Especialidad> findAllEspecialidad() {
-		return this.especialidadService.findAll();
+		try {
+			detalle = detalleService.findById(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		if (detalle == null) {
+			response.put("mensaje",
+					"E l detalle de la factura con el ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<FacturaDetalleCompra>(detalle, HttpStatus.OK);
 	}
 	
-	@GetMapping("/facturas/pacientes/{identificacion}")
-	@ResponseStatus(HttpStatus.OK)
-	public List<Paciente> filtrarPacientesIdentificacion(@PathVariable("identificacion") String term){
-		return  pacienteService.findByIdentificacionPacienteContainingIgnoreCase(term);
-	}
 	
-	@GetMapping("/facturas/pacientes/{apellido}")
-	@ResponseStatus(HttpStatus.OK)
-	public List<Paciente> filtrarPacientesApellido(@PathVariable("apellido") String term){
-		return pacienteService.findByApellidoPaternoPacienteContainingIgnoreCase(term);
-	}
-	
-	@GetMapping("/facturas/producto")
-	public List<Servicio> findAllProducto() {
-		return this.productoService.findAll();
-	}
 	
 
 	//crear el encabezado la factura
@@ -251,6 +278,11 @@ public class FacturaCompraRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		}
 	
-	
+		@DeleteMapping("/facturas/{id}")
+		@ResponseStatus(HttpStatus.NO_CONTENT)
+		public void delete(@PathVariable Long id) {
+			facturaService.deleteFacturaById(id);
+		}
+		
 	
 }

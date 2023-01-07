@@ -41,8 +41,8 @@ public class FacturaCompraServiceImpl  implements IFacturaCompraService{
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
+	public void deleteFacturaById(Long id) {
+		iFacturaCompra.deleteById(id);
 		
 	}
 

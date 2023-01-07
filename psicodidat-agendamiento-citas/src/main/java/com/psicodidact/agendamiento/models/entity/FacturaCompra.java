@@ -69,14 +69,14 @@ public class FacturaCompra implements Serializable {
 	}
 
     @NotNull(message = "El paciente no puede ser nulo")
-   	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+   	@ManyToOne(fetch = FetchType.LAZY)
    	@JoinColumn(name="id_paciente")
    	private Paciente paciente;
     
     @NotNull(message = "La suscursal no puede ser nulo")
- 	@ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+ 	@ManyToOne(fetch = FetchType.LAZY)
  	@JoinColumn(name="id_sucursal")
  	private Sucursal sucursal;
     
