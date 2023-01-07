@@ -1,6 +1,9 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -153,7 +156,15 @@ public class Profesional implements Serializable {
 	
 
 	
-	
+	public int calcularFecha(Date nacimiento) {
+
+		LocalDate nacimientoLocalDate = nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate now = LocalDate.now();
+		Period period = Period.between(nacimientoLocalDate, now);
+
+		return period.getYears();
+
+		}
 	
 	
 }

@@ -2,6 +2,7 @@ package com.psicodidact.agendamiento.models.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -22,6 +23,8 @@ public List<Banco> findAllBank();
 @Query("select p from Cuenta p where p.numeroCuenta=?1")
 public Cuenta findByNumeroCuenta(String nuemroCuenta);
 
-
+@Modifying
+@Query("delete from Cuenta p where p.idCuenta=?1")
+public void deleteId(Long idCueta);
 
 }

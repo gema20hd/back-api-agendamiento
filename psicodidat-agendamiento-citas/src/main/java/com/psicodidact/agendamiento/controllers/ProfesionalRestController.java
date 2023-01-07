@@ -181,30 +181,43 @@ public class ProfesionalRestController {
 
 		Profesional profesionalNew = null;
 		Map<String, Object> response = new HashMap<>();
+		List<String> errors =new ArrayList();
+		boolean erroresForm=false;
+		
+		if(!profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(profesional.getIdentificacionProfesional()).isEmpty()) {
+        	errors.add("El profesional con el cedula: "
+					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
+			response.put("errors", errors);
+			erroresForm=true;
+			System.out.println("cedula repetida");
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
+			errors.add("El profesional con el correo: "
+			.concat(profesional.getCorreoElectronicoProfesional().concat(" ya existe en la base de datos!")));
+        	response.put("errors", errors );
+        	
+        	erroresForm=true;
+        	System.out.println("correo repetida");
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
 
 		if (result.hasErrors()) {
 
-			List<String> errors = result.getFieldErrors().stream()
+			errors.addAll(result.getFieldErrors().stream()
 					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-					.collect(Collectors.toList());
+					.collect(Collectors.toList()) );
+			
 
 			response.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			erroresForm=true;
+			System.out.println("errores entidad");
 		}
 		
-		if(!profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(profesional.getIdentificacionProfesional()).isEmpty()) {
-        	response.put("validarCedulaRepetida", "Error: no se pudo crear, el profesional con el cedula: "
-					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-        }
-		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
-        	response.put("validarCorreoRepetida", "Error: no se pudo crear, el profesional con el correo: "
-					.concat(profesional.getCorreoElectronicoProfesional().concat(" ya existe en la base de datos!")));
-        	
-        	
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-        }
-		
+		if(erroresForm) {
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
 
 		try {
 			profesionalNew = profesionalService.save(profesional);

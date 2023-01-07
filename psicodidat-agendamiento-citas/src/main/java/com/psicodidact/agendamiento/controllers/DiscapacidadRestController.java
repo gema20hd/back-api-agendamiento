@@ -39,7 +39,7 @@ public class DiscapacidadRestController {
 	@Autowired
 	private IDiscapacidadService discapacidadService;
 	
-	@GetMapping("/discapacidad")
+	@GetMapping("/discapacidades")
 	public List<Discapacidad> index() {
 		return discapacidadService.findAll();
 	}
@@ -176,7 +176,7 @@ public class DiscapacidadRestController {
 		
 
 		
-		@PostMapping(value = "/discapacidad")
+		//@PostMapping(value = "/discapacidades")
 		@ResponseStatus(HttpStatus.CREATED)
 		public ResponseEntity<?>guardarDiscapacidad(@RequestBody Discapacidad discapacidad){
 			Map<String, Object> response = new HashMap<>();
@@ -202,7 +202,7 @@ public class DiscapacidadRestController {
 		
 		
 		
-		@PutMapping("/discapacidad/{id}")
+		//@PutMapping("/discapacidades/{id}")
 		@ResponseStatus(HttpStatus.CREATED)
 		public ResponseEntity<?> actualizarDiscapacidad(@RequestBody Discapacidad discapacidad,@PathVariable Long id) {
 			

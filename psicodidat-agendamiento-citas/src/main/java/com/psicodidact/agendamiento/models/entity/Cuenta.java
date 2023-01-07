@@ -38,7 +38,7 @@ public class Cuenta implements Serializable{
 	@Column(name = "id_cuenta")
 	private Long idCuenta;
 	
-	@NotEmpty(message = "no puede estar vacio")
+	@NotEmpty(message = "no puede estar vacio y no se puede repetir el numero de cuenta")
 	@Column(name = "numero_cuenta",unique = true)
 	private String numeroCuenta;
 	

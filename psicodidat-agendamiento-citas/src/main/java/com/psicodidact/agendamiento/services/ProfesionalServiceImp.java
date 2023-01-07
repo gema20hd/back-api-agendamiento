@@ -18,6 +18,7 @@ import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
 import com.psicodidact.agendamiento.models.repository.IBancoRepository;
 import com.psicodidact.agendamiento.models.repository.ICuentaRepository;
+import com.psicodidact.agendamiento.models.repository.IDiscapacidadRepository;
 import com.psicodidact.agendamiento.models.repository.IProfesionalRepository;
 
 @Service
@@ -29,8 +30,10 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 
 	
 	@Autowired
-	private ICuentaRepository iCuenta;
+	private CuentaServiceImpl iCuenta;
 
+	@Autowired
+	private DiscapacidadServiceImpl idiscapacidad;
 	
 	@Autowired
 	private IBancoRepository iBanco;
@@ -51,7 +54,16 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 	@Override
 	@Transactional
 	public Profesional save(Profesional profesional) {
-		return this.IProfesional.save(profesional);
+		Profesional profesionalAux =null;
+		try {
+			profesionalAux =this.IProfesional.save(profesional);
+			return profesionalAux;
+		}catch (Exception e) {
+			iCuenta.delete(profesional.getCuenta().getIdCuenta());
+			idiscapacidad.delete(profesional.getDiscapacidad().getIdDiscapacidad());
+		return null;
+		}
+		
 	}
 
 	@Override

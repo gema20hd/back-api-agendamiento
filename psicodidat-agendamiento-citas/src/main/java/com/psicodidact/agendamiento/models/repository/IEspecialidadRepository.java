@@ -15,6 +15,7 @@ import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 public interface IEspecialidadRepository extends CrudRepository<Especialidad, Long>{
 	
 	public List<Especialidad> findByDescripcionEspecialidadContainingIgnoreCase(String term);
+	
 
 }
 
