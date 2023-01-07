@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.controllers;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.psicodidact.agendamiento.models.entity.Actividad;
 import com.psicodidact.agendamiento.models.entity.Paciente;
+import com.psicodidact.agendamiento.models.entity.Profesional;
 import com.psicodidact.agendamiento.services.IActividadService;
 import com.psicodidact.agendamiento.services.IPacienteService;
 
@@ -169,6 +171,7 @@ public class PacienteRestController {
 	public ResponseEntity<?>  obtenerPacienteByCedula( @PathVariable("cedula_Paciente") String cedula_Paciente) {
 		Map<String, Object> response = new HashMap<>();
 		Paciente pacienteNuevo=null;
+		List<Paciente> pacienteNuevoList=new ArrayList<Paciente>();
 		try {
 			pacienteNuevo=pacienteService.buscarPorCedulaPaciente(cedula_Paciente);
 		} catch (DataAccessException e) {
@@ -180,8 +183,10 @@ public class PacienteRestController {
 		if (pacienteNuevo == null) {
 			response.put("mensaje", "El paciente con cedula ".concat(cedula_Paciente.toString().concat("no existe en la base de datos!")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}else {
+			pacienteNuevoList.add(pacienteNuevo);
 		}
-		return new ResponseEntity<Paciente>(pacienteNuevo, HttpStatus.OK);
+		return new ResponseEntity<List<Paciente>>(pacienteNuevoList, HttpStatus.OK);
 	} 
 	
 	
@@ -203,6 +208,29 @@ public class PacienteRestController {
 		}
 		return new ResponseEntity<List<Paciente>>(pacienteNuevo, HttpStatus.OK);
 	} 
+	
+	//SE PONE ASI PARA QUE NO ME INGRESE UN ERROR DENTRO DEL SUBCRIBE
+	//Y CONTINUE SU EJECUCION NORMAL
+	
+	@GetMapping("/pacientes/identificacion/{dni}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Paciente> findByI(@PathVariable("dni") String identificacion) {
+		
+		
+			return pacienteService.findByIdentificacionPacienteContainingIgnoreCase(identificacion);
+	
+	} 
+	
+	
+
+	// @Secured({"ROLE_ADMIN"})
+	@GetMapping("/pacientes/apellido/paterno/{lastName}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Paciente>  findByLastName(@PathVariable("lastName") String apellidoPaterno) {
+	
+			return pacienteService.findByApellidoPaternoPacienteContainingIgnoreCase(apellidoPaterno);
+		
+	}
 	
 	
 	

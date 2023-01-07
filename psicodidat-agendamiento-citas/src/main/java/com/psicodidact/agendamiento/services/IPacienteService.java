@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.psicodidact.agendamiento.models.entity.Paciente;
+import com.psicodidact.agendamiento.models.entity.Profesional;
 
 
 
@@ -27,4 +28,8 @@ public interface IPacienteService {
 	
 	List<Paciente> buscarPacienteByApellidoPaterno(String apellidoPaterno);
 
+	public List<Paciente> findByIdentificacionPacienteContainingIgnoreCase(String term);
+
+	public List<Paciente> findByApellidoPaternoPacienteContainingIgnoreCase(String term);
+	
 }

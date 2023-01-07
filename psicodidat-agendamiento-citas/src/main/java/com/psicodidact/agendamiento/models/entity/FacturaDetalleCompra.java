@@ -2,7 +2,7 @@ package com.psicodidact.agendamiento.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,11 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,49 +25,63 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
 @Entity
-@Table(name ="factura_pago")
-public class FacturaPago implements Serializable {
+@Table(name ="factura_detalle_compra")
+public class FacturaDetalleCompra  implements Serializable{
+
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_factura_pago")
-	private Long idFacturaPago;
+	@Column(name="id_factura_detalle_compra")
+	private Long idFacturaDetalleCompra;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_pago")
-	private Pago pago;
-	
-
-	@Column(name="estado_pago_factura_compra")
-	private String estadoPagoFacturaCompra;
 	
 	@Column(name="periodo_compra_factura")
 	private String periodoCompraFactura;
 	
-	@Column(name = "fecha_emision_pago")
+	@Column(name="descuento_compra")
+	private int descuentoCompra;
+	
+	@Column(name="cantidad_producto")
+	private Integer cantidad;
+	
+	@Column(name = "fecha_creacion_detalle_factura")
 	@Temporal(TemporalType.DATE)
-	private Date fecha_emision_pago;
+	private Date fechaCreacionDetalle;
 	
 	@PrePersist
 	public void prePersist() {
-		this.fecha_emision_pago= new Date();
+		this.fechaCreacionDetalle = new Date();
 	}
 	
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	public Double getSubtotal() {
+		return cantidad.doubleValue() * preciosProducto.getPrecio();
+	}
+	
+	
+    @NotNull(message = "El factura no puede ser nulo")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_paciente")
-	private Paciente paciente;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_factura_Compra")
+	private FacturaCompra factura;
+
+   
+    @NotNull(message = "El precio del producto no puede ser nulo")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@JoinColumn(name="id_precio_producto")
+	private PreciosProducto preciosProducto;
 
 
 
 
 	
 	
-	
+
 }

@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.models.entity;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
@@ -65,7 +66,9 @@ public class Profesional implements Serializable {
    // @JsonFormat(pattern = "ddMMyyyy")
    // private Date fechaNacimientoProfesional;
     //@NotEmpty(message = "no puede estar vacio")
+  
     @Column(name = "fecha_nacimiento_profesional")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaNacimientoProfesional;
 
     @NotEmpty(message = "no puede estar vacio")
@@ -103,12 +106,14 @@ public class Profesional implements Serializable {
     private int edadProfesional;
     
 	@Column(name = "fecha_creacion")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date fechaCreacion;
 	
 	@PrePersist
 	public void prePersist() {
 		this.fechaCreacion= new Date();
+		
 	}
     
 
@@ -154,9 +159,8 @@ public class Profesional implements Serializable {
 	//@NotEmpty(message = "no puede estar vacio")
 	private Cuenta cuenta;
 	
-
 	
-	public int calcularFecha(Date nacimiento) {
+	public int calcularEdad(Date nacimiento) {
 
 		LocalDate nacimientoLocalDate = nacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		LocalDate now = LocalDate.now();
@@ -165,6 +169,6 @@ public class Profesional implements Serializable {
 		return period.getYears();
 
 		}
-	
+
 	
 }
