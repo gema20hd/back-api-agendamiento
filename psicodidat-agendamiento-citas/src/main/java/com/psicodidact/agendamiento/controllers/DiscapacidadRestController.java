@@ -30,6 +30,7 @@ import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.services.IDiscapacidadService;
 
 
+
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
@@ -39,7 +40,7 @@ public class DiscapacidadRestController {
 	@Autowired
 	private IDiscapacidadService discapacidadService;
 	
-	@GetMapping("/discapacidades")
+	@GetMapping("/discapacidad")
 	public List<Discapacidad> index() {
 		return discapacidadService.findAll();
 	}
@@ -176,7 +177,7 @@ public class DiscapacidadRestController {
 		
 
 		
-		//@PostMapping(value = "/discapacidades")
+		@PostMapping(value = "/discapacidad")
 		@ResponseStatus(HttpStatus.CREATED)
 		public ResponseEntity<?>guardarDiscapacidad(@RequestBody Discapacidad discapacidad){
 			Map<String, Object> response = new HashMap<>();
@@ -202,7 +203,7 @@ public class DiscapacidadRestController {
 		
 		
 		
-		//@PutMapping("/discapacidades/{id}")
+		@PutMapping("/discapacidad/{id}")
 		@ResponseStatus(HttpStatus.CREATED)
 		public ResponseEntity<?> actualizarDiscapacidad(@RequestBody Discapacidad discapacidad,@PathVariable Long id) {
 			
