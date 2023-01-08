@@ -42,11 +42,11 @@ public class Discapacidad implements Serializable {
 	
 	//@NotEmpty(message = "no puede estar vacio")
 	
-	@NotEmpty(message = "La descripcion de la discapacidad no puede estar vacia")
+	//@NotEmpty(message = "La descripcion de la discapacidad no puede estar vacia")
 	@Column(name = "descripcion_discapacidad" , unique =true)
 	private String descripcionDiscapacidad;
 	
-	@NotEmpty(message = "El porcentaje de la discapacidad no puede estar vacia")
+	//@NotEmpty(message = "El porcentaje de la discapacidad no puede estar vacia")
 	@Column(name = "porcentaje_discapacidad")
 	private int porcetajeDiscapacidad;
 
