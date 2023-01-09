@@ -52,6 +52,18 @@ public class PacienteRestController {
 		Map<String, Object> response = new HashMap<>();
 		Paciente pacienteNuevo=null;
 		
+
+	
+		paciente.setNombresPaciente(paciente.getNombresPaciente().toUpperCase());
+		paciente.setApellidoPaternoPaciente(paciente.getApellidoPaternoPaciente().toUpperCase());
+		paciente.setDireccionDomicilio(paciente.getDireccionDomicilio().toUpperCase());
+		paciente.setCorreoElectronicoPaciente(paciente.getCorreoElectronicoPaciente().toLowerCase());
+		paciente.setApellidoMaternoPaciente(paciente.getApellidoMaternoPaciente().toUpperCase());
+	
+		
+		
+		
+		
 		try {
 			pacienteNuevo=pacienteService.save(paciente);
 			
@@ -143,14 +155,14 @@ public class PacienteRestController {
 			pacienteActual.setNivelEducacionParalelo(paciente.getNivelEducacionParalelo());
 			pacienteActual.setAntecedente(paciente.getAntecedente());
 			pacienteActual.setIdentificacionPaciente(paciente.getIdentificacionPaciente());
-			pacienteActual.setNombresPaciente(paciente.getNombresPaciente());
-			pacienteActual.setApellidoPaternoPaciente(paciente.getApellidoPaternoPaciente());
+			pacienteActual.setNombresPaciente(paciente.getNombresPaciente().toUpperCase());
+			pacienteActual.setApellidoPaternoPaciente(paciente.getApellidoPaternoPaciente().toUpperCase());
 			pacienteActual.setFechaNacimientoPaciente(paciente.getFechaNacimientoPaciente());
 			pacienteActual.setCelularPaciente(paciente.getCelularPaciente());
-			pacienteActual.setDireccionDomicilio(paciente.getDireccionDomicilio());
+			pacienteActual.setDireccionDomicilio(paciente.getDireccionDomicilio().toUpperCase());
 			pacienteActual.setTelefonoPaciente(paciente.getTelefonoPaciente());
-			pacienteActual.setCorreoElectronicoPaciente(paciente.getCorreoElectronicoPaciente());
-			pacienteActual.setApellidoMaternoPaciente(paciente.getApellidoMaternoPaciente());
+			pacienteActual.setCorreoElectronicoPaciente(paciente.getCorreoElectronicoPaciente().toLowerCase());
+			pacienteActual.setApellidoMaternoPaciente(paciente.getApellidoMaternoPaciente().toUpperCase());
 			pacienteActual.setEstadoPaciente(paciente.getEstadoPaciente());
 			
         

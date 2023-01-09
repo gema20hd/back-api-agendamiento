@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.psicodidact.agendamiento.models.entity.Profesion;
+import com.psicodidact.agendamiento.models.entity.UnidadEducativa;
 import com.psicodidact.agendamiento.models.repository.IProfesionRepository;
 
 @Service
@@ -30,6 +31,14 @@ public class ProfesionServiceImpl implements  IProfesionService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Profesion> findByDescripcionProfesionContainingIgnoreCase(String term) {
+		// TODO Auto-generated method stub
+		return profesion.findByDescripcionProfesionContainingIgnoreCase(term);
+	}
 	
+	
+
 
 }

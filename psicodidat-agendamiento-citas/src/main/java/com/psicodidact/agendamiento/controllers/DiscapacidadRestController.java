@@ -132,7 +132,7 @@ public class DiscapacidadRestController {
 			}
 
 			try {
-				discapacidadActual.setDescripcionDiscapacidad(discapacidad.getDescripcionDiscapacidad());
+				discapacidadActual.setDescripcionDiscapacidad(discapacidad.getDescripcionDiscapacidad().toUpperCase());
 				discapacidadActual.setPorcetajeDiscapacidad(discapacidad.getPorcetajeDiscapacidad());
 				discapacidadActual.setTipoDiscapacidad(discapacidad.getTipoDiscapacidad());
 				
@@ -182,6 +182,9 @@ public class DiscapacidadRestController {
 			Map<String, Object> response = new HashMap<>();
 			Discapacidad discapacidadNuevo=null;
 			try {
+				
+				discapacidad.setDescripcionDiscapacidad(discapacidad.getDescripcionDiscapacidad().toUpperCase());
+
 		
 				discapacidadNuevo=discapacidadService.save(discapacidad);		
 			
@@ -220,7 +223,7 @@ public class DiscapacidadRestController {
 			
 			try {
 				
-				discapacidadActual.setDescripcionDiscapacidad(discapacidad.getDescripcionDiscapacidad());
+				discapacidadActual.setDescripcionDiscapacidad(discapacidad.getDescripcionDiscapacidad().toUpperCase());
 				discapacidadActual.setPorcetajeDiscapacidad(discapacidad.getPorcetajeDiscapacidad());
 				discapacidadActual.setTipoDiscapacidad(discapacidad.getTipoDiscapacidad());
 				discapacidadActual.setIdDiscapacidad(discapacidad.getIdDiscapacidad());

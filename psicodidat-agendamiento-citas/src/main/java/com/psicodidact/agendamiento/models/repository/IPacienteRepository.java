@@ -14,7 +14,7 @@ public interface IPacienteRepository extends CrudRepository<Paciente, Long>{
 	Paciente  findByIdentificacionPaciente(String identificacionPaciente);
 	
 	@Query("from Paciente p where upper(p.apellidoPaternoPaciente) like upper(concat(:apellidoPaternoPaciente,'%'))")
-	List<Paciente>  findByApellidoPaternoPacienteJPQL(@Param("apellidoPaternoPaciente") String apellidoPaternoPaciente);
+	List<Paciente>  findByApellidoPaternoPaciente(@Param("apellidoPaternoPaciente") String apellidoPaternoPaciente);
 	
 	public List<Paciente> findByIdentificacionPacienteContainingIgnoreCase(String term);
 

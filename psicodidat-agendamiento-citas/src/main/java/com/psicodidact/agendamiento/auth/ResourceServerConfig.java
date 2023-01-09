@@ -109,9 +109,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		.antMatchers(HttpMethod.POST, "/api/trabajos").permitAll()
 		.antMatchers(HttpMethod.PUT, "/api/trabajos/{id}").permitAll()
 		.antMatchers(HttpMethod.GET, "/api/unidadesEducativas").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/unidadesEducativas/nombre/{nombre}").permitAll()
 		
 		.antMatchers(HttpMethod.PUT, "/api/unidadesEducativas/{id}").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/unidadesEducativas").permitAll()
+		
+		.antMatchers(HttpMethod.GET, "/profesiones/nombre/{nombre}").permitAll()
+		
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}

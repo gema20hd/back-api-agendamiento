@@ -48,6 +48,15 @@ public class AntecedenteRestController {
 		Antecedente antcedenteNuevo=null;
 		try {
 			
+			antededente.setEnfermedadAntecedente(antededente.getEnfermedadAntecedente().toUpperCase());
+			antededente.setEnfermedadMaterna(antededente.getEnfermedadMaterna().toUpperCase());
+			antededente.setEnfermedadPaterna(antededente.getEnfermedadPaterna().toUpperCase());
+			antededente.setEnfermedadRepresentante(antededente.getEnfermedadRepresentante().toUpperCase());
+			antededente.setAlergiaAntecedente(antededente.getAlergiaAntecedente().toUpperCase());
+			antededente.setMedicamentoAntecedente(antededente.getMedicamentoAntecedente().toUpperCase());
+			antededente.setSintomaAntecedente(antededente.getSintomaAntecedente().toUpperCase());
+			antededente.setTratamientoAntecedente(antededente.getTratamientoAntecedente().toUpperCase());
+			
 			antcedenteNuevo=antecedenteService.save(antededente);		
 		
 		} catch (DataAccessException e) {
@@ -84,15 +93,15 @@ public class AntecedenteRestController {
 			
 			
 					
-			antecedentesActual.setEnfermedadAntecedente(antededente.getEnfermedadAntecedente());
-			antecedentesActual.setEnfermedadMaterna(antededente.getEnfermedadMaterna());
-			antecedentesActual.setEnfermedadPaterna(antededente.getEnfermedadPaterna());
-			antecedentesActual.setEnfermedadRepresentante(antededente.getEnfermedadRepresentante());
+			antecedentesActual.setEnfermedadAntecedente(antededente.getEnfermedadAntecedente().toUpperCase());
+			antecedentesActual.setEnfermedadMaterna(antededente.getEnfermedadMaterna().toUpperCase());
+			antecedentesActual.setEnfermedadPaterna(antededente.getEnfermedadPaterna().toUpperCase());
+			antecedentesActual.setEnfermedadRepresentante(antededente.getEnfermedadRepresentante().toUpperCase());
 			antecedentesActual.setIdAntecedente(antededente.getIdAntecedente());
-			antecedentesActual.setAlergiaAntecedente(antededente.getAlergiaAntecedente());
-			antecedentesActual.setMedicamentoAntecedente(antededente.getMedicamentoAntecedente());
-			antecedentesActual.setSintomaAntecedente(antededente.getSintomaAntecedente());
-			antecedentesActual.setTratamientoAntecedente(antededente.getTratamientoAntecedente());
+			antecedentesActual.setAlergiaAntecedente(antededente.getAlergiaAntecedente().toUpperCase());
+			antecedentesActual.setMedicamentoAntecedente(antededente.getMedicamentoAntecedente().toUpperCase());
+			antecedentesActual.setSintomaAntecedente(antededente.getSintomaAntecedente().toUpperCase());
+			antecedentesActual.setTratamientoAntecedente(antededente.getTratamientoAntecedente().toUpperCase());
         
 			antecedentesActualizado=antecedenteService.actualizar(antecedentesActual);
 		} catch (DataAccessException e) {

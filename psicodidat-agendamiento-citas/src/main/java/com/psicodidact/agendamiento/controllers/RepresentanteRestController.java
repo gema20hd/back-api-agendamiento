@@ -53,10 +53,19 @@ public class RepresentanteRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?>guardarRepresentante(@RequestBody Representante representante){
 		Map<String, Object> response = new HashMap<>();
-		Representante representanteNuevo=null;
+
+		Representante representanteGuardar=null;
 		try {
-	
-			 representanteNuevo=representanteService.save(representante);		
+
+
+			representante.setApellidoPaternoRepresentante(representante.getApellidoPaternoRepresentante().toUpperCase());
+			representante.setApellidoMaternoRepresentante(representante.getApellidoMaternoRepresentante().toUpperCase());
+			representante.setNombresRepresentante(representante.getNombresRepresentante().toUpperCase());
+			representante.setCorreoElectronicoRepresentante(representante.getCorreoElectronicoRepresentante().toLowerCase());
+			representante.setParentescoRepresentante(representante.getParentescoRepresentante().toUpperCase());
+			representante.setDireccionDomicilioRepresentan(representante.getDireccionDomicilioRepresentan().toUpperCase());
+			
+			representanteGuardar=representanteService.save(representante);		
 		
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos");
@@ -67,7 +76,7 @@ public class RepresentanteRestController {
 				
 		
 		response.put("mensaje", "El representante ha sido creado con exito");
-		response.put("representante", representanteNuevo);
+		response.put("representante", representanteGuardar);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
@@ -151,15 +160,15 @@ public class RepresentanteRestController {
 			representanteActual.setTrabajo(representante.getTrabajo());
 			representanteActual.setProfesion(representante.getProfesion());
 			representanteActual.setIdentificacionRepresentante(representante.getIdentificacionRepresentante());
-			representanteActual.setApellidoPaternoRepresentante(representante.getApellidoPaternoRepresentante());
-			representanteActual.setApellidoMaternoRepresentante(representante.getApellidoMaternoRepresentante());
-			representanteActual.setNombresRepresentante(representante.getNombresRepresentante());
+			representanteActual.setApellidoPaternoRepresentante(representante.getApellidoPaternoRepresentante().toUpperCase());
+			representanteActual.setApellidoMaternoRepresentante(representante.getApellidoMaternoRepresentante().toUpperCase());
+			representanteActual.setNombresRepresentante(representante.getNombresRepresentante().toUpperCase());
 			representanteActual.setFechaNacimientoRepresentante(representante.getFechaNacimientoRepresentante());
-			representanteActual.setCorreoElectronicoRepresentante(representante.getCorreoElectronicoRepresentante());
+			representanteActual.setCorreoElectronicoRepresentante(representante.getCorreoElectronicoRepresentante().toLowerCase());
 			representanteActual.setCelularRepresentante(representante.getCelularRepresentante());
 			representanteActual.setTelefonoEmergenciaRepresentante(representante.getTelefonoEmergenciaRepresentante());
-			representanteActual.setParentescoRepresentante(representante.getParentescoRepresentante());
-			representanteActual.setDireccionDomicilioRepresentan(representante.getDireccionDomicilioRepresentan());
+			representanteActual.setParentescoRepresentante(representante.getParentescoRepresentante().toUpperCase());
+			representanteActual.setDireccionDomicilioRepresentan(representante.getDireccionDomicilioRepresentan().toUpperCase());
 			representanteActual.setEstadoCivil(representante.getEstadoCivil());
 			
 			representanteActualizado=representanteService.actualizar(representanteActual);

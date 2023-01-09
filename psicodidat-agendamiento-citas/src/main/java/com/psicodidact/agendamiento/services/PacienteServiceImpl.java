@@ -63,7 +63,7 @@ public class PacienteServiceImpl  implements IPacienteService {
 	@Override
 	public List<Paciente> buscarPacienteByApellidoPaterno(String apellidoPaterno) {
 		// TODO Auto-generated method stub
-		return iPaciente.findByApellidoPaternoPacienteJPQL(apellidoPaterno);
+		return iPaciente.findByApellidoPaternoPaciente(apellidoPaterno);
 	}
 	@Override
 	public List<Paciente> findByIdentificacionPacienteContainingIgnoreCase(String term) {

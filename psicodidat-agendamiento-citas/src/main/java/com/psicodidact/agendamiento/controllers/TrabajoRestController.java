@@ -40,8 +40,13 @@ public class TrabajoRestController {
 	public ResponseEntity<?>guardarTrabajo(@RequestBody Trabajo trabajo){
 		Map<String, Object> response = new HashMap<>();
 		Trabajo trabajoNuevo=null;
+	
 		try {
 	
+			trabajo.setDireccionTrabajo(trabajo.getDireccionTrabajo().toUpperCase());
+			trabajo.setDescripcionTrabajo(trabajo.getDescripcionTrabajo().toUpperCase());
+
+			
 			trabajoNuevo=trabajoService.save(trabajo);		
 		
 		} catch (DataAccessException e) {
@@ -75,8 +80,8 @@ public class TrabajoRestController {
 	
 		
 		try {
-			trabajoActual.setDireccionTrabajo(trabajo.getDireccionTrabajo());
-			trabajoActual.setDescripcionTrabajo(trabajo.getDescripcionTrabajo());
+			trabajoActual.setDireccionTrabajo(trabajo.getDireccionTrabajo().toUpperCase());
+			trabajoActual.setDescripcionTrabajo(trabajo.getDescripcionTrabajo().toUpperCase());
 			trabajoActual.setIdTrabajo(trabajo.getIdTrabajo());
 			trabajoActual.setTipoTrabajo(trabajo.getTipoTrabajo());
 			
