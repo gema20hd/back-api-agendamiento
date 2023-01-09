@@ -11,6 +11,7 @@ import com.psicodidact.agendamiento.models.entity.Profesional;
 
 
 public interface IPacienteRepository extends CrudRepository<Paciente, Long>{
+	
 	Paciente  findByIdentificacionPaciente(String identificacionPaciente);
 	
 	@Query("from Paciente p where upper(p.apellidoPaternoPaciente) like upper(concat(:apellidoPaternoPaciente,'%'))")

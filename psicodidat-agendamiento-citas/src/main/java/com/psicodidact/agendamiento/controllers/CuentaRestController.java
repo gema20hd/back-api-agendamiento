@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,21 +80,31 @@ public class CuentaRestController {
 
 		Cuenta cuentaNew = null;
 		Map<String, Object> response = new HashMap<>();
+		List<String> errors =new ArrayList();
+		boolean erroresForm=false;
 
 		if (result.hasErrors()) {
 
-			List<String> errors = result.getFieldErrors().stream()
+			errors.addAll(result.getFieldErrors().stream()
 					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-					.collect(Collectors.toList());
+					.collect(Collectors.toList()));
 
 			response.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			erroresForm=true;
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		if(cuentaService.findByNumeroCuenta(cuenta.getNumeroCuenta())!=null) {
-        	response.put("validarNumeroCuentaRepetida", "Error: no se pudo crear, la cuenta con el correo: "
-					.concat(cuenta.getNumeroCuenta().concat(" ya existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        	errors.add( "no se pudo crear, la cuenta con el correo: "
+				.concat(cuenta.getNumeroCuenta().concat(" ya existe en la base de datos!")));
+			response.put("errors", errors);
+        	erroresForm=true;
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
+		
+		if(erroresForm) {
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
 		try {
 			cuentaNew = cuentaService.save(cuenta);
 		} catch (DataAccessException e) {

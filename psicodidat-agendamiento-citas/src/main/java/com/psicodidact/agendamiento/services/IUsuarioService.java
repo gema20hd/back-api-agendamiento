@@ -16,4 +16,6 @@ public interface IUsuarioService {
 	public void delete(Long id);
 	
 	public Rol insertRolesDeUsuario(Long id, Long idRol);
+	
+	
 }

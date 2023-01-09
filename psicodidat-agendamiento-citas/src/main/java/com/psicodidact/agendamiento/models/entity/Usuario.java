@@ -41,13 +41,13 @@ import lombok.*;
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable{
-	public Usuario(String username, String password, boolean enabled, Profesional profesional,Date fechaCreacion) {
+	public Usuario(String username, String password, boolean enabled,Date fechaCreacion, Profesional profesional) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.enabled = enabled;
-		this.profesional = profesional;
 		this.fechaCreacion= fechaCreacion;
+		this.profesional=profesional;
 	}
 
 
@@ -55,14 +55,14 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
+	@Column(name = "id_usuario",unique = true)
 	private Long idUsuario;
 
-	//@NotEmpty(message = "no puede estar vacio")
+	@NotEmpty(message = "no puede estar vacio")
 	@Column(name = "nombre_usuario",unique = true, length = 20,nullable = false)
 	private String username;
 
-	
+	@NotEmpty(message = "no puede estar vacio")
 	@Column(name = "clave_usuario")
 	private String password;
 	
@@ -91,10 +91,8 @@ public class Usuario implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_profesional")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	//@NotEmpty(message = "no puede estar vacio")
 	private Profesional profesional;
-
-
-
 
 
 

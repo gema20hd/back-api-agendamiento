@@ -1,5 +1,6 @@
 package com.psicodidact.agendamiento.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.psicodidact.agendamiento.models.entity.Rol;
 import com.psicodidact.agendamiento.models.entity.Usuario;
 import com.psicodidact.agendamiento.services.IUsuarioService;
 
@@ -53,17 +55,33 @@ public class UsuariosRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		if(usuarioService.findByUsername(usuario.getUsername())!=null) {
-        	response.put("validarCorreoRepetida", "Error: no se pudo crear, el usuario con el correo: "
+        	response.put("validarUsuarioRepetida", "Error: no se pudo crear, el usuario con el username: "
 					.concat(usuario.getUsername().concat(" ya existe en la base de datos!")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
         }
 		try {
+			List<Rol> roles= new ArrayList<Rol>();
+			roles.add(new Rol(1L,"ROLE_USER"));
+			
+			usuario.setRoles(roles);
 			usuarioNew = usuarioService.save(usuario);
-			usuarioService.insertRolesDeUsuario(usuarioNew.getIdUsuario(), 1L);
+			
 		} catch(DataAccessException e) {
 			response.put("mensaje", "Error al agregar al usuario en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally {
+			
+		}
+		try {
+			usuarioService.insertRolesDeUsuario(usuarioNew.getIdUsuario(), 1L);
+			
+		}catch(DataAccessException e) {
+			
+			
+			response.put("mensaje", "El usuario ha sido creado con éxito!");
+			response.put("usuario", usuarioNew);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		}
 		
 		response.put("mensaje", "El usuario ha sido creado con éxito!");

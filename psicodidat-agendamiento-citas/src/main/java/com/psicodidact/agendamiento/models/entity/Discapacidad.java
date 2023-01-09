@@ -16,6 +16,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,12 +40,17 @@ public class Discapacidad implements Serializable {
 	@Column(name = "id_discapacidad")
 	private Long idDiscapacidad;
 	
+	//@NotEmpty(message = "no puede estar vacio")
+	
+	//@NotEmpty(message = "La descripcion de la discapacidad no puede estar vacia")
+	@Column(name = "descripcion_discapacidad" , unique =true)
+	private String descripcionDiscapacidad;
+	
+	//@NotEmpty(message = "El porcentaje de la discapacidad no puede estar vacia")
 	@Column(name = "porcentaje_discapacidad")
 	private int porcetajeDiscapacidad;
 
-	
-	@Column(name = "descripcion_discapacidad")
-	private String descripcionDiscapacidad;
+
 	
 	@Column(name = "fecha_creacion")
 	@Temporal(TemporalType.DATE)

@@ -181,27 +181,43 @@ public class ProfesionalRestController {
 
 		Profesional profesionalNew = null;
 		Map<String, Object> response = new HashMap<>();
+		List<String> errors =new ArrayList();
+		boolean erroresForm=false;
+		
+		if(!profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(profesional.getIdentificacionProfesional()).isEmpty()) {
+        	errors.add("El profesional con el cedula: "
+					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
+			response.put("errors", errors);
+			erroresForm=true;
+			System.out.println("cedula repetida");
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
+		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
+			errors.add("El profesional con el correo: "
+			.concat(profesional.getCorreoElectronicoProfesional().concat(" ya existe en la base de datos!")));
+        	response.put("errors", errors );
+        	
+        	erroresForm=true;
+        	System.out.println("correo repetida");
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+        }
 
 		if (result.hasErrors()) {
 
-			List<String> errors = result.getFieldErrors().stream()
+			errors.addAll(result.getFieldErrors().stream()
 					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-					.collect(Collectors.toList());
+					.collect(Collectors.toList()) );
+			
 
 			response.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			//return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			erroresForm=true;
+			System.out.println("errores entidad");
 		}
-		if(!profesionalService.findByIdentificacionProfesionalContainingIgnoreCase(profesional.getIdentificacionProfesional()).isEmpty()) {
-        	response.put("validarCedulaRepetida", "Error: no se pudo crear, el profesional con el cedula: "
-					.concat(profesional.getIdentificacionProfesional().concat(" ya existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-        }
-		if(profesionalService.findByCorreo(profesional.getCorreoElectronicoProfesional())!=null) {
-        	response.put("validarCorreoRepetida", "Error: no se pudo crear, el profesional con el correo: "
-					.concat(profesional.getCorreoElectronicoProfesional().concat(" ya existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-        }
 		
+		if(erroresForm) {
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
 
 		try {
 			profesionalNew = profesionalService.save(profesional);
@@ -217,65 +233,68 @@ public class ProfesionalRestController {
 	}
 
 	// @Secured("ROLE_ADMIN")
-	public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result,
-			@PathVariable Long id) {
+		@PutMapping("/profesionales/{id}")
+		public ResponseEntity<?> update(@Valid @RequestBody Profesional profesional, BindingResult result,
+				@PathVariable Long id) {
 
-		Profesional profesionalActual = profesionalService.findById(id);
+			Profesional profesionalActual = profesionalService.findById(id);
 
-		Profesional profesionalUpdated = null;
+			Profesional profesionalUpdated = null;
 
-		Map<String, Object> response = new HashMap<>();
+			Map<String, Object> response = new HashMap<>();
 
-		if (result.hasErrors()) {
+			if (result.hasErrors()) {
 
-			List<String> errors = result.getFieldErrors().stream()
-					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-					.collect(Collectors.toList());
+				List<String> errors = result.getFieldErrors().stream()
+						.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+						.collect(Collectors.toList());
 
-			response.put("errors", errors);
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+				response.put("errors", errors);
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+			}
+
+			if (profesionalActual == null) {
+				response.put("mensaje", "Error: no se pudo editar, el profesional con el ID: "
+						.concat(id.toString().concat(" no existe en la base de datos!")));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+	        
+			try {
+				profesionalActual.setIdentificacionProfesional(profesional.getIdentificacionProfesional());
+				profesionalActual.setNombresProfesional(profesional.getNombresProfesional());
+				profesionalActual.setApellidoPaternoProfesional(profesional.getApellidoPaternoProfesional());
+				profesionalActual.setApellidoMaternoProfesional(profesional.getApellidoMaternoProfesional());
+				profesionalActual.setFechaNacimientoProfesional(profesional.getFechaNacimientoProfesional());
+				profesionalActual.setCorreoElectronicoProfesional(profesional.getCorreoElectronicoProfesional());
+				profesionalActual.setCelularProfesional(profesional.getCelularProfesional());
+				profesionalActual.setTelefonoEmergenciaProfesional(profesional.getTelefonoEmergenciaProfesional());
+				profesionalActual.setTituloCuartoNivelProfesional(profesional.getTituloCuartoNivelProfesional());
+				profesionalActual.setDireccionDomicilioProfesional(profesional.getDireccionDomicilioProfesional());
+				profesionalActual.setEstadoProfesional(profesional.getEstadoProfesional());
+				
+				profesionalActual.setHojaVida(profesional.getHojaVida());
+				profesionalActual.setDiscapacidad(profesional.getDiscapacidad());
+				profesionalActual.setGenero(profesional.getGenero());
+				profesionalActual.setTipoSangre(profesional.getTipoSangre());
+				profesionalActual.setEstadoCivil(profesional.getEstadoCivil());
+				profesionalActual.setEstadoProfesional(profesional.getEstadoProfesional());
+				profesionalActual.setCuenta(profesional.getCuenta());
+				profesionalActual.setProfesionProfesional(profesional.getProfesionProfesional());
+			    //profesionalActual.setTipoDiscapacidad(profesional.getDiscapacidad());
+
+				profesionalUpdated = profesionalService.save(profesionalActual);
+
+			} catch (DataAccessException e) {
+				response.put("mensaje", "Error al actualizar el profesional en la base de datos");
+				response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+			response.put("mensaje", "El profesional ha sido actualizado con éxito!");
+			response.put("profesional", profesionalUpdated);
+
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		}
-
-		if (profesionalActual == null) {
-			response.put("mensaje", "Error: no se pudo editar, el profesional con el ID: "
-					.concat(id.toString().concat(" no existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
-        
-		try {
-			profesionalActual.setIdentificacionProfesional(profesional.getIdentificacionProfesional());
-			profesionalActual.setNombresProfesional(profesional.getNombresProfesional());
-			profesionalActual.setApellidoPaternoProfesional(profesional.getApellidoPaternoProfesional());
-			profesionalActual.setApellidoMaternoProfesional(profesional.getApellidoMaternoProfesional());
-			profesionalActual.setFechaNacimientoProfesional(profesional.getFechaNacimientoProfesional());
-			profesionalActual.setGenero(profesional.getGenero());
-			profesionalActual.setCorreoElectronicoProfesional(profesional.getCorreoElectronicoProfesional());
-			profesionalActual.setCelularProfesional(profesional.getCelularProfesional());
-			profesionalActual.setTelefonoEmergenciaProfesional(profesional.getTelefonoEmergenciaProfesional());
-			profesionalActual.setProfesionProfesional(profesional.getProfesionProfesional());
-			profesionalActual.setTituloCuartoNivelProfesional(profesional.getTituloCuartoNivelProfesional());
-			profesionalActual.setDireccionDomicilioProfesional(profesional.getDireccionDomicilioProfesional());
-			profesionalActual.setDiscapacidad(profesional.getDiscapacidad());
-			profesionalActual.setTipoSangre(profesional.getTipoSangre());
-			profesionalActual.setEstadoCivil(profesional.getEstadoCivil());
-			profesionalActual.setEstadoProfesional(profesional.getEstadoProfesional());
-			profesionalActual.setHojaVida(profesional.getHojaVida());
-			profesionalActual.setCuenta(profesional.getCuenta());
-		    //profesionalActual.setTipoDiscapacidad(profesional.getDiscapacidad());
-
-			profesionalUpdated = profesionalService.save(profesionalActual);
-
-		} catch (DataAccessException e) {
-			response.put("mensaje", "Error al actualizar el profesional en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-
-		response.put("mensaje", "El profesional ha sido actualizado con éxito!");
-		response.put("profesional", profesionalUpdated);
-
-		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-	}
 
 	// @Secured("ROLE_ADMIN")
 	@DeleteMapping("/profesionales/{id}")

@@ -1,6 +1,7 @@
 package com.psicodidact.agendamiento.models.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -57,6 +58,9 @@ public interface IProfesionalRepository extends CrudRepository<Profesional, Long
 	
 	@Query("select p from Profesional p where p.correoElectronicoProfesional=?1")
 	public Profesional findByCorreo(String correo);
+	
+	@Query("select p from Profesional p where p.idProfesional=?1")
+	public Profesional findByIdProfesional(Long IdProfesional);
 	
 
 }

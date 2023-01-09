@@ -14,13 +14,13 @@ import com.psicodidact.agendamiento.models.repository.IServicioRepository;
 public class ServicioServiceImpl implements IServicioService{
 
 	@Autowired
-	private IServicioRepository iservicio;
+	private IServicioRepository iServicio;
 	
 	
 	@Override
 	public List<Servicio> findAll() {
 		// TODO Auto-generated method stub
-		return (List<Servicio>) iservicio.findAll();
+		return (List<Servicio>) iServicio.findAll();
 	}
 
 	@Override
@@ -32,19 +32,24 @@ public class ServicioServiceImpl implements IServicioService{
 	@Override
 	public Servicio findById(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return iServicio.findById(id).orElse(null);
 	}
 
 	@Override
 	public Servicio save(Servicio servicio) {
 		// TODO Auto-generated method stub
-		return null;
+		return iServicio.save(servicio);
 	}
 
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Servicio> findBydescripcionServicioContainingIgnoreCase(String term) {
+		return iServicio.findBydescripcionServicioContainingIgnoreCase(term);
 	}
 
 }

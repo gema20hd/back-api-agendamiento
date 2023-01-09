@@ -1,5 +1,7 @@
 package com.psicodidact.agendamiento.services;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import com.psicodidact.agendamiento.models.entity.TipoDiscapacidad;
 import com.psicodidact.agendamiento.models.entity.TipoSangre;
 import com.psicodidact.agendamiento.models.repository.IBancoRepository;
 import com.psicodidact.agendamiento.models.repository.ICuentaRepository;
+import com.psicodidact.agendamiento.models.repository.IDiscapacidadRepository;
 import com.psicodidact.agendamiento.models.repository.IProfesionalRepository;
 
 @Service
@@ -29,8 +32,10 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 
 	
 	@Autowired
-	private ICuentaRepository iCuenta;
+	private CuentaServiceImpl iCuenta;
 
+	@Autowired
+	private DiscapacidadServiceImpl idiscapacidad;
 	
 	@Autowired
 	private IBancoRepository iBanco;
@@ -44,14 +49,30 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Profesional findById(Long id) {
-		return this.IProfesional.findById(id).orElse(null);
+	public Profesional findById(Long id)  {
+		Profesional profesionalAux = null;
+	
+		    profesionalAux = this.IProfesional.findByIdProfesional(id);
+			profesionalAux.setEdadProfesional(profesionalAux.calcularEdad(profesionalAux.getFechaNacimientoProfesional()));
+			profesionalAux.setFechaNacimientoProfesional(profesionalAux.getFechaNacimientoProfesional());
+		
+		
+		return profesionalAux;
 	}
 
 	@Override
 	@Transactional
 	public Profesional save(Profesional profesional) {
-		return this.IProfesional.save(profesional);
+		Profesional profesionalAux =null;
+		try {
+			profesionalAux =this.IProfesional.save(profesional);
+			return profesionalAux;
+		}catch (Exception e) {
+			iCuenta.delete(profesional.getCuenta().getIdCuenta());
+			idiscapacidad.delete(profesional.getDiscapacidad().getIdDiscapacidad());
+		return null;
+		}
+		
 	}
 
 	@Override
@@ -121,21 +142,5 @@ public class ProfesionalServiceImp  implements IProfesionalService {
 		return this.IProfesional.findByCorreo(correo);
 	}
 
-	/*
-	 * @Override
-	 * 
-	 * @Transactional public Profesional update(Profesional profesional, Long id) {
-	 * IProfesional.update(
-	 * 
-	 * profesional.getIdentificacionProfesional(),
-	 * profesional.getNombresProfesional(),
-	 * profesional.getApellidoPaternoProfesional(),
-	 * profesional.getApellidoMaternoProfesional(),
-	 * profesional.getFechaNacimientoProfesional().toString(),
-	 * profesional.getGenero(), profesional.getCorreoElectronicoProfesional(),
-	 * profesional.getEstadoCivil(), profesional.getTipoSangre(),
-	 * profesional.getDireccionDomicilioProfesional(),
-	 * profesional.getDiscapacidad(), profesional.getProfesionProfesional(), id);
-	 * return profesional; }
-	 */
+	
 }
