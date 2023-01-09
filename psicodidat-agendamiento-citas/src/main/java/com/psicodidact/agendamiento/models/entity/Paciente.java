@@ -131,12 +131,12 @@ public class Paciente implements Serializable{
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Antecedente antecedente;
 	
-	
+/*	
 	@JsonIgnoreProperties(value={"paciente", "hibernateLazyInitializer", "handler"}, allowSetters=true)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "paciente", cascade = CascadeType.ALL)
 	private List<FacturaCompra> facturas;
 
-
+*/
 
 	
 	
